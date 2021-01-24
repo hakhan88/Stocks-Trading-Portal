@@ -13,11 +13,12 @@ body {
 
 .app-header {
     justify-content: space-between;
-    position: fixed;
+    position: relative;
     top: 0;
     left: 0;
     right: 0;
     z-index: 2;
+    margin-bottom: 30px !important;
     box-shadow: 0 3px 5px -1px rgba(0, 0, 0, .2), 0 6px 10px 0 rgba(0, 0, 0, .14), 0 1px 18px 0 rgba(0, 0, 0, .12);
 }
 
@@ -105,4 +106,50 @@ body {
 
 .main-wrapper .mat-form-field-appearance-legacy .mat-form-field-infix {
     padding: 0.8375em 0;
+}
+
+
+.banner-title {
+    font-size: 4rem !important;
+    font-weight: 600 !important;
+    margin-bottom: 50px !important;
+    padding: 50px 0px;
+}
+
+.banner-title::after {
+    content: "";
+    position: absolute;
+    top: 12%;
+    right: 35%;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background-color: #00000026;
+    box-shadow: 0 0 20px 0px #607d8b;
+}
+
+.left-side-background {
+    position: relative;
+    background-repeat: round;
+    height: 50%;
+    width: 50%;
+    background-image: url("../assets/image_assets/_1.jpg");
+}
+
+.left-side-background::after {
+    content: "";
+    background: url("../assets/image_assets/_1.jpg") no-repeat center center fixed;
+    height: 70%;
+    width: 70%;
+    position: absolute;
+    right: -50px;
+    bottom: -20px;
+    z-index: -1;
+    background-size: cover;
+    opacity: 0.3;
+}
+
+.left-side-basic {
+    height: 30em;
+    width: 50em;
 }
