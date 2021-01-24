@@ -11,13 +11,17 @@ import { AngularMaterialModule } from './angular-material.module';
 import { FlexLayoutModule, FlexModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EditUserComponent } from './components/editUser/editUser.component';
+import { UserListComponent } from './components/userList/userList.component';
+import { SanitizeHtmlPipe } from './pipes/sanitinse.pipe';
 
 @NgModule({
     declarations: [
         AppComponent,
         SigninComponent,
         RegisterComponent,
-        EditUserComponent
+        EditUserComponent,
+        UserListComponent,
+        SanitizeHtmlPipe
     ],
     imports: [
         BrowserModule,
