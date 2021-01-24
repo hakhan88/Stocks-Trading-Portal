@@ -1,0 +1,23 @@
+{
+  "name": "waren-stocks",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "@angular/cli": "^11.1.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hakhan88/waren-stocks.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hakhan88/waren-stocks/issues"
+  },
+  "homepage": "https://github.com/hakhan88/waren-stocks#readme"
+}
