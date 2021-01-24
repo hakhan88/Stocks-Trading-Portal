@@ -10,12 +10,14 @@ import { RegisterComponent } from './components/register/register.component';
 import { AngularMaterialModule } from './angular-material.module';
 import { FlexLayoutModule, FlexModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { EditUserComponent } from './components/editUser/editUser.component';
 
 @NgModule({
     declarations: [
         AppComponent,
         SigninComponent,
-        RegisterComponent
+        RegisterComponent,
+        EditUserComponent
     ],
     imports: [
         BrowserModule,
