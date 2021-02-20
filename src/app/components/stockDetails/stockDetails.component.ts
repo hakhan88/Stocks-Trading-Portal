@@ -59,19 +59,19 @@ const ELEMENT_DATA2: PeriodicElement2[] = [
 const ELEMENT_DATA3: PeriodicElement2[] = [
     {
         Bid: '09:35:48',
-        Ask: '0.1345 <div style=\"width: 5px !important;border-left: 7px dotted transparent !important;border-right: 7px solid transparent !important;border-bottom: 15px solid blue !important;float: right;"></div>'
+        Ask: '0.1345 <div style=\"width: 5px !important;border-left: 7px dotted transparent !important;border-right: 7px solid transparent !important;border-bottom: 15px solid green !important;float: right;"></div>'
     },
     {
         Bid: '09:45:53',
-        Ask: '0.1345 <div style=\"width: 5px !important;border-left: 7px dotted transparent !important;border-right: 7px solid transparent !important;border-bottom: 15px solid blue !important;float: right;"></div>'
+        Ask: '0.1345 <div style=\"width: 5px !important;border-left: 7px dotted transparent !important;border-right: 7px solid transparent !important;border-bottom: 15px solid green !important;float: right;"></div>'
     },
     {
         Bid: '10:01:10',
-        Ask: '0.1345 <div style=\"width: 5px !important;border-left: 7px dotted transparent !important;border-right: 7px solid transparent !important;border-bottom: 15px solid blue !important;float: right;"></div>'
+        Ask: '0.1345 <div style=\"width: 5px !important;border-left: 7px dotted transparent !important;border-right: 7px solid transparent !important;border-bottom: 15px solid green !important;float: right;"></div>'
     },
     {
         Bid: '10:01:11',
-        Ask: '0.1345 <div style=\"width: 5px !important;border-left: 7px dotted transparent !important;border-right: 7px solid transparent !important;border-bottom: 15px solid blue !important;float: right;"></div>'
+        Ask: '0.1345 <div style=\"width: 5px !important;border-left: 7px dotted transparent !important;border-right: 7px solid transparent !important;border-bottom: 15px solid green !important;float: right;"></div>'
     },
 ];
 
