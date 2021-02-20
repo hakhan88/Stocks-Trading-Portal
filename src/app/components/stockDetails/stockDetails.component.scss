@@ -11,7 +11,12 @@ button {
     min-width: 80%;
 }
 
-ul {
-    list-style-type: none !important;
-    margin-top: 4px;
+// ul {
+//     list-style-type: none !important;
+//     margin-top: 4px;
+// }
+
+.example-margin {
+    position: relative;
+    margin: 0px 10px;
 }

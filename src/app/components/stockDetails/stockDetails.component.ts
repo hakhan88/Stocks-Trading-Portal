@@ -59,6 +59,14 @@ export class StockDetailsComponent implements OnInit {
 
     statusFilter = new FormControl('');
     sourceFilter = new FormControl('');
+    toppings = new FormControl();
+
+    checked = false;
+    indeterminate = false;
+    indeterminate2 = false;
+    indeterminate3 = false;
+
+    toppingList: string[] = ['Extra cheese', 'Mushroom', 'Onion', 'Pepperoni', 'Sausage', 'Tomato'];
 
     constructor() { }
     ngOnInit(): void { }
