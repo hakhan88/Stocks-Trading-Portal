@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
 
 export interface PeriodicElement {
     Name: string;
@@ -36,6 +37,24 @@ export class StockDetailsComponent implements OnInit {
     data: PeriodicElement[] = ELEMENT_DATA;
 
 
+    availableContactStatuses = [
+        {
+            value: 1,
+            display: 'option'
+        }
+    ];
+    availableSources = [
+        {
+            value: 1,
+            display: 'option'
+        }
+    ];
+
+    statusFilter = new FormControl('');
+    sourceFilter = new FormControl('');
+
     constructor() { }
     ngOnInit(): void { }
+
+    clearFilter(): void { }
 }
