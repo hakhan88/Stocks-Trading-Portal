@@ -40,8 +40,16 @@ export class StockDetailsComponent implements OnInit {
     availableContactStatuses = [
         {
             value: 1,
-            display: 'option'
-        }
+            display: 'Normal'
+        },
+        {
+            value: 1,
+            display: 'Stopped Trading'
+        },
+        {
+            value: 1,
+            display: 'Waiting Listing'
+        },
     ];
     availableSources = [
         {
@@ -57,9 +65,13 @@ export class StockDetailsComponent implements OnInit {
         { name: 'Bear', completed: false, },
     ]
 
-    statusFilter = new FormControl('');
+    statusFilterControl = new FormControl('');
     sourceFilter = new FormControl('');
-    toppings = new FormControl();
+    toppingsControl = new FormControl();
+    listingDateControl = new FormControl('');
+    expiryDateControl = new FormControl('');
+    issuerControl = new FormControl('');
+    stockControl = new FormControl('');
 
     checked = false;
     indeterminate = false;
@@ -67,6 +79,12 @@ export class StockDetailsComponent implements OnInit {
     indeterminate3 = false;
 
     toppingList: string[] = ['Extra cheese', 'Mushroom', 'Onion', 'Pepperoni', 'Sausage', 'Tomato'];
+
+    stockList: string[] = ['0001 CK Hutchinson', '0002 CLP Group', '0700 Tencent'];
+    issuerList: string[] = ['SG', 'JP', 'UB', 'GS', 'HS'];
+    expiryDateList: string[] = ['Less than 3 months', '3 months to 6 months', '6 months to 12 months', 'more than 12 months'];
+    ListingDateList: string[] = ['Today', 'Tomorrow', 'Within a week', 'Past week', 'Past month'];
+    // : string[] = ['', '', ''];
 
     constructor() { }
     ngOnInit(): void { }

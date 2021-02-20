@@ -7,6 +7,18 @@
                 </mat-panel-title>
             </mat-expansion-panel-header>
 
+
+            <div class="vertical-form-field">
+                <div>
+                    <mat-form-field appearance="fill" [ngClass]="'option-dropdown-styling'">
+                        <mat-label>Stock</mat-label>
+                        <mat-select [formControl]="stockControl" multiple>
+                            <mat-option *ngFor="let stock of stockList" [value]="stock">{{stock}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+
             <div class="vertical-form-field">
                 <section class="example-section">
                     <mat-checkbox class="example-margin" [(ngModel)]="checked">Call</mat-checkbox>
@@ -20,8 +32,8 @@
                 <div>
                     <mat-form-field appearance="fill" [ngClass]="'option-dropdown-styling'">
                         <mat-label>Issuer</mat-label>
-                        <mat-select [formControl]="toppings" multiple>
-                            <mat-option *ngFor="let topping of toppingList" [value]="topping">{{topping}}</mat-option>
+                        <mat-select [formControl]="issuerControl" multiple>
+                            <mat-option *ngFor="let issuer of issuerList" [value]="issuer">{{issuer}}</mat-option>
                         </mat-select>
                     </mat-form-field>
                 </div>
@@ -31,8 +43,9 @@
                 <div>
                     <mat-form-field appearance="fill" [ngClass]="'option-dropdown-styling'">
                         <mat-label>Expiry Date</mat-label>
-                        <mat-select [formControl]="toppings" multiple>
-                            <mat-option *ngFor="let topping of toppingList" [value]="topping">{{topping}}</mat-option>
+                        <mat-select [formControl]="expiryDateControl" multiple>
+                            <mat-option *ngFor="let expiryDate of expiryDateList" [value]="expiryDate">{{expiryDate}}
+                            </mat-option>
                         </mat-select>
                     </mat-form-field>
                 </div>
@@ -42,8 +55,9 @@
                 <div>
                     <mat-form-field appearance="fill" [ngClass]="'option-dropdown-styling'">
                         <mat-label>Listing Date</mat-label>
-                        <mat-select [formControl]="toppings" multiple>
-                            <mat-option *ngFor="let topping of toppingList" [value]="topping">{{topping}}</mat-option>
+                        <mat-select [formControl]="listingDateControl" multiple>
+                            <mat-option *ngFor="let listDate of ListingDateList" [value]="listDate">{{listDate}}
+                            </mat-option>
                         </mat-select>
                     </mat-form-field>
                 </div>
@@ -54,7 +68,7 @@
                 <div>
                     <mat-form-field [ngClass]="'option-dropdown-styling'" appearance="fill" class="no-label-field">
                         <mat-label>Status</mat-label>
-                        <mat-select [formControl]="statusFilter">
+                        <mat-select [formControl]="statusFilterControl">
                             <mat-option *ngFor="let status of availableContactStatuses" [value]="status.value">
                                 {{status.display}}
                             </mat-option>
