@@ -8,7 +8,11 @@ button {
 
 .filter-container {
     margin-bottom: 30px;
-    min-width: 80%;
+    min-width: 20%;
+    background: white;
+    padding: 20px;
+    margin: 20px;
+    border-radius: 10px;
 }
 
 // ul {
@@ -28,12 +32,22 @@ button {
 .table-wrapper-scrollbar {
     overflow-x: scroll;
     max-height: 100%;
-    max-width: 80%;
+    max-width: 70%;
     overflow-y: scroll;
+    border-radius: 10px;
+    margin-top: 20px;
+}
+
+th.mat-header-cell {
+    min-width: 130px;
+}
+
+.example-full-width-custom {
+    width: 50%;
 }
 
 .table-min-width-styling {
-    min-width: 2000px;
+    // min-width: 2000px;
 }
 
 ::-webkit-scrollbar-button {
