@@ -37,7 +37,6 @@ body {
     opacity: 1;
     float: left;
     padding: 60px 50px 40px 50px;
-    width: 100%;
     background: #fff;
     border-radius: 10px;
     transform: scale(1);
@@ -117,7 +116,7 @@ body {
 }
 
 .banner-title::after {
-    content: "";
+    // content: ""; // TODO come back to this after fixing responsiveness
     position: absolute;
     top: 12%;
     right: 35%;

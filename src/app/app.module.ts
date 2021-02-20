@@ -13,6 +13,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EditUserComponent } from './components/editUser/editUser.component';
 import { UserListComponent } from './components/userList/userList.component';
 import { SanitizeHtmlPipe } from './pipes/sanitinse.pipe';
+import { StockDetailsComponent } from './components/stockDetails/stockDetails.component';
 
 @NgModule({
     declarations: [
@@ -21,7 +22,8 @@ import { SanitizeHtmlPipe } from './pipes/sanitinse.pipe';
         RegisterComponent,
         EditUserComponent,
         UserListComponent,
-        SanitizeHtmlPipe
+        SanitizeHtmlPipe,
+        StockDetailsComponent,
     ],
     imports: [
         BrowserModule,
