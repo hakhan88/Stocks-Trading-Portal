@@ -24,3 +24,37 @@ button {
 .option-dropdown-styling {
     min-width: 50%;
 }
+
+.table-wrapper-scrollbar {
+    overflow-x: scroll;
+    max-height: 100%;
+    max-width: 80%;
+    overflow-y: scroll;
+}
+
+.table-min-width-styling {
+    min-width: 2000px;
+}
+
+::-webkit-scrollbar-button {
+    height: 0;
+    width: 0;
+}
+
+::-webkit-scrollbar {
+    max-width: 10px !important;
+    width: 10px !important;
+    height: 10px !important;
+    background: none;
+}
+
+::-webkit-scrollbar-thumb {
+    background-clip: padding-box;
+    background: grey;
+    border: 5px solid transparent;
+    border-radius: 10px;
+    min-height: 20px;
+    min-width: 20px;
+    height: 5px;
+    width: 5px;
+}
