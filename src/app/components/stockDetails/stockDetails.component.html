@@ -18,7 +18,7 @@
 
             <div class="vertical-form-field">
                 <div>
-                    <mat-form-field appearance="fill">
+                    <mat-form-field appearance="fill" [ngClass]="'option-dropdown-styling'">
                         <mat-label>Issuer</mat-label>
                         <mat-select [formControl]="toppings" multiple>
                             <mat-option *ngFor="let topping of toppingList" [value]="topping">{{topping}}</mat-option>
@@ -29,7 +29,7 @@
 
             <div class="vertical-form-field">
                 <div>
-                    <mat-form-field appearance="fill">
+                    <mat-form-field appearance="fill" [ngClass]="'option-dropdown-styling'">
                         <mat-label>Expiry Date</mat-label>
                         <mat-select [formControl]="toppings" multiple>
                             <mat-option *ngFor="let topping of toppingList" [value]="topping">{{topping}}</mat-option>
@@ -40,7 +40,7 @@
 
             <div class="vertical-form-field">
                 <div>
-                    <mat-form-field appearance="fill">
+                    <mat-form-field appearance="fill" [ngClass]="'option-dropdown-styling'">
                         <mat-label>Listing Date</mat-label>
                         <mat-select [formControl]="toppings" multiple>
                             <mat-option *ngFor="let topping of toppingList" [value]="topping">{{topping}}</mat-option>
@@ -52,7 +52,7 @@
 
             <div class="vertical-form-field">
                 <div>
-                    <mat-form-field appearance="fill" class="no-label-field">
+                    <mat-form-field [ngClass]="'option-dropdown-styling'" appearance="fill" class="no-label-field">
                         <mat-label>Status</mat-label>
                         <mat-select [formControl]="statusFilter">
                             <mat-option *ngFor="let status of availableContactStatuses" [value]="status.value">
@@ -65,9 +65,8 @@
 
             <div class="vertical-form-field">
                 <div fxLayout="row">
-                    <p></p>
                     <mat-form-field class="example-full-width">
-                        <mat-label>Last Price:</mat-label>
+                        <mat-label>Last Price</mat-label>
                         <input matInput placeholder="Last Price">
                     </mat-form-field>
                     <mat-form-field class="example-full-width">
@@ -79,9 +78,8 @@
 
             <div class="vertical-form-field">
                 <div fxLayout="row">
-                    <p></p>
                     <mat-form-field class="example-full-width">
-                        <mat-label>Outstandig %:</mat-label>
+                        <mat-label>Outstandig %</mat-label>
                         <input matInput placeholder="Outstandig %">
                     </mat-form-field>
                     <mat-form-field class="example-full-width">
@@ -93,9 +91,8 @@
 
             <div class="vertical-form-field">
                 <div fxLayout="row">
-                    <p></p>
                     <mat-form-field class="example-full-width">
-                        <mat-label>Conversion Ratio:</mat-label>
+                        <mat-label>Conversion Ratio</mat-label>
                         <input matInput placeholder="Conversion Ratio">
                     </mat-form-field>
                     <mat-form-field class="example-full-width">
@@ -107,9 +104,8 @@
 
             <div class="vertical-form-field">
                 <div fxLayout="row">
-                    <p></p>
                     <mat-form-field class="example-full-width">
-                        <mat-label>I.V.:</mat-label>
+                        <mat-label>I.V.</mat-label>
                         <input matInput placeholder="I.V.">
                     </mat-form-field>
                     <mat-form-field class="example-full-width">
@@ -121,9 +117,8 @@
 
             <div class="vertical-form-field">
                 <div fxLayout="row">
-                    <p></p>
                     <mat-form-field class="example-full-width">
-                        <mat-label>Volume:</mat-label>
+                        <mat-label>Volume</mat-label>
                         <input matInput placeholder="Volume">
                     </mat-form-field>
                     <mat-form-field class="example-full-width">
@@ -135,9 +130,8 @@
 
             <div class="vertical-form-field">
                 <div fxLayout="row">
-                    <p></p>
                     <mat-form-field class="example-full-width">
-                        <mat-label>Premium %:</mat-label>
+                        <mat-label>Premium %</mat-label>
                         <input matInput placeholder="Premium %">
                     </mat-form-field>
                     <mat-form-field class="example-full-width">
@@ -149,9 +143,8 @@
 
             <div class="vertical-form-field">
                 <div fxLayout="row">
-                    <p></p>
                     <mat-form-field class="example-full-width">
-                        <mat-label>To Call Price %:</mat-label>
+                        <mat-label>To Call Price %</mat-label>
                         <input matInput placeholder="To Call Price %">
                     </mat-form-field>
                     <mat-form-field class="example-full-width">
@@ -163,9 +156,8 @@
 
             <div class="vertical-form-field">
                 <div fxLayout="row">
-                    <p></p>
                     <mat-form-field class="example-full-width">
-                        <mat-label>Sensitivity:</mat-label>
+                        <mat-label>Sensitivity</mat-label>
                         <input matInput placeholder="Sensitivity">
                     </mat-form-field>
                     <mat-form-field class="example-full-width">
@@ -177,9 +169,8 @@
 
             <div class="vertical-form-field">
                 <div fxLayout="row">
-                    <p></p>
                     <mat-form-field class="example-full-width">
-                        <mat-label>Spread:</mat-label>
+                        <mat-label>Spread</mat-label>
                         <input matInput placeholder="Spread">
                     </mat-form-field>
                     <mat-form-field class="example-full-width">
