@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 export interface PeriodicElement {
     Name: string;
@@ -36,6 +37,13 @@ export class UserListComponent implements OnInit {
     data: PeriodicElement[] = ELEMENT_DATA;
 
 
-    constructor() { }
+    constructor(
+        private route: Router,
+    ) { }
     ngOnInit(): void { }
+
+    clickRow(row: any): void {
+        console.log(row);
+        this.route.navigate(['/editUser']);
+    }
 }

@@ -27,4 +27,8 @@ export class AppComponent {
         this.loginService.modalIsOpen$.next('false');
         this.route.navigate(['/signin']);
     }
+
+    editUser(): void {
+        this.route.navigate(['/userList']);
+    }
 }
