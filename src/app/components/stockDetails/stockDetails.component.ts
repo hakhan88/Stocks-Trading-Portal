@@ -7,14 +7,79 @@ export interface PeriodicElement {
     Symbol: string;
     Name: string;
     Issuer: string;
+    Sensitivity: string;
+    Spread: string;
+    Bid: string;
+    Ask: string;
+    Last: string;
+    Volume: string;
+    Turnover: string;
+    Premium: string;
+    IV: string;
+    Delta: string;
+    ConversionRatio: string;
+    Change: string;
+    ExercisePrice: string;
+    ExpiryDate: string;
+    CallPrice: string;
+    OutStanding: string;
+    Profit: string;
+    Loss: string;
+    Net: string;
 }
 
 const ELEMENT_DATA: PeriodicElement[] = [
     {
-        Symbol: 'George@gmail.com', Stock: 'Hydrogen', Name: 'Admin', Issuer: '<mat-icon matSuffix class="mat-icon notranslate material-icons mat-icon-no-color">edit</mat-icon>', Add: 'Add'
+        Add: 'Add',
+        Stock: '700',
+        Symbol: '17850',
+        Name: 'BITCON@EC201E',
+        Issuer: 'BI',
+        Sensitivity: '1.11',
+        Spread: '1',
+        Bid: '0.134',
+        Ask: '2.35M',
+        Last: '0.123',
+        Volume: '2.35M',
+        Turnover: '76K',
+        Premium: '26.37%',
+        IV: '40.827',
+        Delta: '0.431',
+        ConversionRatio: '100',
+        Change: '+0.019',
+        ExercisePrice: '650.12',
+        ExpiryDate: '2020-04-11',
+        CallPrice: '3.80%',
+        OutStanding: '67.15%',
+        Profit: '500',
+        Loss: '-200',
+        Net: '300',
     },
     {
-        Symbol: 'Ford@gmail.com', Stock: 'Helium', Name: 'Admin', Issuer: '<mat-icon matSuffix class="mat-icon notranslate material-icons mat-icon-no-color">edit</mat-icon>', Add: 'Add'
+        Add: 'Add',
+        Stock: '700',
+        Symbol: '17850',
+        Name: 'BITCON@EC201E',
+        Issuer: 'BI',
+        Sensitivity: '4.63',
+        Spread: '-',
+        Bid: '0.874',
+        Ask: '0.11M',
+        Last: '0.987',
+        Volume: '1.65M',
+        Turnover: '16K',
+        Premium: '18.37%',
+        IV: '40.827',
+        Delta: '0.431',
+        ConversionRatio: '800',
+        Change: '+1.090',
+        ExercisePrice: '90.12',
+        ExpiryDate: '2020-01-11',
+        CallPrice: '55.80%',
+        OutStanding: '70.15%',
+        Profit: '700',
+        Loss: '-10',
+        Net: '30',
     },
 ];
 
@@ -29,7 +94,7 @@ export class StockDetailsComponent implements OnInit {
     hide2 = true;
     test = '<h3>Hello</h3>';
 
-    displayedColumns: string[] = ['Add', 'Stock', 'Symbol', 'Name', 'Issuer'];
+    displayedColumns: string[] = ['Add', 'Stock', 'Symbol', 'Name', 'Issuer', 'Sensitivity', 'Spread', 'Bid', 'Ask', 'Last', 'Volume', 'Turnover', 'Premium', 'IV', 'Delta', 'ConversionRatio', 'Change', 'ExercisePrice', 'ExpiryDate', 'CallPrice', 'OutStanding', 'Profit', 'Loss', 'Net'];
     columnsToDisplay: string[] = this.displayedColumns.slice();
     data: PeriodicElement[] = ELEMENT_DATA;
 
