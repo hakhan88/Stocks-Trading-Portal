@@ -187,9 +187,24 @@
             </div>
         </div>
 
-
         <div>
-            <button mat-raised-button color="primary" (click)="filter()">Filter</button>
+            <button mat-raised-button color="primary" (click)="filter()">Search</button>
+            <div fxLayout="row">
+                <button mat-raised-button color="primary" [ngClass]="'filter-panel-custom-buttons'"
+                    (click)="filter()">Save</button>
+                <mat-form-field class="example-full-width-custom">
+                    <mat-label>Save</mat-label>
+                    <input matInput placeholder="To">
+                </mat-form-field>
+            </div>
+            <div fxLayout="row">
+                <button mat-raised-button color="primary" [ngClass]="'filter-panel-custom-buttons'"
+                    (click)="filter()">Load</button>
+                <mat-form-field class="example-full-width-custom">
+                    <mat-label>Load</mat-label>
+                    <input matInput placeholder="To">
+                </mat-form-field>
+            </div>
         </div>
     </div>
 

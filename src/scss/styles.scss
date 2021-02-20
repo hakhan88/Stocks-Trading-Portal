@@ -154,3 +154,27 @@ body {
     height: 30em;
     width: 50em;
 }
+
+
+::-webkit-scrollbar-button {
+    height: 0;
+    width: 0;
+}
+
+::-webkit-scrollbar {
+    max-width: 10px !important;
+    width: 10px !important;
+    height: 10px !important;
+    background: none;
+}
+
+::-webkit-scrollbar-thumb {
+    background-clip: padding-box;
+    background: grey;
+    border: 5px solid transparent;
+    border-radius: 10px;
+    min-height: 20px;
+    min-width: 20px;
+    height: 5px;
+    width: 5px;
+}
