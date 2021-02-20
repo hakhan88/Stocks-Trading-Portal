@@ -1,5 +1,5 @@
 <div class="main-wrapper" fxLayout="column" fxLayoutAlign="start center">
-    <div class="filter-container">
+    <div [ngClass]="'filter-container'">
         <mat-expansion-panel>
             <mat-expansion-panel-header>
                 <mat-panel-title>
@@ -201,7 +201,7 @@
         </mat-expansion-panel>
     </div>
 
-    <div class="table-wrapper-scrollbar">
+    <div [ngClass]="'table-wrapper-scrollbar'">
         <table mat-table [dataSource]="data" class="mat-elevation-z8 table-min-width-styling">
             <ng-container [matColumnDef]="column" *ngFor="let column of displayedColumns">
                 <th mat-header-cell *matHeaderCellDef> {{column}} </th>
@@ -212,5 +212,4 @@
             <tr mat-row *matRowDef="let row; columns: columnsToDisplay;"></tr>
         </table>
     </div>
-
 </div>
