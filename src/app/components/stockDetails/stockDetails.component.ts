@@ -2,23 +2,20 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 
 export interface PeriodicElement {
+    Add?: string;
+    Stock: string;
+    Symbol: string;
     Name: string;
-    Email: string;
-    Role: string;
-    Edit: string;
+    Issuer: string;
 }
 
 const ELEMENT_DATA: PeriodicElement[] = [
-    { Email: 'George@gmail.com', Name: 'Hydrogen', Role: 'Admin', Edit: '<mat-icon matSuffix class="mat-icon notranslate material-icons mat-icon-no-color">edit</mat-icon>' },
-    { Email: 'Ford@gmail.com', Name: 'Helium', Role: 'Admin', Edit: '<mat-icon matSuffix class="mat-icon notranslate material-icons mat-icon-no-color">edit</mat-icon>' },
-    { Email: 'Anna@gmail.com', Name: 'Lithium', Role: 'Admin', Edit: '<mat-icon matSuffix class="mat-icon notranslate material-icons mat-icon-no-color">edit</mat-icon>' },
-    { Email: 'Joshua@gmail.com', Name: 'Beryllium', Role: 'Admin', Edit: '<mat-icon matSuffix class="mat-icon notranslate material-icons mat-icon-no-color">edit</mat-icon>' },
-    { Email: 'Hannah@gmail.com', Name: 'Boron', Role: 'Admin', Edit: '<mat-icon matSuffix class="mat-icon notranslate material-icons mat-icon-no-color">edit</mat-icon>' },
-    { Email: 'Martha@gmail.com', Name: 'Carbon', Role: 'Admin', Edit: '<mat-icon matSuffix class="mat-icon notranslate material-icons mat-icon-no-color">edit</mat-icon>' },
-    { Email: 'Mark@gmail.com', Name: 'Nitrogen', Role: 'Admin', Edit: '<mat-icon matSuffix class="mat-icon notranslate material-icons mat-icon-no-color">edit</mat-icon>' },
-    { Email: 'Henry@gmail.com', Name: 'Oxygen', Role: 'Admin', Edit: '<mat-icon matSuffix class="mat-icon notranslate material-icons mat-icon-no-color">edit</mat-icon>' },
-    { Email: 'Luke@gmail.com', Name: 'Fluorine', Role: 'Admin', Edit: '<mat-icon matSuffix class="mat-icon notranslate material-icons mat-icon-no-color">edit</mat-icon>' },
-    { Email: 'Joseph@gmail.com', Name: 'Neon', Role: 'Admin', Edit: '<mat-icon matSuffix class="mat-icon notranslate material-icons mat-icon-no-color">edit</mat-icon>' },
+    {
+        Symbol: 'George@gmail.com', Stock: 'Hydrogen', Name: 'Admin', Issuer: '<mat-icon matSuffix class="mat-icon notranslate material-icons mat-icon-no-color">edit</mat-icon>', Add: 'Add'
+    },
+    {
+        Symbol: 'Ford@gmail.com', Stock: 'Helium', Name: 'Admin', Issuer: '<mat-icon matSuffix class="mat-icon notranslate material-icons mat-icon-no-color">edit</mat-icon>', Add: 'Add'
+    },
 ];
 
 @Component({
@@ -32,7 +29,7 @@ export class StockDetailsComponent implements OnInit {
     hide2 = true;
     test = '<h3>Hello</h3>';
 
-    displayedColumns: string[] = ['Name', 'Email', 'Role', 'Edit'];
+    displayedColumns: string[] = ['Add', 'Stock', 'Symbol', 'Name', 'Issuer'];
     columnsToDisplay: string[] = this.displayedColumns.slice();
     data: PeriodicElement[] = ELEMENT_DATA;
 
