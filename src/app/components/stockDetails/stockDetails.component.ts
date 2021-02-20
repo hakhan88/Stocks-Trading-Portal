@@ -50,11 +50,21 @@ export class StockDetailsComponent implements OnInit {
         }
     ];
 
+    calPut = [
+        { name: 'Call', completed: false, },
+        { name: 'Put', completed: false, },
+        { name: 'Pull', completed: false, },
+        { name: 'Bear', completed: false, },
+    ]
+
     statusFilter = new FormControl('');
     sourceFilter = new FormControl('');
 
     constructor() { }
     ngOnInit(): void { }
 
-    clearFilter(): void { }
+    filter(): void { }
+
+    updateAllComplete() {
+    }
 }
