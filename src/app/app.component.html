@@ -1,8 +1,15 @@
 <mat-toolbar color="primary" class="app-header">
     <div><a href="#" class="positronx">Waren Stocks</a></div>
-    <span class="nav-tool-items">
-        <a mat-button routerLink="signin" routerLinkActive="active">Log in</a>
-        <a mat-button mat-raised-button routerLink="register" routerLinkActive="active">Sign up</a>
-    </span>
+    <div *ngIf="showLogin">
+        <span class="nav-tool-items">
+            <a mat-button routerLink="signin" routerLinkActive="active">Log in</a>
+            <a mat-button mat-raised-button routerLink="register" routerLinkActive="active">Sign up</a>
+        </span>
+    </div>
+    <div *ngIf="!showLogin">
+        <span class="nav-tool-items">
+            <a mat-button mat-raised-button routerLinkActive="active" (click)="logout()">Logout</a>
+        </span>
+    </div>
 </mat-toolbar>
 <router-outlet></router-outlet>

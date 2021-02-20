@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { LoginService } from 'src/app/services/login.service';
 
 @Component({
     selector: 'app-signin',
@@ -9,12 +10,16 @@ import { Router } from '@angular/router';
 export class SigninComponent implements OnInit {
     hide = true;
     hide2 = true;
-    constructor(private route: Router) { }
+    constructor(
+        private route: Router,
+        private loginService: LoginService,
+    ) { }
 
     ngOnInit(): void {
     }
 
     signIn(): void {
+        this.loginService.modalIsOpen$.next('true');
         this.route.navigate(['/stockDetails']);
     }
 

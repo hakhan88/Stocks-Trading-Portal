@@ -14,6 +14,7 @@ import { EditUserComponent } from './components/editUser/editUser.component';
 import { UserListComponent } from './components/userList/userList.component';
 import { SanitizeHtmlPipe } from './pipes/sanitinse.pipe';
 import { StockDetailsComponent } from './components/stockDetails/stockDetails.component';
+import { LoginService } from './services/login.service';
 
 @NgModule({
     declarations: [
@@ -36,7 +37,9 @@ import { StockDetailsComponent } from './components/stockDetails/stockDetails.co
         FormsModule,
         ReactiveFormsModule,
     ],
-    providers: [],
+    providers: [
+        LoginService,
+    ],
     bootstrap: [AppComponent],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
