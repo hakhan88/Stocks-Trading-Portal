@@ -222,6 +222,17 @@
             <tr mat-row *matRowDef="let row; columns: columnsToDisplay2;"></tr>
         </table>
 
+        <div style="margin-top: 10px;">
+            <h2>Tranaction Log</h2>
+            <table mat-table [dataSource]="data3" style="width: 100%;" class="mat-elevation-z8 table-min-width-styling">
+                <ng-container [matColumnDef]="column" *ngFor="let column of displayedColumns3">
+                    <th style="display: none;" mat-header-cell *matHeaderCellDef> {{column}} </th>
+                    <td mat-cell *matCellDef="let element" [innerHTML]="element[column] | sanitizeHtml"></td>
+                </ng-container>
+                <tr mat-row *matRowDef="let row; columns: columnsToDisplay3;"></tr>
+            </table>
+        </div>
+
     </div>
 
     <div style="max-width: 100%;">

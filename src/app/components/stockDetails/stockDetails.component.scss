@@ -53,3 +53,10 @@ th.mat-header-cell {
 .table-min-width-styling {
     // min-width: 2000px;
 }
+
+:host .pyramid {
+    width: 5px !important;
+    border-left: 10px dotted transparent !important;
+    border-right: 10px solid transparent !important;
+    border-bottom: 20px solid blue !important;
+}
