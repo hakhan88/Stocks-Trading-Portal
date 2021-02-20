@@ -28,6 +28,34 @@ export interface PeriodicElement {
     Net: string;
 }
 
+interface PeriodicElement2 {
+    Bid: string;
+    Ask: string;
+}
+
+const ELEMENT_DATA2: PeriodicElement2[] = [
+    {
+        Bid: '0.23 6M (2)',
+        Ask: '0.12 7M (2)'
+    },
+    {
+        Bid: '0.23 6M (2)',
+        Ask: '0.12 7M (2)'
+    },
+    {
+        Bid: '0.23 6M (2)',
+        Ask: '0.12 7M (2)'
+    },
+    {
+        Bid: '0.23 6M (2)',
+        Ask: '0.12 7M (2)'
+    },
+    {
+        Bid: '0.23 6M (2)',
+        Ask: '0.12 7M (2)'
+    }
+];
+
 const ELEMENT_DATA: PeriodicElement[] = [
     {
         Add: 'Add',
@@ -146,7 +174,10 @@ export class StockDetailsComponent implements OnInit {
     issuerList: string[] = ['SG', 'JP', 'UB', 'GS', 'HS'];
     expiryDateList: string[] = ['Less than 3 months', '3 months to 6 months', '6 months to 12 months', 'more than 12 months'];
     ListingDateList: string[] = ['Today', 'Tomorrow', 'Within a week', 'Past week', 'Past month'];
-    // : string[] = ['', '', ''];
+
+    displayedColumns2: string[] = ['Bid', 'Ask']
+    columnsToDisplay2: string[] = this.displayedColumns2.slice();
+    data2: any[] = ELEMENT_DATA2;
 
     constructor() { }
     ngOnInit(): void { }
