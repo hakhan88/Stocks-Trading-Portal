@@ -3,33 +3,91 @@ import { FormControl } from '@angular/forms';
 
 export interface PeriodicElement {
     Add?: string;
-    Stock: string;
-    Symbol: string;
+    STK: string;
+    Code: string;
     Name: string;
-    Issuer: string;
-    Sensitivity: string;
-    Spread: string;
-    SquareMultiple: string;
-    Type: string;
-    Bid: string;
-    Ask: string;
-    Last: string;
-    Volume: string;
-    Turnover: string;
-    Premium: string;
+    ISR: string;
+    SEN: string;
+    SPRD: string;
+    SQX: string;
+    TY: string;
+    BID: string;
+    ASK: string;
+    LAST: string;
+    VOL: string;
+    TO: string;
+    PREM: string;
     IV: string;
-    Delta: string;
-    ConversionRatio: string;
-    Change: string;
-    ExercisePrice: string;
-    ExpiryDate: string;
-    CallPrice: string;
-    OutStanding: string;
-    Profit: string;
-    Loss: string;
-    Net: string;
+    D: string;
+    CR: string;
+    CHG: string;
+    K: string;
+    EXP: string;
+    CP: string;
+    OUTS: string;
+    P: string;
+    L: string;
+    NET: string;
 }
 
+const ELEMENT_DATA: PeriodicElement[] = [
+    {
+        Add: 'Add',
+        STK: '700',
+        Code: '17850',
+        Name: 'BITCON@EC201E',
+        ISR: 'BI',
+        SEN: '1.11',
+        SPRD: '1',
+        SQX: 'SQX',
+        TY: 'Call',
+        BID: '0.134',
+        ASK: '2.35M',
+        LAST: '0.123',
+        VOL: '2.35M',
+        TO: '76K',
+        PREM: '26.37%',
+        IV: '40.827',
+        D: '0.431',
+        CR: '100',
+        CHG: '+0.019',
+        K: '650.12',
+        EXP: '2020-04-11',
+        CP: '3.80%',
+        OUTS: '67.15%',
+        P: '500',
+        L: '-200',
+        NET: '300',
+    },
+    {
+        Add: 'Add',
+        STK: '700',
+        Code: '17850',
+        Name: 'BITCON@EC201E',
+        ISR: 'BI',
+        SEN: '4.63',
+        SQX: 'SQX',
+        TY: 'Put',
+        SPRD: '-',
+        BID: '0.874',
+        ASK: '0.11M',
+        LAST: '0.987',
+        VOL: '1.65M',
+        TO: '16K',
+        PREM: '18.37%',
+        IV: '40.827',
+        D: '0.431',
+        CR: '800',
+        CHG: '+1.090',
+        K: '90.12',
+        EXP: '2020-01-11',
+        CP: '55.80%',
+        OUTS: '70.15%',
+        P: '700',
+        L: '-10',
+        NET: '30',
+    },
+];
 interface PeriodicElement2 {
     Bid: string;
     Ask: string;
@@ -77,65 +135,6 @@ const ELEMENT_DATA3: PeriodicElement2[] = [
     },
 ];
 
-const ELEMENT_DATA: PeriodicElement[] = [
-    {
-        Add: 'Add',
-        Stock: '700',
-        Symbol: '17850',
-        Name: 'BITCON@EC201E',
-        Issuer: 'BI',
-        Sensitivity: '1.11',
-        Spread: '1',
-        SquareMultiple: 'SQX',
-        Type: 'Call',
-        Bid: '0.134',
-        Ask: '2.35M',
-        Last: '0.123',
-        Volume: '2.35M',
-        Turnover: '76K',
-        Premium: '26.37%',
-        IV: '40.827',
-        Delta: '0.431',
-        ConversionRatio: '100',
-        Change: '+0.019',
-        ExercisePrice: '650.12',
-        ExpiryDate: '2020-04-11',
-        CallPrice: '3.80%',
-        OutStanding: '67.15%',
-        Profit: '500',
-        Loss: '-200',
-        Net: '300',
-    },
-    {
-        Add: 'Add',
-        Stock: '700',
-        Symbol: '17850',
-        Name: 'BITCON@EC201E',
-        Issuer: 'BI',
-        Sensitivity: '4.63',
-        SquareMultiple: 'SQX',
-        Type: 'Put',
-        Spread: '-',
-        Bid: '0.874',
-        Ask: '0.11M',
-        Last: '0.987',
-        Volume: '1.65M',
-        Turnover: '16K',
-        Premium: '18.37%',
-        IV: '40.827',
-        Delta: '0.431',
-        ConversionRatio: '800',
-        Change: '+1.090',
-        ExercisePrice: '90.12',
-        ExpiryDate: '2020-01-11',
-        CallPrice: '55.80%',
-        OutStanding: '70.15%',
-        Profit: '700',
-        Loss: '-10',
-        Net: '30',
-    },
-];
-
 @Component({
     selector: 'app-stock-details',
     templateUrl: './stockDetails.component.html',
@@ -147,7 +146,33 @@ export class StockDetailsComponent implements OnInit {
     hide2 = true;
     test = '<h3>Hello</h3>';
 
-    displayedColumns: string[] = ['Add', 'Stock', 'Symbol', 'Name', 'Issuer', 'Sensitivity', 'Spread', 'SquareMultiple', 'Bid', 'Ask', 'Last', 'Volume', 'Turnover', 'Premium', 'IV', 'Delta', 'ConversionRatio', 'Change', 'ExercisePrice', 'ExpiryDate', 'CallPrice', 'OutStanding', 'Profit', 'Loss', 'Net'];
+    displayedColumns: string[] = [
+        'Add',
+        'CODE',
+        'TY',
+        'Name',
+        'ISR',
+        'SEN',
+        'SQRD',
+        'SQX',
+        'BID',
+        'ASK',
+        'LAST',
+        'VOL',
+        'TO',
+        'PREM',
+        'IV',
+        'D',
+        'CR',
+        'CHG',
+        'K',
+        'EXP',
+        'C.P.',
+        'OUT%',
+        'P',
+        'L',
+        'NET',
+    ];
     columnsToDisplay: string[] = this.displayedColumns.slice();
     data: PeriodicElement[] = ELEMENT_DATA;
 
