@@ -203,7 +203,7 @@ export class StockDetailsComponent implements OnInit {
         { name: 'Put', completed: false, },
         { name: 'Pull', completed: false, },
         { name: 'Bear', completed: false, },
-    ]
+    ];
 
     statusFilterControl = new FormControl('');
     sourceFilter = new FormControl('');
@@ -293,6 +293,6 @@ export class StockDetailsComponent implements OnInit {
 
     filter(): void { }
 
-    updateAllComplete() {
+    updateAllComplete(): void {
     }
 }
