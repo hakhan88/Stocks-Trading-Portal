@@ -182,6 +182,8 @@ export class StockDetailsComponent implements OnInit {
     issuerControl = new FormControl('');
     stockControl = new FormControl('');
 
+    saveStrategyControl = new FormControl('');
+
     checked = false;
     indeterminate = false;
     indeterminate2 = false;
@@ -194,10 +196,62 @@ export class StockDetailsComponent implements OnInit {
     expiryDateList: string[] = ['Less than 3 months', '3 months to 6 months', '6 months to 12 months', 'more than 12 months'];
     ListingDateList: string[] = ['Today', 'Tomorrow', 'Within a week', 'Past week', 'Past month'];
 
-    displayedColumns2: string[] = ['Bid', 'Ask']
+    strategyList: string[] = ['Strategy 1', 'Strategy 2', 'Strategy 3', 'Strategy 4'];
+    sortedByOptions = [
+        {
+            value: 1,
+            display: 'Issuer',
+        },
+        {
+            value: 1,
+            display: 'Sensitivity',
+        },
+        {
+            value: 1,
+            display: 'spread',
+        },
+        {
+            value: 1,
+            display: 'Square spread',
+        },
+        {
+            value: 1,
+            display: 'Bid',
+        },
+        {
+            value: 1,
+            display: 'Ask',
+        },
+        {
+            value: 1,
+            display: 'Last',
+        },
+        {
+            value: 1,
+            display: 'Volume',
+        },
+        {
+            value: 1,
+            display: 'Premium',
+        },
+        {
+            value: 1,
+            display: 'IV',
+        },
+        {
+            value: 1,
+            display: 'Delta',
+        },
+        {
+            value: 1,
+            display: 'Turnover',
+        },
+    ];
+
+
+    displayedColumns2: string[] = ['Bid', 'Ask'];
     columnsToDisplay2: string[] = this.displayedColumns2.slice();
     data2: any[] = ELEMENT_DATA2;
-
 
     displayedColumns3: string[] = ['Bid', 'Ask'];
     columnsToDisplay3: string[] = ['Bid', 'Ask'];
