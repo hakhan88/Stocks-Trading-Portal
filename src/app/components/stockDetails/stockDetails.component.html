@@ -282,6 +282,53 @@
                 <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
                 <tr mat-row *matRowDef="let row; columns: columnsToDisplay;"></tr>
             </table>
+
+            <!-- <table class="table table-responsive table-bordered table-hover" id="table">
+                <thead>
+                    <tr cdkDropList cdkDropListOrientation="horizontal" [cdkDropListData]="columns"
+                        (cdkDragReleased)="release=true" (cdkDropListDropped)="dropCol($event)">
+                        <ng-container *ngFor="let column of columns, let i = index">
+                            <th cdkDrag (mousedown)="mouseDown($event)" cdkDragLockAxis="x"
+                                (cdkDragReleased)="release=true">
+                                {{column.header}}
+                                <div *cdkDragPreview>
+                                    <div [style.width]="pos?.width" [style.margin-top]="pos?.y"
+                                        [style.margin-left]="pos?.x">
+                                        <thead>
+                                            <tr>
+                                                <th>
+                                                    {{column.header}}
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                    </div>
+                                </div>
+                                <div class="placeholder" *cdkDragPlaceholder></div>
+                            </th>
+                        </ng-container>
+                    </tr>
+                </thead>
+                <tbody cdkDropList [cdkDropListData]="paginateData" (cdkDropListDropped)="dropRow($event)">
+                    <tr #tr cdkDrag cdkDragLockAxis="y" (mousedown)="mouseDown($event,tr)"
+                        (cdkDragReleased)="onDragRelease($event)" *ngFor="let element of paginateData">
+                        <ng-container *ngFor="let cell of columns">
+                            <ng-container>
+                                <td>{{element[cell.field]}}
+                                </td>
+                            </ng-container>
+                        </ng-container>
+                        <div *cdkDragPreview class="preview" [style.margin-top]="pos?.y" [style.margin-left]="pos?.x"
+                            [style.width]="pos?.width">
+                            <table>
+                                <tr>
+                                    <td *ngFor="let cell of columns">{{element[cell.field]}}</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="preview placeholder" *cdkDragPlaceholder></div>
+                    </tr>
+                </tbody>
+            </table> -->
         </div>
     </div>
 </div>

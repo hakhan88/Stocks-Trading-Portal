@@ -326,27 +326,25 @@ export class StockDetailsComponent implements OnInit {
             city: 'Condon',
             state: 'Minnesota'
         }
-        ]
+        ];
     }
 
     dropRow(event: CdkDragDrop<string[]>): void {
         moveItemInArray(this.paginateData, event.previousIndex, event.currentIndex);
     }
     dropCol(event: CdkDragDrop<string[]>): void {
-
         moveItemInArray(this.columns, event.previousIndex, event.currentIndex);
-        console.log(this.columns, this.paginateData)
     }
     mouseDown(event: any, el: any = null): void {
         el = el || event.target;
         this.pos = {
             x: el.getBoundingClientRect().left - event.clientX + 'px',
             y: el.getBoundingClientRect().top - event.clientY + 'px',
-            width: el.getBoundingClientRect().width + 'px'
+            width: el.getBoundingClientRect().width + 'px',
         };
     }
     onDragRelease(event: CdkDragRelease): void {
-        this.renderer2.setStyle(event.source.element.nativeElement, 'margin-left', '0px')
+        this.renderer2.setStyle(event.source.element.nativeElement, 'margin-left', '0px');
     }
 
     constructor(

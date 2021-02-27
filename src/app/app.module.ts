@@ -15,6 +15,7 @@ import { UserListComponent } from './components/userList/userList.component';
 import { SanitizeHtmlPipe } from './pipes/sanitinse.pipe';
 import { StockDetailsComponent } from './components/stockDetails/stockDetails.component';
 import { LoginService } from './services/login.service';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 @NgModule({
     declarations: [
@@ -36,6 +37,7 @@ import { LoginService } from './services/login.service';
         FlexModule,
         FormsModule,
         ReactiveFormsModule,
+        DragDropModule,
     ],
     providers: [
         LoginService,
