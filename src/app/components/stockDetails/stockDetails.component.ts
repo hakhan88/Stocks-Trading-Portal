@@ -9,6 +9,8 @@ export interface PeriodicElement {
     Issuer: string;
     Sensitivity: string;
     Spread: string;
+    SquareMultiple: string;
+    Type: string;
     Bid: string;
     Ask: string;
     Last: string;
@@ -84,6 +86,8 @@ const ELEMENT_DATA: PeriodicElement[] = [
         Issuer: 'BI',
         Sensitivity: '1.11',
         Spread: '1',
+        SquareMultiple: 'SQX',
+        Type: 'Call',
         Bid: '0.134',
         Ask: '2.35M',
         Last: '0.123',
@@ -109,6 +113,8 @@ const ELEMENT_DATA: PeriodicElement[] = [
         Name: 'BITCON@EC201E',
         Issuer: 'BI',
         Sensitivity: '4.63',
+        SquareMultiple: 'SQX',
+        Type: 'Put',
         Spread: '-',
         Bid: '0.874',
         Ask: '0.11M',
@@ -141,7 +147,7 @@ export class StockDetailsComponent implements OnInit {
     hide2 = true;
     test = '<h3>Hello</h3>';
 
-    displayedColumns: string[] = ['Add', 'Stock', 'Symbol', 'Name', 'Issuer', 'Sensitivity', 'Spread', 'Bid', 'Ask', 'Last', 'Volume', 'Turnover', 'Premium', 'IV', 'Delta', 'ConversionRatio', 'Change', 'ExercisePrice', 'ExpiryDate', 'CallPrice', 'OutStanding', 'Profit', 'Loss', 'Net'];
+    displayedColumns: string[] = ['Add', 'Stock', 'Symbol', 'Name', 'Issuer', 'Sensitivity', 'Spread', 'SquareMultiple', 'Bid', 'Ask', 'Last', 'Volume', 'Turnover', 'Premium', 'IV', 'Delta', 'ConversionRatio', 'Change', 'ExercisePrice', 'ExpiryDate', 'CallPrice', 'OutStanding', 'Profit', 'Loss', 'Net'];
     columnsToDisplay: string[] = this.displayedColumns.slice();
     data: PeriodicElement[] = ELEMENT_DATA;
 
