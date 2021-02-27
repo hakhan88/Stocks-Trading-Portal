@@ -64,3 +64,32 @@ th.mat-header-cell {
     border-right: 10px solid transparent !important;
     border-bottom: 20px solid blue !important;
 }
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  tr,tr
+  {
+  height: 2.5rem;
+  }
+  tr,td{
+  border-bottom:1px solid silver;
+  padding-left:.5rem;
+  background-color:transparent;
+  cursor:move;
+  }
+  
+  th
+  {
+  height: 2.7rem;
+    text-align: left;
+    padding-left:.5rem;
+    border-bottom:1px solid #e0e0e0;
+  }
+  .placeholder
+  {
+    background-color:transparent;
+    height: 2.5rem;
+  }
+  

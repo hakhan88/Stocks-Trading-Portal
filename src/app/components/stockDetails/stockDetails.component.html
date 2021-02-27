@@ -283,7 +283,9 @@
                 <tr mat-row *matRowDef="let row; columns: columnsToDisplay;"></tr>
             </table>
 
-            <!-- <table class="table table-responsive table-bordered table-hover" id="table">
+            <!-- <table
+                class="table mat-table  table-responsive table-bordered table-hover mat-elevation-z8 table-min-width-styling"
+                id="table">
                 <thead>
                     <tr cdkDropList cdkDropListOrientation="horizontal" [cdkDropListData]="columns"
                         (cdkDragReleased)="release=true" (cdkDropListDropped)="dropCol($event)">
