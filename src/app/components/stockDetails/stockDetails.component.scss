@@ -70,5 +70,10 @@ th.mat-header-cell {
 
 ::ng-deep .mat-form-field-wrapper{
    margin-bottom: -1.25em;
-   font-size: 8px !important;
+   font-size: 10px !important;
+}
+
+::ng-deep .mat-raised-button {
+    line-height: 24px !important;
+    font-size: 12px !important;
 }
