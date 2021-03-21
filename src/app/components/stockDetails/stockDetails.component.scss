@@ -10,8 +10,8 @@ button {
     margin-bottom: 30px;
     min-width: 20%;
     background: white;
-    padding: 20px;
-    margin: 20px;
+    padding: 0px 20px;
+    margin: 0px 20px;
     border-radius: 10px;
 }
 
@@ -35,7 +35,6 @@ button {
     max-width: 70%;
     overflow-y: scroll;
     border-radius: 10px;
-    margin-top: 20px;
 }
 
 th.mat-header-cell {
@@ -65,31 +64,16 @@ th.mat-header-cell {
     border-bottom: 20px solid blue !important;
 }
 
-table {
-    width: 100%;
-    border-collapse: collapse;
-  }
-  tr,tr
-  {
-  height: 2.5rem;
-  }
-  tr,td{
-  border-bottom:1px solid silver;
-  padding-left:.5rem;
-  background-color:transparent;
-  cursor:move;
-  }
-  
-  th
-  {
-  height: 2.7rem;
-    text-align: left;
-    padding-left:.5rem;
-    border-bottom:1px solid #e0e0e0;
-  }
-  .placeholder
-  {
-    background-color:transparent;
-    height: 2.5rem;
-  }
-  
+::ng-deep .mat-form-field-appearance-fill .mat-form-field-flex {
+    background-color: rgb(209 209 209 / 4%) !important;
+}
+
+::ng-deep .mat-form-field-wrapper {
+    margin-bottom: -1.25em;
+    font-size: 10px !important;
+}
+
+::ng-deep .mat-raised-button {
+    line-height: 24px !important;
+    font-size: 12px !important;
+}
