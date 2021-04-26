@@ -38,6 +38,22 @@ export class MainUiListService {
             );
     }
 
+
+    getAskBidListData(): Observable<any> {
+        return this.httpClient.post(`${this.BASE_URL}v_ask_bid_list`, {})
+            .pipe(
+                catchError(this.handleError)
+            );
+    }
+
+
+    getTransactionLogListData(): Observable<any> {
+        return this.httpClient.post(`${this.BASE_URL}v_transaction_log/buy`, {})
+            .pipe(
+                catchError(this.handleError)
+            );
+    }
+
     private handleError(error: HttpErrorResponse): Observable<any> {
         if (error.error instanceof ErrorEvent) {
             // A client-side or network error occurred. Handle it accordingly.

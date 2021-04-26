@@ -437,4 +437,17 @@ export class StockDetailsComponent implements OnInit {
         });
         return mappedToFe;
     }
+
+    rowClicked(element: any): void {
+        this.mainUiListService
+            .getAskBidListData()
+            .subscribe(val => {
+                console.log('getAskBidListData', val);
+            });
+        this.mainUiListService
+            .getTransactionLogListData()
+            .subscribe(val => {
+                console.log('getTransactionLogListData', val);
+            });
+    }
 }
