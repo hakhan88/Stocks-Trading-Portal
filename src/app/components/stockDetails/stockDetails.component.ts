@@ -57,6 +57,10 @@ const ELEMENT_DATA3: PeriodicElement2[] = [];
     styleUrls: ['./stockDetails.component.scss']
 })
 export class StockDetailsComponent implements OnInit {
+
+    SymbolSelected: string | undefined;
+    NameSelected: string | undefined;
+
     User: any = ['Super Admin', 'Admin', 'Guest'];
     hide = true;
     hide2 = true;
@@ -426,18 +430,17 @@ export class StockDetailsComponent implements OnInit {
     }
 
     rowClicked(element: PeriodicElement): void {
+        this.SymbolSelected = element.CODE;
+        this.NameSelected = element.Name;
         this.mainUiListService
             .getAskBidListData(element.CODE)
             .subscribe(getAskBidListDataVal => {
                 this.data2 = this.concertBidList2FE(getAskBidListDataVal);
-                console.log('data2:', this.data2);
-                console.log('getAskBidListDataVal:', getAskBidListDataVal);
             });
         this.mainUiListService
             .getTransactionLogListData(element.CODE)
             .subscribe(getTransactionLogListDataVal => {
                 this.data3 = this.concertTransaction2FE(getTransactionLogListDataVal);
-                console.log('data3:', this.data3);
             });
     }
 }
