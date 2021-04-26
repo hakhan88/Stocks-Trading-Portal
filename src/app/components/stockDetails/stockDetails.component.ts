@@ -207,6 +207,7 @@ export class StockDetailsComponent implements OnInit {
         { name: 'Bear', completed: false, },
     ];
 
+    // All Form controls
     statusFilterControl = new FormControl('');
     sourceFilter = new FormControl('');
     toppingsControl = new FormControl();
@@ -214,8 +215,28 @@ export class StockDetailsComponent implements OnInit {
     expiryDateControl = new FormControl('');
     issuerControl = new FormControl('');
     stockControl = new FormControl('');
-
     saveStrategyControl = new FormControl('');
+    lastPriceFrom = new FormControl('');
+    lastPriceTo = new FormControl('');
+    outStandingFrom = new FormControl('');
+    outStandingTo = new FormControl('');
+    conversionRatioFrom = new FormControl('');
+    conversionRatioTo = new FormControl('');
+    ivFrom = new FormControl('');
+    ivTo = new FormControl('');
+    volumeFrom = new FormControl('');
+    volumeTo = new FormControl('');
+    premiumFrom = new FormControl('');
+    premiumTo = new FormControl('');
+    callPriceFrom = new FormControl('');
+    callPriceTo = new FormControl('');
+    sensitivityFrom = new FormControl('');
+    sensitivityTo = new FormControl('');
+    spreadFrom = new FormControl('');
+    spreadTo = new FormControl('');
+    squareMultipleFrom = new FormControl('');
+    squareMultipleTo = new FormControl('');
+
 
     checked = false;
     indeterminate = false;

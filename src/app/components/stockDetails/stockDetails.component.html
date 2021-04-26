@@ -65,11 +65,11 @@
             <div fxLayout="row">
                 <mat-form-field class="example-full-width-custom">
                     <mat-label>Last Price</mat-label>
-                    <input matInput placeholder="Last Price">
+                    <input matInput [formControl]="lastPriceFrom" placeholder="Last Price">
                 </mat-form-field>
                 <mat-form-field class="example-full-width-custom">
                     <mat-label>To</mat-label>
-                    <input matInput placeholder="To">
+                    <input matInput placeholder="To" [formControl]="lastPriceTo">
                 </mat-form-field>
             </div>
         </div>
@@ -78,11 +78,11 @@
             <div fxLayout="row">
                 <mat-form-field class="example-full-width-custom">
                     <mat-label>Outstandig %</mat-label>
-                    <input matInput placeholder="Outstandig %">
+                    <input matInput placeholder="Outstandig %" [formControl]="outStandingFrom">
                 </mat-form-field>
                 <mat-form-field class="example-full-width-custom">
                     <mat-label>To</mat-label>
-                    <input matInput placeholder="To">
+                    <input matInput placeholder="To" [formControl]="outStandingTo">
                 </mat-form-field>
             </div>
         </div>
@@ -91,11 +91,11 @@
             <div fxLayout="row">
                 <mat-form-field class="example-full-width-custom">
                     <mat-label>Conversion Ratio</mat-label>
-                    <input matInput placeholder="Conversion Ratio">
+                    <input matInput placeholder="Conversion Ratio" [formControl]="conversionRatioFrom">
                 </mat-form-field>
                 <mat-form-field class="example-full-width-custom">
                     <mat-label>To</mat-label>
-                    <input matInput placeholder="To">
+                    <input matInput placeholder="To" [formControl]="conversionRatioTo">
                 </mat-form-field>
             </div>
         </div>
@@ -104,11 +104,11 @@
             <div fxLayout="row">
                 <mat-form-field class="example-full-width-custom">
                     <mat-label>I.V.</mat-label>
-                    <input matInput placeholder="I.V.">
+                    <input matInput placeholder="I.V." [formControl]="ivFrom">
                 </mat-form-field>
                 <mat-form-field class="example-full-width-custom">
                     <mat-label>To</mat-label>
-                    <input matInput placeholder="To">
+                    <input matInput placeholder="To" [formControl]="ivTo">
                 </mat-form-field>
             </div>
         </div>
@@ -117,11 +117,11 @@
             <div fxLayout="row">
                 <mat-form-field class="example-full-width-custom">
                     <mat-label>Volume</mat-label>
-                    <input matInput placeholder="Volume">
+                    <input matInput placeholder="Volume" [formControl]="volumeFrom">
                 </mat-form-field>
                 <mat-form-field class="example-full-width-custom">
                     <mat-label>To</mat-label>
-                    <input matInput placeholder="To">
+                    <input matInput placeholder="To" [formControl]="volumeTo">
                 </mat-form-field>
             </div>
         </div>
@@ -130,11 +130,11 @@
             <div fxLayout="row">
                 <mat-form-field class="example-full-width-custom">
                     <mat-label>Premium %</mat-label>
-                    <input matInput placeholder="Premium %">
+                    <input matInput placeholder="Premium %" [formControl]="premiumFrom">
                 </mat-form-field>
                 <mat-form-field class="example-full-width-custom">
                     <mat-label>To</mat-label>
-                    <input matInput placeholder="To">
+                    <input matInput placeholder="To" [formControl]="premiumTo">
                 </mat-form-field>
             </div>
         </div>
@@ -143,11 +143,11 @@
             <div fxLayout="row">
                 <mat-form-field class="example-full-width-custom">
                     <mat-label>To Call Price %</mat-label>
-                    <input matInput placeholder="To Call Price %">
+                    <input matInput placeholder="To Call Price %" [formControl]="callPriceFrom">
                 </mat-form-field>
                 <mat-form-field class="example-full-width-custom">
                     <mat-label>To</mat-label>
-                    <input matInput placeholder="To">
+                    <input matInput placeholder="To" [formControl]="callPriceTo">
                 </mat-form-field>
             </div>
         </div>
@@ -156,11 +156,11 @@
             <div fxLayout="row">
                 <mat-form-field class="example-full-width-custom">
                     <mat-label>Sensitivity</mat-label>
-                    <input matInput placeholder="Sensitivity">
+                    <input matInput placeholder="Sensitivity" [formControl]="sensitivityFrom">
                 </mat-form-field>
                 <mat-form-field class="example-full-width-custom">
                     <mat-label>To</mat-label>
-                    <input matInput placeholder="To">
+                    <input matInput placeholder="To" [formControl]="sensitivityTo">
                 </mat-form-field>
             </div>
         </div>
@@ -169,11 +169,11 @@
             <div fxLayout="row">
                 <mat-form-field class="example-full-width-custom">
                     <mat-label>Spread</mat-label>
-                    <input matInput placeholder="Spread">
+                    <input matInput placeholder="Spread" [formControl]="spreadFrom">
                 </mat-form-field>
                 <mat-form-field class="example-full-width-custom">
                     <mat-label>To</mat-label>
-                    <input matInput placeholder="To">
+                    <input matInput placeholder="To" [formControl]="spreadTo">
                 </mat-form-field>
             </div>
         </div>
@@ -182,11 +182,11 @@
             <div fxLayout="row">
                 <mat-form-field class="example-full-width-custom">
                     <mat-label>Square Multiple</mat-label>
-                    <input matInput placeholder="Square Multiple">
+                    <input matInput placeholder="Square Multiple" [formControl]="squareMultipleFrom">
                 </mat-form-field>
                 <mat-form-field class="example-full-width-custom">
                     <mat-label>To</mat-label>
-                    <input matInput placeholder="To">
+                    <input matInput placeholder="To" [formControl]="squareMultipleTo">
                 </mat-form-field>
             </div>
         </div>
