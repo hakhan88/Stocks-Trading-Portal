@@ -1,3 +1,4 @@
+// tslint:disable: deprecation
 import { Component, OnInit, Renderer2 } from '@angular/core';
 import { FormControl } from '@angular/forms';
 
@@ -208,34 +209,34 @@ export class StockDetailsComponent implements OnInit {
     ];
 
     // All Form controls
-    statusFilterControl = new FormControl('');
-    sourceFilter = new FormControl('');
-    toppingsControl = new FormControl();
-    listingDateControl = new FormControl('');
-    expiryDateControl = new FormControl('');
-    issuerControl = new FormControl('');
-    stockControl = new FormControl('');
-    saveStrategyControl = new FormControl('');
-    lastPriceFrom = new FormControl('');
-    lastPriceTo = new FormControl('');
-    outStandingFrom = new FormControl('');
-    outStandingTo = new FormControl('');
-    conversionRatioFrom = new FormControl('');
-    conversionRatioTo = new FormControl('');
-    ivFrom = new FormControl('');
-    ivTo = new FormControl('');
-    volumeFrom = new FormControl('');
-    volumeTo = new FormControl('');
-    premiumFrom = new FormControl('');
-    premiumTo = new FormControl('');
     callPriceFrom = new FormControl('');
     callPriceTo = new FormControl('');
+    conversionRatioFrom = new FormControl('');
+    conversionRatioTo = new FormControl('');
+    expiryDateControl = new FormControl('');
+    issuerControl = new FormControl('');
+    ivFrom = new FormControl('');
+    ivTo = new FormControl('');
+    lastPriceFrom = new FormControl('');
+    lastPriceTo = new FormControl('');
+    listingDateControl = new FormControl('');
+    outStandingFrom = new FormControl('');
+    outStandingTo = new FormControl('');
+    premiumFrom = new FormControl('');
+    premiumTo = new FormControl('');
+    saveStrategyControl = new FormControl('');
     sensitivityFrom = new FormControl('');
     sensitivityTo = new FormControl('');
+    sourceFilter = new FormControl('');
     spreadFrom = new FormControl('');
     spreadTo = new FormControl('');
     squareMultipleFrom = new FormControl('');
     squareMultipleTo = new FormControl('');
+    statusFilterControl = new FormControl('');
+    stockControl = new FormControl('');
+    toppingsControl = new FormControl('');
+    volumeFrom = new FormControl('');
+    volumeTo = new FormControl('');
 
 
     checked = false;
@@ -398,15 +399,50 @@ export class StockDetailsComponent implements OnInit {
 
     ngOnInit(): void {
         this.setDraggableData();
-        this.mainUiListService.getMainUiListData(this.sampleBody)
-            // tslint:disable-next-line: deprecation
+        this.mainUiListService
+            .getMainUiListData(this.sampleBody)
             .subscribe(val => {
                 console.log(val);
             });
     }
 
-    filter(): void { }
+    filter(): void {
+        // tslint:disable: object-literal-shorthand
+        const bodyObject = {
+            to_call_price_from: this.callPriceFrom.value,
+            to_call_price_to: this.callPriceTo.value,
+            conversion_ratio_from: this.conversionRatioFrom.value,
+            conversion_ratio_to: this.conversionRatioTo.value,
+            expiryDateControl: this.expiryDateControl.value,
+            issuerControl: this.issuerControl.value,
+            iV_from: this.ivFrom.value,
+            iV_to: this.ivTo.value,
+            last_price_from: this.lastPriceFrom.value,
+            last_price_to: this.lastPriceTo.value,
+            listingDateControl: this.listingDateControl.value,
+            outstanding_from: this.outStandingFrom.value,
+            outstanding_to: this.outStandingTo.value,
+            premium_from: this.premiumFrom.value,
+            premium_to: this.premiumTo.value,
+            saveStrategyControl: this.saveStrategyControl.value,
+            sensitivity_from: this.sensitivityFrom.value,
+            sensitivity_to: this.sensitivityTo.value,
+            sourceFilter: this.sourceFilter.value,
+            spread_from: this.spreadFrom.value,
+            spread_to: this.spreadTo.value,
+            square_multiple_from: this.squareMultipleFrom.value,
+            square_multiple_to: this.squareMultipleTo.value,
+            statusFilterControl: this.statusFilterControl.value,
+            stockControl: this.stockControl.value,
+            toppingsControl: this.toppingsControl.value,
+            volume_from: this.volumeFrom.value,
+            volume_to: this.volumeTo.value,
+        };
 
-    updateAllComplete(): void {
+        this.mainUiListService
+            .getMainUiListData(bodyObject)
+            .subscribe(val => {
+                console.log('val', val);
+            });
     }
 }
