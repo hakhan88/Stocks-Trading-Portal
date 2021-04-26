@@ -442,7 +442,43 @@ export class StockDetailsComponent implements OnInit {
         this.mainUiListService
             .getMainUiListData(bodyObject)
             .subscribe(val => {
-                console.log('val', val);
+                this.data = this.concertBe2FE(val);
             });
+    }
+
+    concertBe2FE(array: any): any[] {
+        const mappedToFe: any[] = [];
+        array.forEach((ele: { [x: string]: any; }) => {
+            const mapObject = {
+                ASK: ele.ask,
+                Add: 'Add',
+                BID: ele.bid,
+                CHG: ele.change,
+                CODE: ele.change,
+                CP: ele.call_Price,
+                CR: ele.conversion_Ratio,
+                D: ele.delta,
+                EXP: ele.exercise_Price,
+                ISR: ele.issuer,
+                IV: ele.iv,
+                K: ele.iv,
+                L: ele.loss,
+                LAST: ele.last,
+                NET: ele.net,
+                Name: ele.name,
+                OUT: ele.outstanding_Qty,
+                P: ele.profit,
+                PREM: ele.premium,
+                SEN: ele.sensitivity,
+                SPRD: ele.spread,
+                SQX: ele.square_Multiple,
+                STK: ele.stock,
+                TO: ele.to_Call_Price_Precentage,
+                TY: ele.type,
+                VOL: ele.volume,
+            };
+            mappedToFe.push(mapObject);
+        });
+        return mappedToFe;
     }
 }
