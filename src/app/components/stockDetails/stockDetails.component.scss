@@ -12,6 +12,25 @@ input::-webkit-inner-spin-button {
     margin: 0;
 }
 
+.table-wrapper-scrollbar {
+    th.mat-header-cell {
+        min-width: 75px !important;
+    }
+}
+
+.table-min-width-styling-bid-ask {
+    th.mat-header-cell {
+        min-width: 100px !important;
+    }
+}
+
+.no-data-class {
+    background: white;
+    padding: 20px;
+    color: #777777;
+}
+
+
 .filter-container {
     margin-bottom: 30px;
     min-width: 20%;

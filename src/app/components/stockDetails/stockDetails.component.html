@@ -230,7 +230,8 @@
             <h3>17850</h3>
             <h3 style="margin-left: 20px;">BITENCT@EC2012E</h3>
         </div>
-        <table mat-table [dataSource]="data2" style="width: 100%;" class="mat-elevation-z8 table-min-width-styling">
+        <table mat-table [dataSource]="data2" style="width: 100%;"
+            class="mat-elevation-z8 table-min-width-styling-bid-ask">
             <ng-container [matColumnDef]="column" *ngFor="let column of displayedColumns2">
                 <th mat-header-cell *matHeaderCellDef> {{column}} </th>
                 <td mat-cell *matCellDef="let element" [innerHTML]="element[column] | sanitizeHtml"></td>
@@ -260,10 +261,12 @@
                     <th mat-header-cell *matHeaderCellDef> {{column}} </th>
                     <td mat-cell *matCellDef="let element" [innerHTML]="element[column] | sanitizeHtml"></td>
                 </ng-container>
-
                 <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
                 <tr mat-row *matRowDef="let row; columns: columnsToDisplay;"></tr>
             </table>
+            <div [hidden]="data && data.length > 0" class="no-data-class">
+                No records found.
+            </div>
 
             <!-- <table
                 class="table mat-table  table-responsive table-bordered table-hover mat-elevation-z8 table-min-width-styling"
