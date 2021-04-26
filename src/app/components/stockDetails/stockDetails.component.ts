@@ -374,7 +374,7 @@ export class StockDetailsComponent implements OnInit {
         array.forEach((ele: { [x: string]: any; }) => {
             const mapObject = {
                 ASK: ele.ask,
-                Add: 'Add',
+                Add: `<a href="hkex://ec2-18-162-51-206.ap-east-1.compute.amazonaws.com/warren/stockDetails?triggeradd=${ele.symbol}">Add</a>`,
                 BID: ele.bid,
                 CHG: ele.change,
                 CODE: ele.symbol,
