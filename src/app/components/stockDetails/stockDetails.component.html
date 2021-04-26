@@ -241,7 +241,7 @@
             <tr mat-header-row *matHeaderRowDef="columnsToDisplay2"></tr>
             <tr mat-row *matRowDef="let row; columns: columnsToDisplay2;"></tr>
         </table>
-        <div [hidden]="data && data.length > 0" class="no-data-class">
+        <div [hidden]="data2 && data2.length > 0" class="no-data-class">
             No records found.
         </div>
 
@@ -254,7 +254,7 @@
                 </ng-container>
                 <tr mat-row *matRowDef="let row; columns: columnsToDisplay3;"></tr>
             </table>
-            <div [hidden]="data && data.length > 0" class="no-data-class">
+            <div [hidden]="data3 && data3.length > 0" class="no-data-class">
                 No records found.
             </div>
         </div>

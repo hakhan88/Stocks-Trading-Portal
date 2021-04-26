@@ -11,6 +11,7 @@ interface StockIssuerListInterface {
     name: string;
     symbolName: string;
 }
+
 export interface PeriodicElement {
     Add?: string;
     STK: string;
@@ -51,22 +52,6 @@ const ELEMENT_DATA2: PeriodicElement2[] = [
         Bid: '0.23 6M (2)',
         Ask: '0.12 7M (2)'
     },
-    {
-        Bid: '0.23 6M (2)',
-        Ask: '0.12 7M (2)'
-    },
-    {
-        Bid: '0.23 6M (2)',
-        Ask: '0.12 7M (2)'
-    },
-    {
-        Bid: '0.23 6M (2)',
-        Ask: '0.12 7M (2)'
-    },
-    {
-        Bid: '0.23 6M (2)',
-        Ask: '0.12 7M (2)'
-    }
 ];
 
 const ELEMENT_DATA3: PeriodicElement2[] = [
@@ -438,14 +423,16 @@ export class StockDetailsComponent implements OnInit {
         return mappedToFe;
     }
 
-    rowClicked(element: any): void {
+    rowClicked(element: PeriodicElement): void {
+        console.log('rowClicked', element);
         this.mainUiListService
-            .getAskBidListData()
+            .getAskBidListData(element.CODE)
             .subscribe(val => {
+                this.data2 = val;
                 console.log('getAskBidListData', val);
             });
         this.mainUiListService
-            .getTransactionLogListData()
+            .getTransactionLogListData(element.CODE)
             .subscribe(val => {
                 console.log('getTransactionLogListData', val);
             });
