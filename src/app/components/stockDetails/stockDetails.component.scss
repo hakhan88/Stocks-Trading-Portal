@@ -6,6 +6,12 @@ button {
     margin: 16px 8px;
 }
 
+::ng-deep input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
 .filter-container {
     margin-bottom: 30px;
     min-width: 20%;

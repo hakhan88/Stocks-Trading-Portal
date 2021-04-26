@@ -67,11 +67,11 @@
                 <div fxLayout="row">
                     <mat-form-field class="example-full-width-custom">
                         <mat-label>Last Price</mat-label>
-                        <input matInput [formControl]="lastPriceFrom" placeholder="Last Price">
+                        <input matInput type="number" [formControl]="lastPriceFrom" placeholder="Last Price">
                     </mat-form-field>
                     <mat-form-field class="example-full-width-custom">
                         <mat-label>To</mat-label>
-                        <input matInput placeholder="To" [formControl]="lastPriceTo">
+                        <input matInput type="number" placeholder="To" [formControl]="lastPriceTo">
                     </mat-form-field>
                 </div>
             </div>
@@ -80,11 +80,11 @@
                 <div fxLayout="row">
                     <mat-form-field class="example-full-width-custom">
                         <mat-label>Outstandig %</mat-label>
-                        <input matInput placeholder="Outstandig %" [formControl]="outStandingFrom">
+                        <input matInput placeholder="Outstandig %" type="number" [formControl]="outStandingFrom">
                     </mat-form-field>
                     <mat-form-field class="example-full-width-custom">
                         <mat-label>To</mat-label>
-                        <input matInput placeholder="To" [formControl]="outStandingTo">
+                        <input matInput placeholder="To" type="number" [formControl]="outStandingTo">
                     </mat-form-field>
                 </div>
             </div>
@@ -93,11 +93,12 @@
                 <div fxLayout="row">
                     <mat-form-field class="example-full-width-custom">
                         <mat-label>Conversion Ratio</mat-label>
-                        <input matInput placeholder="Conversion Ratio" [formControl]="conversionRatioFrom">
+                        <input matInput placeholder="Conversion Ratio" type="number"
+                            [formControl]="conversionRatioFrom">
                     </mat-form-field>
                     <mat-form-field class="example-full-width-custom">
                         <mat-label>To</mat-label>
-                        <input matInput placeholder="To" [formControl]="conversionRatioTo">
+                        <input matInput placeholder="To" type="number" [formControl]="conversionRatioTo">
                     </mat-form-field>
                 </div>
             </div>
@@ -106,11 +107,11 @@
                 <div fxLayout="row">
                     <mat-form-field class="example-full-width-custom">
                         <mat-label>I.V.</mat-label>
-                        <input matInput placeholder="I.V." [formControl]="ivFrom">
+                        <input matInput placeholder="I.V." type="number" [formControl]="ivFrom">
                     </mat-form-field>
                     <mat-form-field class="example-full-width-custom">
                         <mat-label>To</mat-label>
-                        <input matInput placeholder="To" [formControl]="ivTo">
+                        <input matInput placeholder="To" type="number" [formControl]="ivTo">
                     </mat-form-field>
                 </div>
             </div>
@@ -119,11 +120,11 @@
                 <div fxLayout="row">
                     <mat-form-field class="example-full-width-custom">
                         <mat-label>Volume</mat-label>
-                        <input matInput placeholder="Volume" [formControl]="volumeFrom">
+                        <input matInput placeholder="Volume" type="number" [formControl]="volumeFrom">
                     </mat-form-field>
                     <mat-form-field class="example-full-width-custom">
                         <mat-label>To</mat-label>
-                        <input matInput placeholder="To" [formControl]="volumeTo">
+                        <input matInput placeholder="To" type="number" [formControl]="volumeTo">
                     </mat-form-field>
                 </div>
             </div>
@@ -132,11 +133,11 @@
                 <div fxLayout="row">
                     <mat-form-field class="example-full-width-custom">
                         <mat-label>Premium %</mat-label>
-                        <input matInput placeholder="Premium %" [formControl]="premiumFrom">
+                        <input matInput placeholder="Premium %" type="number" [formControl]="premiumFrom">
                     </mat-form-field>
                     <mat-form-field class="example-full-width-custom">
                         <mat-label>To</mat-label>
-                        <input matInput placeholder="To" [formControl]="premiumTo">
+                        <input matInput placeholder="To" type="number" [formControl]="premiumTo">
                     </mat-form-field>
                 </div>
             </div>
@@ -145,11 +146,11 @@
                 <div fxLayout="row">
                     <mat-form-field class="example-full-width-custom">
                         <mat-label>To Call Price %</mat-label>
-                        <input matInput placeholder="To Call Price %" [formControl]="callPriceFrom">
+                        <input matInput placeholder="To Call Price %" type="number" [formControl]="callPriceFrom">
                     </mat-form-field>
                     <mat-form-field class="example-full-width-custom">
                         <mat-label>To</mat-label>
-                        <input matInput placeholder="To" [formControl]="callPriceTo">
+                        <input matInput placeholder="To" type="number" [formControl]="callPriceTo">
                     </mat-form-field>
                 </div>
             </div>
@@ -158,11 +159,11 @@
                 <div fxLayout="row">
                     <mat-form-field class="example-full-width-custom">
                         <mat-label>Sensitivity</mat-label>
-                        <input matInput placeholder="Sensitivity" [formControl]="sensitivityFrom">
+                        <input matInput placeholder="Sensitivity" type="number" [formControl]="sensitivityFrom">
                     </mat-form-field>
                     <mat-form-field class="example-full-width-custom">
                         <mat-label>To</mat-label>
-                        <input matInput placeholder="To" [formControl]="sensitivityTo">
+                        <input matInput placeholder="To" type="number" [formControl]="sensitivityTo">
                     </mat-form-field>
                 </div>
             </div>
@@ -171,11 +172,11 @@
                 <div fxLayout="row">
                     <mat-form-field class="example-full-width-custom">
                         <mat-label>Spread</mat-label>
-                        <input matInput placeholder="Spread" [formControl]="spreadFrom">
+                        <input matInput placeholder="Spread" type="number" [formControl]="spreadFrom">
                     </mat-form-field>
                     <mat-form-field class="example-full-width-custom">
                         <mat-label>To</mat-label>
-                        <input matInput placeholder="To" [formControl]="spreadTo">
+                        <input matInput placeholder="To" type="number" [formControl]="spreadTo">
                     </mat-form-field>
                 </div>
             </div>
@@ -184,11 +185,11 @@
                 <div fxLayout="row">
                     <mat-form-field class="example-full-width-custom">
                         <mat-label>Square Multiple</mat-label>
-                        <input matInput placeholder="Square Multiple" [formControl]="squareMultipleFrom">
+                        <input matInput placeholder="Square Multiple" type="number" [formControl]="squareMultipleFrom">
                     </mat-form-field>
                     <mat-form-field class="example-full-width-custom">
                         <mat-label>To</mat-label>
-                        <input matInput placeholder="To" [formControl]="squareMultipleTo">
+                        <input matInput placeholder="To" type="number" [formControl]="squareMultipleTo">
                     </mat-form-field>
                 </div>
             </div>
