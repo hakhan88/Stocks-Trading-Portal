@@ -2,6 +2,7 @@ import { Component, OnInit, Renderer2 } from '@angular/core';
 import { FormControl } from '@angular/forms';
 
 import { CdkDragDrop, moveItemInArray, CdkDragStart, CdkDragRelease } from '@angular/cdk/drag-drop';
+import { MainUiListService } from '../../services/main-ui-list.service';
 
 export interface PeriodicElement {
     Add?: string;
@@ -329,6 +330,29 @@ export class StockDetailsComponent implements OnInit {
         ];
     }
 
+    sampleBody = {
+        last_price_from: 0,
+        last_price_to: 0,
+        outstanding_from: 0,
+        outstanding_to: 0,
+        conversion_ratio_from: 0,
+        conversion_ration_to: 0,
+        iV_from: 0,
+        iV_to: 0,
+        volume_from: 0,
+        volume_to: 0,
+        premium_from: 0,
+        premium_to: 0,
+        to_call_price_from: 0,
+        to_call_price_to: 0,
+        sensitivity_from: 0,
+        sensitivity_to: 0,
+        spread_from: 0,
+        spread_to: 0,
+        square_multiple_from: 0,
+        square_multiple_to: 0
+    };
+
     dropRow(event: CdkDragDrop<string[]>): void {
         moveItemInArray(this.paginateData, event.previousIndex, event.currentIndex);
     }
@@ -349,10 +373,16 @@ export class StockDetailsComponent implements OnInit {
 
     constructor(
         public renderer2: Renderer2,
+        public mainUiListService: MainUiListService,
     ) { }
 
     ngOnInit(): void {
         this.setDraggableData();
+        this.mainUiListService.getMainUiListData(this.sampleBody)
+            // tslint:disable-next-line: deprecation
+            .subscribe(val => {
+                console.log(val);
+            });
     }
 
     filter(): void { }

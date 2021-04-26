@@ -16,6 +16,8 @@ import { SanitizeHtmlPipe } from './pipes/sanitinse.pipe';
 import { StockDetailsComponent } from './components/stockDetails/stockDetails.component';
 import { LoginService } from './services/login.service';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { MainUiListService } from './services/main-ui-list.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
     declarations: [
@@ -38,9 +40,11 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
         FormsModule,
         ReactiveFormsModule,
         DragDropModule,
+        HttpClientModule,
     ],
     providers: [
         LoginService,
+        MainUiListService,
     ],
     bootstrap: [AppComponent],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
