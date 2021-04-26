@@ -47,31 +47,9 @@ interface PeriodicElement2 {
     Ask: string;
 }
 
-const ELEMENT_DATA2: PeriodicElement2[] = [
-    {
-        Bid: '0.23 6M (2)',
-        Ask: '0.12 7M (2)'
-    },
-];
+const ELEMENT_DATA2: PeriodicElement2[] = [];
 
-const ELEMENT_DATA3: PeriodicElement2[] = [
-    {
-        Bid: '09:35:48',
-        Ask: '0.1345 <div style=\"width: 5px !important;border-left: 7px dotted transparent !important;border-right: 7px solid transparent !important;border-bottom: 15px solid green !important;float: right;"></div>'
-    },
-    {
-        Bid: '09:45:53',
-        Ask: '0.1345 <div style=\"width: 5px !important;border-left: 7px dotted transparent !important;border-right: 7px solid transparent !important;border-bottom: 15px solid green !important;float: right;"></div>'
-    },
-    {
-        Bid: '10:01:10',
-        Ask: '0.1345 <div style=\"width: 5px !important;border-left: 7px dotted transparent !important;border-right: 7px solid transparent !important;border-bottom: 15px solid green !important;float: right;"></div>'
-    },
-    {
-        Bid: '10:01:11',
-        Ask: '0.1345 <div style=\"width: 5px !important;border-left: 7px dotted transparent !important;border-right: 7px solid transparent !important;border-bottom: 15px solid green !important;float: right;"></div>'
-    },
-];
+const ELEMENT_DATA3: PeriodicElement2[] = [];
 
 @Component({
     selector: 'app-stock-details',
@@ -264,8 +242,8 @@ export class StockDetailsComponent implements OnInit {
     columnsToDisplay2: string[] = this.displayedColumns2.slice();
     data2: any[] = ELEMENT_DATA2;
 
-    displayedColumns3: string[] = ['Bid', 'Ask'];
-    columnsToDisplay3: string[] = ['Bid', 'Ask'];
+    displayedColumns3: string[] = ['Ask', 'Bid'];
+    columnsToDisplay3: string[] = this.displayedColumns3.slice();
     data3: any[] = ELEMENT_DATA3;
 
     /*
@@ -423,18 +401,43 @@ export class StockDetailsComponent implements OnInit {
         return mappedToFe;
     }
 
+    concertTransaction2FE(array: any): any[] {
+        const mappedToFe: any[] = [];
+        array.forEach((ele: { [x: string]: any; }) => {
+            const mapObject = {
+                Ask: ele.time,
+                Bid: `${ele.price} <div style=\"width: 5px !important;border-left: 7px dotted transparent !important;border-right: 7px solid transparent !important;border-bottom: 15px solid green !important;float: right;"></div>`,
+            };
+            mappedToFe.push(mapObject);
+        });
+        return mappedToFe;
+    }
+
+    concertBidList2FE(array: any): any[] {
+        const mappedToFe: any[] = [];
+        array.forEach((ele: { [x: string]: any; }) => {
+            const mapObject = {
+                Ask: ele.ask_Price,
+                Bid: ele.bid_Price,
+            };
+            mappedToFe.push(mapObject);
+        });
+        return mappedToFe;
+    }
+
     rowClicked(element: PeriodicElement): void {
-        console.log('rowClicked', element);
         this.mainUiListService
             .getAskBidListData(element.CODE)
-            .subscribe(val => {
-                this.data2 = val;
-                console.log('getAskBidListData', val);
+            .subscribe(getAskBidListDataVal => {
+                this.data2 = this.concertBidList2FE(getAskBidListDataVal);
+                console.log('data2:', this.data2);
+                console.log('getAskBidListDataVal:', getAskBidListDataVal);
             });
         this.mainUiListService
             .getTransactionLogListData(element.CODE)
-            .subscribe(val => {
-                console.log('getTransactionLogListData', val);
+            .subscribe(getTransactionLogListDataVal => {
+                this.data3 = this.concertTransaction2FE(getTransactionLogListDataVal);
+                console.log('data3:', this.data3);
             });
     }
 }
