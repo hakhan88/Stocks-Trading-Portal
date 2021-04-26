@@ -24,6 +24,20 @@ export class MainUiListService {
             );
     }
 
+    getStockListData(body: any): Observable<any> {
+        return this.httpClient.post(`${this.BASE_URL}v_main_ui_list/symbolName`, body)
+            .pipe(
+                catchError(this.handleError)
+            );
+    }
+
+    getIssuerListData(body: any): Observable<any> {
+        return this.httpClient.post(`${this.BASE_URL}v_main_ui_list/issuer`, body)
+            .pipe(
+                catchError(this.handleError)
+            );
+    }
+
     private handleError(error: HttpErrorResponse): Observable<any> {
         if (error.error instanceof ErrorEvent) {
             // A client-side or network error occurred. Handle it accordingly.

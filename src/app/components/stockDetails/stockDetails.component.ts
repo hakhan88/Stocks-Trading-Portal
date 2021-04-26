@@ -5,6 +5,12 @@ import { FormControl } from '@angular/forms';
 import { CdkDragDrop, moveItemInArray, CdkDragStart, CdkDragRelease } from '@angular/cdk/drag-drop';
 import { MainUiListService } from '../../services/main-ui-list.service';
 
+
+interface StockIssuerListInterface {
+    symbol: number;
+    name: string;
+    symbolName: string;
+}
 export interface PeriodicElement {
     Add?: string;
     STK: string;
@@ -189,8 +195,8 @@ export class StockDetailsComponent implements OnInit {
 
     toppingList: string[] = ['Extra cheese', 'Mushroom', 'Onion', 'Pepperoni', 'Sausage', 'Tomato'];
 
-    stockList: string[] = ['0001 CK Hutchinson', '0002 CLP Group', '0700 Tencent'];
-    issuerList: string[] = ['SG', 'JP', 'UB', 'GS', 'HS'];
+    stockList: StockIssuerListInterface[] = [];
+    issuerList: string[] = [];
     expiryDateList: string[] = ['Less than 3 months', '3 months to 6 months', '6 months to 12 months', 'more than 12 months'];
     ListingDateList: string[] = ['Today', 'Tomorrow', 'Within a week', 'Past week', 'Past month'];
 
@@ -342,10 +348,17 @@ export class StockDetailsComponent implements OnInit {
 
     ngOnInit(): void {
         this.setDraggableData();
+
         this.mainUiListService
-            .getMainUiListData(this.sampleBody)
+            .getStockListData(this.sampleBody)
             .subscribe(val => {
-                console.log(val);
+                this.stockList = val;
+            });
+
+        this.mainUiListService
+            .getIssuerListData(this.sampleBody)
+            .subscribe(val => {
+                this.issuerList = val;
             });
     }
 
