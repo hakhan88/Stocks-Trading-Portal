@@ -17,7 +17,9 @@ import { StockDetailsComponent } from './components/stockDetails/stockDetails.co
 import { LoginService } from './services/login.service';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { MainUiListService } from './services/main-ui-list.service';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { LoadingInterceptor } from './services/loadingInterceptor.service';
+import { LoadingService } from './services/loading.service';
 
 @NgModule({
     declarations: [
@@ -45,6 +47,8 @@ import { HttpClientModule } from '@angular/common/http';
     providers: [
         LoginService,
         MainUiListService,
+        LoadingService,
+        { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true }
     ],
     bootstrap: [AppComponent],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]

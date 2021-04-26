@@ -1,3 +1,5 @@
+<div *ngIf="loadingService.isLoading$ | async" class="overlay">
+</div>
 <mat-toolbar color="primary" class="app-header">
     <div><a href="#" class="positronx">Waren Stocks</a></div>
     <div *ngIf="showLogin">

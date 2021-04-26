@@ -1,5 +1,7 @@
+// tslint:disable: deprecation
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { LoadingService } from './services/loading.service';
 import { LoginService } from './services/login.service';
 
 @Component({
@@ -12,6 +14,7 @@ export class AppComponent {
     constructor(
         private route: Router,
         private loginService: LoginService,
+        public loadingService: LoadingService,
     ) {
         this.loginService.modalIsOpen$.subscribe(val => {
             if (val === 'true') {
