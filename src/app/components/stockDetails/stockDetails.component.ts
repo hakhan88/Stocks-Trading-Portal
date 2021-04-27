@@ -61,6 +61,8 @@ export class StockDetailsComponent implements OnInit {
     SymbolSelected: string | undefined;
     NameSelected: string | undefined;
 
+    formSubmitted = false;
+
     User: any = ['Super Admin', 'Admin', 'Guest'];
     hide = true;
     hide2 = true;
@@ -327,9 +329,16 @@ export class StockDetailsComponent implements OnInit {
             .subscribe(val => {
                 this.issuerList = val;
             });
+
+        setInterval(() => {
+            if (this.formSubmitted) {
+                this.filter();
+            }
+        }, 60000);
     }
 
     filter(): void {
+        this.formSubmitted = true;
         // tslint:disable: object-literal-shorthand
         const bodyObject = {
             to_call_price_from: this.callPriceFrom.value,
