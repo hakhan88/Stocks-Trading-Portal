@@ -272,7 +272,7 @@
                 <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
                 <tr mat-row *matRowDef="let row; columns: columnsToDisplay;"></tr>
             </table>
-            <div [hidden]="data && data.length > 0" class="no-data-class">
+            <div [hidden]="data && data.length > 0" class="no-data-class no-data-class-main-data-table">
                 No records found.
             </div>
 

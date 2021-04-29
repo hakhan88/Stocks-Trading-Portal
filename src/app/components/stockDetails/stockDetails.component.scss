@@ -26,8 +26,13 @@ input::-webkit-inner-spin-button {
 
 .no-data-class {
     background: white;
-    padding: 20px;
+    padding: 20px 0px;
     color: #777777;
+    text-align: center;
+}
+
+.no-data-class-main-data-table {
+    width: 1848px;
 }
 
 
