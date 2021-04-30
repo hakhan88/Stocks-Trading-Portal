@@ -127,6 +127,8 @@ export class StockDetailsComponent implements OnInit {
     ];
 
     // All Form controls
+    stockFilterControl = new FormControl();
+    stockIssuerControl = new FormControl();
     callPriceFrom = new FormControl();
     callPriceTo = new FormControl();
     conversionRatioFrom = new FormControl();
@@ -419,7 +421,8 @@ export class StockDetailsComponent implements OnInit {
         array.forEach((ele: { [x: string]: any; }) => {
             const mapObject = {
                 Ask: ele.time,
-                Bid: `${ele.price} <div style=\"width: 5px !important;border-left: 7px dotted transparent !important;border-right: 7px solid transparent !important;border-bottom: 15px solid green !important;float: right;"></div>`,
+                Bid: `${ele.price}
+                    <div style=\"width: 5px !important;border-left: 7px dotted transparent !important;border-right: 7px solid transparent !important;border-bottom: 15px solid green !important;float: right;"></div>`,
             };
             mappedToFe.push(mapObject);
         });
@@ -451,5 +454,13 @@ export class StockDetailsComponent implements OnInit {
             .subscribe(getTransactionLogListDataVal => {
                 this.data3 = this.concertTransaction2FE(getTransactionLogListDataVal);
             });
+    }
+
+    filterStockOption(): void {
+        console.log('filterOptione filterOptione', this.stockFilterControl);
+    }
+
+    filteIssuerOption(): void {
+        console.log('filterOptione filterOptione', this.stockIssuerControl);
     }
 }

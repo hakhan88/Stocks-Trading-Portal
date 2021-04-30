@@ -13,19 +13,31 @@
             </div>
 
             <div class="vertical-form-field" fxLayout="row">
-                <mat-form-field appearance="fill" [ngClass]="'option-dropdown-styling'">
-                    <mat-label>Stock</mat-label>
-                    <mat-select [formControl]="stockControl" multiple>
-                        <mat-option *ngFor="let stock of stockList" [value]="stock.symbol">{{stock.symbolName}}
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field>
-                <mat-form-field appearance="fill" [ngClass]="'option-dropdown-styling'">
-                    <mat-label>Issuer</mat-label>
-                    <mat-select [formControl]="issuerControl" multiple>
-                        <mat-option *ngFor="let issuer of issuerList" [value]="issuer">{{issuer}}</mat-option>
-                    </mat-select>
-                </mat-form-field>
+                <div fxLayout="column" [ngClass]="'option-dropdown-styling'">
+                    <mat-form-field>
+                        <input matInput [formControl]="stockFilterControl" placeholder="Filter Stock"
+                            (input)="filterStockOption()" />
+                    </mat-form-field>
+                    <mat-form-field appearance="fill">
+                        <mat-label>Stock</mat-label>
+                        <mat-select [formControl]="stockControl" multiple>
+                            <mat-option *ngFor="let stock of stockList" [value]="stock.symbol">{{stock.symbolName}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div fxLayout="column" [ngClass]="'option-dropdown-styling'">
+                    <mat-form-field>
+                        <input matInput [formControl]="stockIssuerControl" placeholder="Filter Issuer"
+                            (input)="filteIssuerOption()" />
+                    </mat-form-field>
+                    <mat-form-field appearance="fill">
+                        <mat-label>Issuer</mat-label>
+                        <mat-select [formControl]="issuerControl" multiple>
+                            <mat-option *ngFor="let issuer of issuerList" [value]="issuer">{{issuer}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
             </div>
 
             <div class="vertical-form-field" fxLayout="row">
