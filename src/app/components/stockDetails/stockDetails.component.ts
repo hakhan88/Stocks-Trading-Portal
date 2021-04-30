@@ -331,9 +331,9 @@ export class StockDetailsComponent implements OnInit {
             });
 
         setInterval(() => {
-            if (this.formSubmitted) {
-                this.filter();
-            }
+            // if (this.formSubmitted) {
+            //     this.filter();
+            // }
         }, 60000);
     }
 

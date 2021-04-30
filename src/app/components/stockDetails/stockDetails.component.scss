@@ -14,7 +14,7 @@ input::-webkit-inner-spin-button {
 
 .table-wrapper-scrollbar {
     th.mat-header-cell {
-        min-width: 75px !important;
+        min-width: 50px !important;
     }
 }
 
@@ -32,7 +32,7 @@ input::-webkit-inner-spin-button {
 }
 
 .no-data-class-main-data-table {
-    width: 1848px;
+    width: 1248px;
 }
 
 
@@ -62,7 +62,7 @@ input::-webkit-inner-spin-button {
 .table-wrapper-scrollbar {
     overflow-x: scroll;
     max-height: 100%;
-    max-width: 70%;
+    max-width: 90%;
     overflow-y: scroll;
     border-radius: 10px;
 }
