@@ -458,9 +458,11 @@ export class StockDetailsComponent implements OnInit {
 
     filterStockOption(): void {
         console.log('filterOptione filterOptione', this.stockFilterControl);
+        //  this.options = this._unfilteredOptions.filter(x => x.toLowerCase().includes(filter.toLowerCase()));
     }
 
     filteIssuerOption(): void {
         console.log('filterOptione filterOptione', this.stockIssuerControl);
+        //  this.options = this._unfilteredOptions.filter(x => x.toLowerCase().includes(filter.toLowerCase()));
     }
 }
