@@ -63,6 +63,9 @@ export class StockDetailsComponent implements OnInit {
     faAngleDown = faAngleDown;
     faAngleUp = faAngleUp;
 
+    biddingExpanded = false;
+    buySellExpanded = false;
+
     // Pagination Related
     // MatPaginator Inputs
     pageLength = 0;
@@ -527,5 +530,21 @@ export class StockDetailsComponent implements OnInit {
                 this.data = this.concertBe2FE(val);
                 this.pageLength = val.length;
             });
+    }
+
+    fetchData2(array: any): any[] {
+        return this.biddingExpanded ? array.slice(0, 10) : array.slice(0, 5) || [];
+    }
+
+    fetchData3(array: any): any[] {
+        return this.buySellExpanded ? array.slice(0, 10) : array.slice(0, 5) || [];
+    }
+
+    biddingExpandedUpdate(): void {
+        this.biddingExpanded = !this.biddingExpanded;
+    }
+
+    buySellExpandedUpdate(): void {
+        this.buySellExpanded = !this.buySellExpanded;
     }
 }
