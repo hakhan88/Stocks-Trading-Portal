@@ -17,8 +17,8 @@ export class MainUiListService {
     ) { }
 
 
-    getMainUiListData(body: any): Observable<any> {
-        return this.httpClient.post(`${this.BASE_URL}v_main_ui_list`, body)
+    getMainUiListData(body: any, offset = 0, limit = 10): Observable<any> {
+        return this.httpClient.post(`${this.BASE_URL}v_main_ui_list/adv?limit=${limit}&offset=${offset}`, body)
             .pipe(
                 catchError(this.handleError)
             );

@@ -283,6 +283,14 @@
                 <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
                 <tr mat-row *matRowDef="let row; columns: columnsToDisplay;"></tr>
             </table>
+
+            <div *ngIf="data && data.length > 0" class="no-data-class no-data-class-main-data-table">
+                <mat-paginator [length]="pageLength" [pageSize]="pageSize" [hidePageSize]="true"
+                    (page)="getServerData($event)">
+                </mat-paginator>
+            </div>
+
+
             <div [hidden]="data && data.length > 0" class="no-data-class no-data-class-main-data-table">
                 No records found.
             </div>

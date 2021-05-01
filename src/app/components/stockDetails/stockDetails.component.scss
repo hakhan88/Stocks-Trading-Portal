@@ -107,3 +107,8 @@ th.mat-header-cell {
     line-height: 24px !important;
     font-size: 12px !important;
 }
+
+::ng-deep .mat-paginator {
+    display: flex !important;
+    justify-content: left !important;
+}

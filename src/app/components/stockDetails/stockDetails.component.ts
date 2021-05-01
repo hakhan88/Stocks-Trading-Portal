@@ -4,6 +4,7 @@ import { FormControl } from '@angular/forms';
 
 import { CdkDragDrop, moveItemInArray, CdkDragStart, CdkDragRelease } from '@angular/cdk/drag-drop';
 import { MainUiListService } from '../../services/main-ui-list.service';
+import { PageEvent } from '@angular/material/paginator';
 
 
 interface StockIssuerListInterface {
@@ -57,6 +58,14 @@ const ELEMENT_DATA3: PeriodicElement2[] = [];
     styleUrls: ['./stockDetails.component.scss']
 })
 export class StockDetailsComponent implements OnInit {
+
+    // Pagination Related
+    // MatPaginator Inputs
+    pageLength = 0;
+    pageSize = 10;
+
+    // MatPaginator Output
+    pageEvent: PageEvent | undefined;
 
     SymbolSelected: string | undefined;
     NameSelected: string | undefined;
@@ -377,6 +386,7 @@ export class StockDetailsComponent implements OnInit {
             .getMainUiListData(bodyObject)
             .subscribe(val => {
                 this.data = this.concertBe2FE(val);
+                this.pageLength = val.length;
             });
     }
 
@@ -465,5 +475,47 @@ export class StockDetailsComponent implements OnInit {
 
     getIssuerListOptions(options: any[]): any[] {
         return options.filter(ele => ele.includes(this.stockIssuerControl.value) || !this.stockIssuerControl.value).slice(0, 10) || [];
+    }
+
+    getServerData(event: any): void {
+        console.log('getServerData', event.pageIndex);
+
+        const bodyObject = {
+            to_call_price_from: this.callPriceFrom.value,
+            to_call_price_to: this.callPriceTo.value,
+            conversion_ratio_from: this.conversionRatioFrom.value,
+            conversion_ratio_to: this.conversionRatioTo.value,
+            expiryDateControl: this.expiryDateControl.value,
+            issuerControl: this.issuerControl.value,
+            iV_from: this.ivFrom.value,
+            iV_to: this.ivTo.value,
+            last_price_from: this.lastPriceFrom.value,
+            last_price_to: this.lastPriceTo.value,
+            listingDateControl: this.listingDateControl.value,
+            outstanding_from: this.outStandingFrom.value,
+            outstanding_to: this.outStandingTo.value,
+            premium_from: this.premiumFrom.value,
+            premium_to: this.premiumTo.value,
+            saveStrategyControl: this.saveStrategyControl.value,
+            sensitivity_from: this.sensitivityFrom.value,
+            sensitivity_to: this.sensitivityTo.value,
+            sourceFilter: this.sourceFilter.value,
+            spread_from: this.spreadFrom.value,
+            spread_to: this.spreadTo.value,
+            square_multiple_from: this.squareMultipleFrom.value,
+            square_multiple_to: this.squareMultipleTo.value,
+            statusFilterControl: this.statusFilterControl.value,
+            stockControl: this.stockControl.value,
+            toppingsControl: this.toppingsControl.value,
+            volume_from: this.volumeFrom.value,
+            volume_to: this.volumeTo.value,
+        };
+
+        this.mainUiListService
+            .getMainUiListData(bodyObject, event.pageIndex + 1)
+            .subscribe(val => {
+                this.data = this.concertBe2FE(val);
+                this.pageLength = val.length;
+            });
     }
 }
