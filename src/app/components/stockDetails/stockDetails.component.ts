@@ -417,12 +417,15 @@ export class StockDetailsComponent implements OnInit {
     }
 
     concertTransaction2FE(array: any): any[] {
+        const arrowUp = '<div style=\"width: 0px !important;border-left: 7px dotted transparent !important;border-right: 7px solid transparent !important;border-bottom: 15px solid green !important;float: right;"></div>';
+        const arrowDown = '<div style=\"width: 0px !important;border-left: 7px dotted transparent !important;border-right: 7px solid transparent !important;border-top: 15px solid #ff0000 !important;float: right;"></div>';
         const mappedToFe: any[] = [];
         array.forEach((ele: { [x: string]: any; }) => {
+            const showArrow = ele.buySell === 'B' ? arrowUp : arrowDown;
             const mapObject = {
                 Ask: ele.time,
                 Bid: `${ele.price}
-                    <div style=\"width: 5px !important;border-left: 7px dotted transparent !important;border-right: 7px solid transparent !important;border-bottom: 15px solid green !important;float: right;"></div>`,
+                    ${showArrow}`,
             };
             mappedToFe.push(mapObject);
         });
