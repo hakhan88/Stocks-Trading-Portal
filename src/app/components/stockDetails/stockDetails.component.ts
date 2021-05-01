@@ -456,13 +456,11 @@ export class StockDetailsComponent implements OnInit {
             });
     }
 
-    filterStockOption(): void {
-        console.log('filterOptione filterOptione', this.stockFilterControl);
-        //  this.options = this._unfilteredOptions.filter(x => x.toLowerCase().includes(filter.toLowerCase()));
+    getStockListOptions(options: any[]): any[] {
+        return options.filter(ele => ele.name.includes(this.stockFilterControl.value) || !this.stockFilterControl.value).slice(0, 10) || [];
     }
 
-    filteIssuerOption(): void {
-        console.log('filterOptione filterOptione', this.stockIssuerControl);
-        //  this.options = this._unfilteredOptions.filter(x => x.toLowerCase().includes(filter.toLowerCase()));
+    getIssuerListOptions(options: any[]): any[] {
+        return options.filter(ele => ele.includes(this.stockIssuerControl.value) || !this.stockIssuerControl.value).slice(0, 10) || [];
     }
 }
