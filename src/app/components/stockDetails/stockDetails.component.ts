@@ -6,6 +6,7 @@ import { CdkDragDrop, moveItemInArray, CdkDragStart, CdkDragRelease } from '@ang
 import { MainUiListService } from '../../services/main-ui-list.service';
 import { PageEvent } from '@angular/material/paginator';
 
+import { faAngleDown, faAngleUp } from '@fortawesome/free-solid-svg-icons';
 
 interface StockIssuerListInterface {
     symbol: number;
@@ -58,6 +59,9 @@ const ELEMENT_DATA3: PeriodicElement2[] = [];
     styleUrls: ['./stockDetails.component.scss']
 })
 export class StockDetailsComponent implements OnInit {
+
+    faAngleDown = faAngleDown;
+    faAngleUp = faAngleUp;
 
     // Pagination Related
     // MatPaginator Inputs
@@ -460,11 +464,19 @@ export class StockDetailsComponent implements OnInit {
         this.mainUiListService
             .getAskBidListData(element.CODE)
             .subscribe(getAskBidListDataVal => {
-                this.data2 = this.concertBidList2FE(getAskBidListDataVal);
+                const test = [];
+                for (let index = 0; index < 10; index++) {
+                    test.push(getAskBidListDataVal[0]);
+                }
+                this.data2 = this.concertBidList2FE(test);
+
+                console.log('getAskBidListDataVal:', getAskBidListDataVal);
+                // this.data2 = this.concertBidList2FE(getAskBidListDataVal);
             });
         this.mainUiListService
             .getTransactionLogListData(element.CODE)
             .subscribe(getTransactionLogListDataVal => {
+                console.log('getTransactionLogListDataVal:', getTransactionLogListDataVal);
                 this.data3 = this.concertTransaction2FE(getTransactionLogListDataVal);
             });
     }
@@ -478,8 +490,6 @@ export class StockDetailsComponent implements OnInit {
     }
 
     getServerData(event: any): void {
-        console.log('getServerData', event.pageIndex);
-
         const bodyObject = {
             to_call_price_from: this.callPriceFrom.value,
             to_call_price_to: this.callPriceTo.value,

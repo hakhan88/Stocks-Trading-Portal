@@ -20,6 +20,7 @@ import { MainUiListService } from './services/main-ui-list.service';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LoadingInterceptor } from './services/loadingInterceptor.service';
 import { LoadingService } from './services/loading.service';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
     declarations: [
@@ -43,6 +44,7 @@ import { LoadingService } from './services/loading.service';
         ReactiveFormsModule,
         DragDropModule,
         HttpClientModule,
+        FontAwesomeModule,
     ],
     providers: [
         LoginService,

@@ -239,8 +239,13 @@
         <mat-divider></mat-divider>
 
         <div fxLayout="row" style="margin-top: 20px; width: 100%;">
-            <h3>{{SymbolSelected}}</h3>
-            <h3 style="margin-left: 20px;">{{NameSelected}}</h3>
+            <div fxFlex="1 1 90%" fxLayout="row">
+                <h3>{{ SymbolSelected }}</h3>
+                <h3 style="margin-left: 20px;">{{ NameSelected }}</h3>
+            </div>
+            <div fxFlex="1 1 10%">
+                <fa-icon [icon]="faAngleDown"></fa-icon>
+            </div>
         </div>
         <table mat-table [dataSource]="data2" style="width: 100%;"
             class="mat-elevation-z8 table-min-width-styling-bid-ask">
@@ -258,6 +263,12 @@
 
         <div style="margin-top: 10px;">
             <h2>Tranaction Log</h2>
+            <div fxLayout="row">
+                <div fxFlex="1 1 90%"></div>
+                <div fxFlex="1 1 10%">
+                    <fa-icon [icon]="faAngleDown"></fa-icon>
+                </div>
+            </div>
             <table mat-table [dataSource]="data3" style="width: 100%;" class="mat-elevation-z8 table-min-width-styling">
                 <ng-container [matColumnDef]="column" *ngFor="let column of displayedColumns3">
                     <th style="display: none;" mat-header-cell *matHeaderCellDef> {{column}} </th>
