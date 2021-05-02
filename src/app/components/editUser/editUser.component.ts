@@ -10,7 +10,7 @@ import { CustomerListService } from '../../services/customer.service';
 })
 
 export class EditUserComponent implements OnInit {
-    User: any = ['Super Admin', 'Admin', 'Guest'];
+    UserRoles: string[] = ['Super Admin', 'Admin', 'Guest', 'manager'];
     hide = true;
     hide2 = true;
 
@@ -28,11 +28,27 @@ export class EditUserComponent implements OnInit {
     ngOnInit(): void {
         this.customerListService.getUserData()
             .subscribe(val => {
-                console.log(val);
+                this.id.setValue(val.id);
+                this.firstName.setValue(val.firstName);
+                this.lastName.setValue(val.lastName);
+                this.username.setValue(val.username);
+                this.password.setValue(val.password);
+                this.role.setValue(val.role);
             });
     }
 
     updateUserData(): void {
-        console.log('updateUserData');
+        const body = {
+            id: this.id.value,
+            firstName: this.firstName.value,
+            lastName: this.lastName.value,
+            username: this.username.value,
+            password: this.password.value,
+            role: this.role.value,
+        };
+        this.customerListService.updateUserData(body)
+            .subscribe(val => {
+                console.log('val: ', val);
+            });
     }
 }

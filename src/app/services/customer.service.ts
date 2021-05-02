@@ -25,7 +25,7 @@ export class CustomerListService {
     }
 
     updateUserData(body: object): Observable<any> {
-        return this.httpClient.post(`${this.BASE_URL}Users/update/${this.getUserIdSession}`, body)
+        return this.httpClient.post(`${this.BASE_URL}Users/update/${this.getUserIdSession()}`, body)
             .pipe(
                 catchError(this.handleError)
             );
