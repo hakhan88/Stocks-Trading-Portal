@@ -287,7 +287,7 @@
 
     <div style="max-width: 80%;">
         <div [ngClass]="'table-wrapper-scrollbar'">
-            <table mat-table [dataSource]="data" class="mat-elevation-z8 table-min-width-styling">
+            <!-- <table mat-table [dataSource]="data" class="mat-elevation-z8 table-min-width-styling">
                 <ng-container [matColumnDef]="column" *ngFor="let column of displayedColumns">
                     <th mat-header-cell *matHeaderCellDef> {{column}} </th>
                     <td mat-cell *matCellDef="let element" (click)="rowClicked(element)"
@@ -306,16 +306,16 @@
 
             <div [hidden]="data && data.length > 0" class="no-data-class no-data-class-main-data-table">
                 No records found.
-            </div>
+            </div> -->
 
-            <!-- <table
+            <table
                 class="table mat-table  table-responsive table-bordered table-hover mat-elevation-z8 table-min-width-styling"
                 id="table">
                 <thead>
                     <tr cdkDropList cdkDropListOrientation="horizontal" [cdkDropListData]="columns"
                         (cdkDragReleased)="release=true" (cdkDropListDropped)="dropCol($event)">
                         <ng-container *ngFor="let column of columns, let i = index">
-                            <th cdkDrag (mousedown)="mouseDown($event)" cdkDragLockAxis="x"
+                            <th class="drag-drop-header-th" cdkDrag (mousedown)="mouseDown($event)" cdkDragLockAxis="x"
                                 (cdkDragReleased)="release=true">
                                 {{column.header}}
                                 <div *cdkDragPreview>
@@ -323,7 +323,7 @@
                                         [style.margin-left]="pos?.x">
                                         <thead>
                                             <tr>
-                                                <th>
+                                                <th class="drag-drop-header-th">
                                                     {{column.header}}
                                                 </th>
                                             </tr>
@@ -340,7 +340,7 @@
                         (cdkDragReleased)="onDragRelease($event)" *ngFor="let element of paginateData">
                         <ng-container *ngFor="let cell of columns">
                             <ng-container>
-                                <td>{{element[cell.field]}}
+                                <td class="drag-drop-data-td" [innerHTML]="element[cell.field] | sanitizeHtml">
                                 </td>
                             </ng-container>
                         </ng-container>
@@ -348,14 +348,24 @@
                             [style.width]="pos?.width">
                             <table>
                                 <tr>
-                                    <td *ngFor="let cell of columns">{{element[cell.field]}}</td>
+                                    <td *ngFor="let cell of columns" class="drag-drop-data-td"
+                                        [innerHTML]="element[cell.field] | sanitizeHtml">
+                                    </td>
                                 </tr>
                             </table>
                         </div>
                         <div class="preview placeholder" *cdkDragPlaceholder></div>
                     </tr>
                 </tbody>
-            </table> -->
+            </table>
+            <div *ngIf="paginateData && paginateData.length > 0" class="no-data-class no-data-class-main-data-table">
+                <mat-paginator [length]="pageLength" [pageSize]="pageSize" [hidePageSize]="true"
+                    (page)="getServerData($event)">
+                </mat-paginator>
+            </div>
+            <div [hidden]="paginateData && paginateData.length > 0" class="no-data-class no-data-class-main-data-table">
+                No records found.
+            </div>
         </div>
     </div>
 </div>

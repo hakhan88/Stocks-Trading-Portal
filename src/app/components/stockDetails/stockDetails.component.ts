@@ -281,33 +281,32 @@ export class StockDetailsComponent implements OnInit {
 
     setDraggableData(): void {
         this.columns = [
-            { field: '_id', header: 'Id' },
-            { field: 'firstName', header: 'First Name' },
-            { field: 'lastName', header: 'Last Name' },
-            { field: 'Address', header: 'Address' },
-            { field: 'street', header: 'Street' },
-            { field: 'city', header: 'City' },
-            { field: 'state', header: 'State' }
+            { field: 'Add', header: 'Add' },
+            { field: 'CODE', header: 'CODE' },
+            { field: 'TY', header: 'TY' },
+            { field: 'Name', header: 'Name' },
+            { field: 'ISR', header: 'ISR' },
+            { field: 'SEN', header: 'SEN' },
+            { field: 'SQX', header: 'SQX' },
+            { field: 'BID', header: 'BID' },
+            { field: 'ASK', header: 'ASK' },
+            { field: 'LAST', header: 'LAST' },
+            { field: 'VOL', header: 'VOL' },
+            { field: 'TO', header: 'TO' },
+            { field: 'PREM', header: 'PREM' },
+            { field: 'IV', header: 'IV' },
+            { field: 'D', header: 'D' },
+            { field: 'CR', header: 'CR' },
+            { field: 'CHG', header: 'CHG' },
+            { field: 'K', header: 'K' },
+            { field: 'EXP', header: 'EXP' },
+            { field: 'CP', header: 'CP' },
+            { field: 'OUT', header: 'OUT' },
+            { field: 'P', header: 'P' },
+            { field: 'L', header: 'L' },
+            { field: 'NET', header: 'NET' },
         ];
-        this.paginateData = [{
-            id: '1',
-            firstName: 'Becker',
-            lastName: 'Glenn',
-            Address: 626,
-            street: 'Keap Street',
-            city: 'Oceola',
-            state: 'Tennessee'
-        },
-        {
-            id: '2',
-            firstName: 'Kellie',
-            lastName: 'Moody',
-            Address: 426,
-            street: 'Windsor Place',
-            city: 'Condon',
-            state: 'Minnesota'
-        }
-        ];
+        this.paginateData = [];
     }
 
     dropRow(event: CdkDragDrop<string[]>): void {
@@ -393,6 +392,7 @@ export class StockDetailsComponent implements OnInit {
             .getMainUiListData(bodyObject)
             .subscribe(val => {
                 this.data = this.concertBe2FE(val.data);
+                this.paginateData = this.concertBe2FE(val.data);
                 this.pageLength = val.totalCount;
             });
     }
@@ -520,6 +520,7 @@ export class StockDetailsComponent implements OnInit {
             .getMainUiListData(bodyObject, event.pageIndex * this.pageSize)
             .subscribe(val => {
                 this.data = this.concertBe2FE(val.data);
+                this.paginateData = this.concertBe2FE(val.data);
                 this.pageLength = val.totalCount;
             });
     }
