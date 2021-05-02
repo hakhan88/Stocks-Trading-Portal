@@ -392,8 +392,8 @@ export class StockDetailsComponent implements OnInit {
         this.mainUiListService
             .getMainUiListData(bodyObject)
             .subscribe(val => {
-                this.data = this.concertBe2FE(val);
-                this.pageLength = val.length;
+                this.data = this.concertBe2FE(val.data);
+                this.pageLength = val.totalCount;
             });
     }
 
