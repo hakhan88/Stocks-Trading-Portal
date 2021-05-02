@@ -29,7 +29,6 @@ export class SigninComponent implements OnInit {
     }
 
     signIn(): void {
-        this.loginService.modalIsOpen$.next('true');
         this.loginService.performLogin({
             username: this.userName.value,
             password: this.password.value
@@ -41,8 +40,8 @@ export class SigninComponent implements OnInit {
                     this.authService.setToken(val.token);
                     this.authService.setRole(val.role);
                     this.route.navigate(['/stockDetails']);
+                    this.loginService.modalIsOpen$.next('true');
                 }
-
             });
     }
 

@@ -61,7 +61,6 @@ export class EditUserComponent implements OnInit {
     }
 
     addUser(): void {
-        console.log('addUseraddUser');
         const body = {
             id: 0,
             firstName: this.firstName.value,

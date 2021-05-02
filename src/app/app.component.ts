@@ -20,13 +20,15 @@ export class AppComponent {
         private authService: AuthService,
         public loadingService: LoadingService,
     ) {
-        this.loginService.modalIsOpen$.subscribe(val => {
-            if (val === 'true') {
-                this.showLogin = false;
-            } else {
-                this.showLogin = true;
-            }
-        });
+        this.loginService.modalIsOpen$
+            .subscribe(val => {
+                if (val === 'true') {
+                    this.showLogin = false;
+                } else {
+                    this.showLogin = true;
+                }
+                this.token = this.authService.getToken();
+            });
         this.token = this.authService.getToken();
         this.showLogin = !!!this.token;
     }
@@ -43,8 +45,8 @@ export class AppComponent {
     }
 
     navigateTo(): void {
-        if (!!!this.token) {
-            this.route.navigate(['/userList']);
+        if (!!this.token) {
+            this.route.navigate(['/stockDetails']);
         } else {
             this.route.navigate(['/signin']);
         }
