@@ -20,4 +20,8 @@ export class AuthService {
         return sessionStorage.getItem('role');
     }
 
+    clearSessions(): void {
+        sessionStorage.clear();
+    }
+
 }
