@@ -16,6 +16,28 @@ export class CustomerListService {
         private httpClient: HttpClient,
     ) { }
 
+    setUserIdSession(userId: number): void {
+        sessionStorage.setItem('userId', `${userId}`);
+    }
+
+    getUserIdSession(): string | null {
+        return sessionStorage.getItem('userId');
+    }
+
+    updateUserData(body: object): Observable<any> {
+        return this.httpClient.post(`${this.BASE_URL}Users/update/${this.getUserIdSession}`, body)
+            .pipe(
+                catchError(this.handleError)
+            );
+    }
+
+    getUserData(): Observable<any> {
+        const userSessionId = this.getUserIdSession();
+        return this.httpClient.get(`${this.BASE_URL}Users/${userSessionId}`, {})
+            .pipe(
+                catchError(this.handleError)
+            );
+    }
 
     getUsersListData(): Observable<any> {
         return this.httpClient.get(`${this.BASE_URL}Users`, {})
