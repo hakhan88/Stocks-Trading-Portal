@@ -34,6 +34,8 @@
             </mat-card-content>
             <button *ngIf="userExists" mat-stroked-button color="accent" (click)="updateUserData()"
                 class="btn-block">Edit details</button>
+            <button *ngIf="userExists" mat-stroked-button color="accent" (click)="deleteUser()" class="btn-block">Delete
+                User</button>
             <button *ngIf="!userExists" mat-stroked-button color="accent" (click)="addUser()" class="btn-block">Add
                 User</button>
         </form>

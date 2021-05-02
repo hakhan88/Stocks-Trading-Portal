@@ -1,6 +1,7 @@
 // tslint:disable: deprecation
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { Router } from '@angular/router';
 import { CustomerListService } from '../../services/customer.service';
 
 @Component({
@@ -24,6 +25,7 @@ export class EditUserComponent implements OnInit {
     userExists = false;
 
     constructor(
+        private route: Router,
         private customerListService: CustomerListService,
     ) { }
 
@@ -70,7 +72,14 @@ export class EditUserComponent implements OnInit {
         };
         this.customerListService.addUser(body)
             .subscribe(val => {
-                console.log('val: ', val);
+                this.route.navigate(['/userList']);
+            });
+    }
+
+    deleteUser(): void {
+        this.customerListService.deleteUser()
+            .subscribe(val => {
+                this.route.navigate(['/userList']);
             });
     }
 }

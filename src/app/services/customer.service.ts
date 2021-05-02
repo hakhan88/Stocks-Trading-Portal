@@ -35,6 +35,13 @@ export class CustomerListService {
             );
     }
 
+    deleteUser(): Observable<any> {
+        return this.httpClient.post(`${this.BASE_URL}Users/delete/${this.getUserIdSession()}`, {})
+            .pipe(
+                catchError(this.handleError)
+            );
+    }
+
     updateUserData(body: object): Observable<any> {
         return this.httpClient.post(`${this.BASE_URL}Users/update/${this.getUserIdSession()}`, body)
             .pipe(
