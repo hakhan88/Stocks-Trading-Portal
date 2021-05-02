@@ -21,6 +21,9 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LoadingInterceptor } from './services/loadingInterceptor.service';
 import { LoadingService } from './services/loading.service';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { CustomerListService } from './services/customer.service';
+import { AuthService } from './services/Auth.service';
+import { AuthInterceptor } from './services/auth-Interceptor.service';
 
 @NgModule({
     declarations: [
@@ -50,6 +53,9 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
         LoginService,
         MainUiListService,
         LoadingService,
+        CustomerListService,
+        AuthService,
+        { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
         { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true }
     ],
     bootstrap: [AppComponent],

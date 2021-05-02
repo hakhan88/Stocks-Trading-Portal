@@ -13,7 +13,9 @@ import { Observable } from 'rxjs';
 export class LoadingInterceptor implements HttpInterceptor {
     private totalRequests = 0;
 
-    constructor(private loadingService: LoadingService) { }
+    constructor(
+        private loadingService: LoadingService,
+    ) { }
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<any> {
         this.totalRequests++;

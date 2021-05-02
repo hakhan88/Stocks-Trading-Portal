@@ -1,5 +1,8 @@
+
+// tslint:disable: deprecation
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { CustomerListService } from '../../services/customer.service';
 
 export interface PeriodicElement {
     Name: string;
@@ -39,8 +42,14 @@ export class UserListComponent implements OnInit {
 
     constructor(
         private route: Router,
+        public customerListService: CustomerListService,
     ) { }
-    ngOnInit(): void { }
+    ngOnInit(): void {
+        this.customerListService.getUsersListData()
+            .subscribe(val => {
+                console.log('val: ', val);
+            });
+    }
 
     clickRow(row: any): void {
         console.log(row);
