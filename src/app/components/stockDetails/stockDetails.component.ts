@@ -467,19 +467,11 @@ export class StockDetailsComponent implements OnInit {
         this.mainUiListService
             .getAskBidListData(element.CODE)
             .subscribe(getAskBidListDataVal => {
-                const test = [];
-                for (let index = 0; index < 10; index++) {
-                    test.push(getAskBidListDataVal[0]);
-                }
-                this.data2 = this.concertBidList2FE(test);
-
-                console.log('getAskBidListDataVal:', getAskBidListDataVal);
-                // this.data2 = this.concertBidList2FE(getAskBidListDataVal);
+                this.data2 = this.concertBidList2FE(getAskBidListDataVal);
             });
         this.mainUiListService
             .getTransactionLogListData(element.CODE)
             .subscribe(getTransactionLogListDataVal => {
-                console.log('getTransactionLogListDataVal:', getTransactionLogListDataVal);
                 this.data3 = this.concertTransaction2FE(getTransactionLogListDataVal);
             });
     }
@@ -527,8 +519,8 @@ export class StockDetailsComponent implements OnInit {
         this.mainUiListService
             .getMainUiListData(bodyObject, event.pageIndex + 1)
             .subscribe(val => {
-                this.data = this.concertBe2FE(val);
-                this.pageLength = val.length;
+                this.data = this.concertBe2FE(val.data);
+                this.pageLength = val.totalCount;
             });
     }
 
