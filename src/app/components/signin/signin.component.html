@@ -13,15 +13,18 @@
             <form class="example-form">
                 <mat-card-content>
                     <mat-form-field class="example-full-width">
-                        <input matInput placeholder="Username">
+                        <input [formControl]="userName" matInput placeholder="Username">
                     </mat-form-field>
 
                     <mat-form-field class="example-full-width">
-                        <input matInput placeholder="Password" [type]="hide2 ? 'password' : 'text'">
+                        <input [formControl]="password" matInput placeholder="Password"
+                            [type]="hide2 ? 'password' : 'text'">
                         <mat-icon matSuffix (click)="hide2 = !hide2">{{hide2 ? 'visibility_off' : 'visibility'}}
                         </mat-icon>
                     </mat-form-field>
                 </mat-card-content>
+                <div *ngIf="incorrectPassword" class="incorrect-username-password">Incorrect Username/password
+                    combination</div>
                 <button mat-stroked-button color="accent" (click)="signIn()" class="btn-block">Sign-in</button>
             </form>
         </mat-card>

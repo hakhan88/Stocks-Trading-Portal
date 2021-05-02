@@ -1,6 +1,9 @@
+// tslint:disable: deprecation
 import { Component, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoginService } from 'src/app/services/login.service';
+import { AuthService } from '../../services/Auth.service';
 
 @Component({
     selector: 'app-signin',
@@ -10,9 +13,16 @@ import { LoginService } from 'src/app/services/login.service';
 export class SigninComponent implements OnInit {
     hide = true;
     hide2 = true;
+
+    incorrectPassword = false;
+
+    userName = new FormControl();
+    password = new FormControl();
+
     constructor(
         private route: Router,
         private loginService: LoginService,
+        private authService: AuthService,
     ) { }
 
     ngOnInit(): void {
@@ -20,7 +30,20 @@ export class SigninComponent implements OnInit {
 
     signIn(): void {
         this.loginService.modalIsOpen$.next('true');
-        this.route.navigate(['/stockDetails']);
+        this.loginService.performLogin({
+            username: this.userName.value,
+            password: this.password.value
+        })
+            .subscribe(val => {
+                if (val.error) {
+                    this.incorrectPassword = true;
+                } else {
+                    this.authService.setToken(val.token);
+                    this.authService.setRole(val.role);
+                    this.route.navigate(['/stockDetails']);
+                }
+
+            });
     }
 
 }

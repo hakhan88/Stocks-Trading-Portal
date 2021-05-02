@@ -3,6 +3,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CustomerListService } from '../../services/customer.service';
+import { AuthService } from '../../services/Auth.service';
 
 export interface PeriodicElement {
     Name: string;
@@ -43,7 +44,8 @@ export class UserListComponent implements OnInit {
     constructor(
         private route: Router,
         public customerListService: CustomerListService,
-    ) { }
+    ) {
+    }
     ngOnInit(): void {
         this.customerListService.getUsersListData()
             .subscribe(val => {
