@@ -32,8 +32,6 @@ export class UserListComponent implements OnInit {
     ngOnInit(): void {
         this.customerListService.getUsersListData()
             .subscribe(val => {
-                console.log('val: ', val);
-                console.log('data: ', this.data);
                 this.data = this.convertBeToFeData(val);
             });
     }
@@ -48,6 +46,11 @@ export class UserListComponent implements OnInit {
                 'User Name': ele.username,
             };
         });
+    }
+
+    addUser(): void {
+        this.customerListService.usSetUserIdSession();
+        this.route.navigate(['/editUser']);
     }
 
     clickRow(row: any): void {

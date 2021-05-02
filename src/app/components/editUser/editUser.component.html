@@ -32,7 +32,10 @@
                     </mat-select>
                 </mat-form-field>
             </mat-card-content>
-            <button mat-stroked-button color="accent" (click)="updateUserData()" class="btn-block">Edit details</button>
+            <button *ngIf="userExists" mat-stroked-button color="accent" (click)="updateUserData()"
+                class="btn-block">Edit details</button>
+            <button *ngIf="!userExists" mat-stroked-button color="accent" (click)="addUser()" class="btn-block">Add
+                User</button>
         </form>
     </mat-card>
 </div>

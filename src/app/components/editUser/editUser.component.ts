@@ -21,20 +21,26 @@ export class EditUserComponent implements OnInit {
     password = new FormControl();
     role = new FormControl();
 
+    userExists = false;
+
     constructor(
         private customerListService: CustomerListService,
     ) { }
 
     ngOnInit(): void {
-        this.customerListService.getUserData()
-            .subscribe(val => {
-                this.id.setValue(val.id);
-                this.firstName.setValue(val.firstName);
-                this.lastName.setValue(val.lastName);
-                this.username.setValue(val.username);
-                this.password.setValue(val.password);
-                this.role.setValue(val.role);
-            });
+
+        this.userExists = !!this.customerListService.getUserIdSession();
+        if (this.userExists) {
+            this.customerListService.getUserData()
+                .subscribe(val => {
+                    this.id.setValue(val.id);
+                    this.firstName.setValue(val.firstName);
+                    this.lastName.setValue(val.lastName);
+                    this.username.setValue(val.username);
+                    this.password.setValue(val.password);
+                    this.role.setValue(val.role);
+                });
+        }
     }
 
     updateUserData(): void {
@@ -47,6 +53,22 @@ export class EditUserComponent implements OnInit {
             role: this.role.value,
         };
         this.customerListService.updateUserData(body)
+            .subscribe(val => {
+                console.log('val: ', val);
+            });
+    }
+
+    addUser(): void {
+        console.log('addUseraddUser');
+        const body = {
+            id: 0,
+            firstName: this.firstName.value,
+            lastName: this.lastName.value,
+            username: this.username.value,
+            password: this.password.value,
+            role: this.role.value,
+        };
+        this.customerListService.addUser(body)
             .subscribe(val => {
                 console.log('val: ', val);
             });

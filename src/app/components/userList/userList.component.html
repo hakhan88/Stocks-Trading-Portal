@@ -1,3 +1,4 @@
+<button mat-stroked-button (click)="addUser()" class="btn-block">Add User</button>
 <div class="main-wrapper" fxLayout="row" fxLayoutAlign="center center">
     <table mat-table [dataSource]="data" class="mat-elevation-z8">
         <ng-container [matColumnDef]="column" *ngFor="let column of displayedColumns">

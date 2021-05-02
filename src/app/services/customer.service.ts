@@ -20,8 +20,19 @@ export class CustomerListService {
         sessionStorage.setItem('userId', `${userId}`);
     }
 
+    usSetUserIdSession(): void {
+        sessionStorage.removeItem('userId');
+    }
+
     getUserIdSession(): string | null {
         return sessionStorage.getItem('userId');
+    }
+
+    addUser(body: object): Observable<any> {
+        return this.httpClient.post(`${this.BASE_URL}Users`, body)
+            .pipe(
+                catchError(this.handleError)
+            );
     }
 
     updateUserData(body: object): Observable<any> {
