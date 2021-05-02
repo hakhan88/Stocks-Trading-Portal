@@ -24,6 +24,10 @@ export class UserListComponent implements OnInit {
     columnsToDisplay: string[] = this.displayedColumns.slice();
     data: UserData[] = ELEMENT_DATA;
 
+    pageLength = 0;
+    pageSize = 10;
+    currentPageIndex = 0;
+
     constructor(
         private route: Router,
         public customerListService: CustomerListService,
@@ -32,6 +36,7 @@ export class UserListComponent implements OnInit {
     ngOnInit(): void {
         this.customerListService.getUsersListData()
             .subscribe(val => {
+                this.pageLength = val.length;
                 this.data = this.convertBeToFeData(val);
             });
     }
@@ -56,5 +61,15 @@ export class UserListComponent implements OnInit {
     clickRow(row: any): void {
         this.customerListService.setUserIdSession(row.id);
         this.route.navigate(['/editUser']);
+    }
+
+    paginate(event: any): void {
+        this.currentPageIndex = event.pageIndex;
+        console.log('event', event);
+        console.log('currentPageIndex', this.currentPageIndex);
+    }
+
+    returnPaginated(data: any[]): any[] {
+        return data.slice(this.currentPageIndex * this.pageSize, this.currentPageIndex * this.pageSize + 10);
     }
 }

@@ -1,6 +1,6 @@
 <button mat-stroked-button (click)="addUser()" class="btn-block add-user-button">Add User</button>
 <div class="main-wrapper" fxLayout="row" fxLayoutAlign="center center">
-    <table mat-table [dataSource]="data" class="mat-elevation-z8">
+    <table mat-table [dataSource]="returnPaginated(data)" class="mat-elevation-z8">
         <ng-container [matColumnDef]="column" *ngFor="let column of displayedColumns">
             <th mat-header-cell *matHeaderCellDef> {{column}} </th>
             <td mat-cell *matCellDef="let element" [innerHTML]="element[column] | sanitizeHtml"></td>
@@ -9,4 +9,8 @@
         <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
         <tr (click)="clickRow(row)" mat-row *matRowDef="let row; columns: columnsToDisplay;"></tr>
     </table>
+</div>
+<div class="user-list-pagination-styling">
+    <mat-paginator [length]="pageLength" [pageSize]="pageSize" [hidePageSize]="true" (page)="paginate($event)">
+    </mat-paginator>
 </div>
