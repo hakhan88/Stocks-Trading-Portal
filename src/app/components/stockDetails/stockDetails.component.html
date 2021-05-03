@@ -221,7 +221,7 @@
                         (click)="loadStrategy()">Load</button>
                     <mat-form-field appearance="fill" [ngClass]="'option-dropdown-styling'">
                         <mat-label>Load trategy</mat-label>
-                        <mat-select [formControl]="saveStrategyControlLoad" multiple>
+                        <mat-select [formControl]="saveStrategyControlLoad">
                             <mat-option *ngFor="let listDate of strategyList()" [value]="listDate">{{listDate}}
                             </mat-option>
                         </mat-select>

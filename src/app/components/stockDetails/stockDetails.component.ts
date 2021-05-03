@@ -530,12 +530,14 @@ export class StockDetailsComponent implements OnInit {
     }
 
     saveLayout(): void {
-        console.log('saveLayout');
         document.cookie = `${this.saveStrategyControl.value}=${JSON.stringify(this.columns)}`;
     }
 
     loadStrategy(): void {
-        console.log('loadStrategy');
+        const loadedColumn = this.getCookie(this.saveStrategyControlLoad.value);
+        if (loadedColumn) {
+            this.columns = JSON.parse(loadedColumn);
+        }
     }
 
     strategyList(): string[] {
