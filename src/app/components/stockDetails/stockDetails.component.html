@@ -67,7 +67,7 @@
                 </mat-form-field>
                 <mat-form-field [ngClass]="'option-dropdown-styling'" appearance="fill" class="no-label-field">
                     <mat-label>Sorted</mat-label>
-                    <mat-select [formControl]="statusFilterControl">
+                    <mat-select [formControl]="sortedFilterControl">
                         <mat-option *ngFor="let status of sortedByOptions" [value]="status.value">
                             {{status.display}}
                         </mat-option>

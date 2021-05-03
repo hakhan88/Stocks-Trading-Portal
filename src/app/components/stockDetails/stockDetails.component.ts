@@ -174,6 +174,7 @@ export class StockDetailsComponent implements OnInit {
     toppingsControl = new FormControl();
     volumeFrom = new FormControl();
     volumeTo = new FormControl();
+    sortedFilterControl = new FormControl();
 
 
     checked = false;
@@ -190,52 +191,16 @@ export class StockDetailsComponent implements OnInit {
 
     sortedByOptions = [
         {
-            value: 1,
-            display: 'Issuer',
+            value: '',
+            display: '',
         },
         {
-            value: 1,
-            display: 'Sensitivity',
+            value: 'DESC',
+            display: 'Descending',
         },
         {
-            value: 1,
-            display: 'spread',
-        },
-        {
-            value: 1,
-            display: 'Square spread',
-        },
-        {
-            value: 1,
-            display: 'Bid',
-        },
-        {
-            value: 1,
-            display: 'Ask',
-        },
-        {
-            value: 1,
-            display: 'Last',
-        },
-        {
-            value: 1,
-            display: 'Volume',
-        },
-        {
-            value: 1,
-            display: 'Premium',
-        },
-        {
-            value: 1,
-            display: 'IV',
-        },
-        {
-            value: 1,
-            display: 'Delta',
-        },
-        {
-            value: 1,
-            display: 'Turnover',
+            value: 'ASC',
+            display: 'Ascending',
         },
     ];
 
@@ -352,13 +317,13 @@ export class StockDetailsComponent implements OnInit {
             to_call_price_to: this.callPriceTo.value,
             conversion_ratio_from: this.conversionRatioFrom.value,
             conversion_ratio_to: this.conversionRatioTo.value,
-            expiryDateControl: this.expiryDateControl.value,
-            issuerControl: this.issuerControl.value,
+            expiry_date: this.expiryDateControl.value,
+            issuer: this.issuerControl.value,
             iV_from: this.ivFrom.value,
             iV_to: this.ivTo.value,
             last_price_from: this.lastPriceFrom.value,
             last_price_to: this.lastPriceTo.value,
-            listingDateControl: this.listingDateControl.value,
+            listing_date: this.listingDateControl.value,
             outstanding_from: this.outStandingFrom.value,
             outstanding_to: this.outStandingTo.value,
             premium_from: this.premiumFrom.value,
@@ -375,6 +340,7 @@ export class StockDetailsComponent implements OnInit {
             toppingsControl: this.toppingsControl.value,
             volume_from: this.volumeFrom.value,
             volume_to: this.volumeTo.value,
+            sorted_by: this.sortedFilterControl.value,
         };
 
         this.mainUiListService
