@@ -161,6 +161,7 @@ export class StockDetailsComponent implements OnInit {
     premiumFrom = new FormControl();
     premiumTo = new FormControl();
     saveStrategyControl = new FormControl();
+    saveStrategyControlLoad = new FormControl();
     sensitivityFrom = new FormControl();
     sensitivityTo = new FormControl();
     sourceFilter = new FormControl();
@@ -187,7 +188,6 @@ export class StockDetailsComponent implements OnInit {
     expiryDateList: string[] = ['Less than 3 months', '3 months to 6 months', '6 months to 12 months', 'more than 12 months'];
     ListingDateList: string[] = ['Today', 'Tomorrow', 'Within a week', 'Past week', 'Past month'];
 
-    strategyList: string[] = ['Strategy 1', 'Strategy 2', 'Strategy 3', 'Strategy 4'];
     sortedByOptions = [
         {
             value: 1,
@@ -309,12 +309,11 @@ export class StockDetailsComponent implements OnInit {
         this.paginateData = [];
     }
 
-    dropRow(event: CdkDragDrop<string[]>): void {
-        moveItemInArray(this.paginateData, event.previousIndex, event.currentIndex);
-    }
     dropCol(event: CdkDragDrop<string[]>): void {
         moveItemInArray(this.columns, event.previousIndex, event.currentIndex);
+        console.log('columns: ', this.columns);
     }
+
     mouseDown(event: any, el: any = null): void {
         el = el || event.target;
         this.pos = {
@@ -322,9 +321,6 @@ export class StockDetailsComponent implements OnInit {
             y: el.getBoundingClientRect().top - event.clientY + 'px',
             width: el.getBoundingClientRect().width + 'px',
         };
-    }
-    onDragRelease(event: CdkDragRelease): void {
-        this.renderer2.setStyle(event.source.element.nativeElement, 'margin-left', '0px');
     }
 
     constructor(
@@ -346,12 +342,6 @@ export class StockDetailsComponent implements OnInit {
             .subscribe(val => {
                 this.issuerList = val;
             });
-
-        setInterval(() => {
-            // if (this.formSubmitted) {
-            //     this.filter();
-            // }
-        }, 60000);
     }
 
     filter(): void {
@@ -373,7 +363,6 @@ export class StockDetailsComponent implements OnInit {
             outstanding_to: this.outStandingTo.value,
             premium_from: this.premiumFrom.value,
             premium_to: this.premiumTo.value,
-            saveStrategyControl: this.saveStrategyControl.value,
             sensitivity_from: this.sensitivityFrom.value,
             sensitivity_to: this.sensitivityTo.value,
             sourceFilter: this.sourceFilter.value,
@@ -501,7 +490,6 @@ export class StockDetailsComponent implements OnInit {
             outstanding_to: this.outStandingTo.value,
             premium_from: this.premiumFrom.value,
             premium_to: this.premiumTo.value,
-            saveStrategyControl: this.saveStrategyControl.value,
             sensitivity_from: this.sensitivityFrom.value,
             sensitivity_to: this.sensitivityTo.value,
             sourceFilter: this.sourceFilter.value,
@@ -539,5 +527,35 @@ export class StockDetailsComponent implements OnInit {
 
     buySellExpandedUpdate(): void {
         this.buySellExpanded = !this.buySellExpanded;
+    }
+
+    saveLayout(): void {
+        console.log('saveLayout');
+        document.cookie = `${this.saveStrategyControl.value}=${JSON.stringify(this.columns)}`;
+    }
+
+    loadStrategy(): void {
+        console.log('loadStrategy');
+    }
+
+    strategyList(): string[] {
+        const allCookies = this.listCookies();
+        return Object.keys(allCookies);
+    }
+
+    getCookie(name: string): string | undefined {
+        const value = `; ${document.cookie}`;
+        const parts = value.split(`; ${name}=`);
+        if (parts && parts.length === 2) {
+            return parts.pop()?.split(';').shift();
+        }
+        return;
+    }
+
+    listCookies(): object {
+        return document.cookie.split(';').reduce((cookies, cookie) => {
+            const [name, value] = cookie.split('=').map(c => c.trim());
+            return { ...cookies, [name]: value };
+        }, {});
     }
 }

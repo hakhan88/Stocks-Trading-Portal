@@ -210,26 +210,19 @@
                 <button mat-raised-button color="primary" (click)="filter()">Search</button>
                 <div fxLayout="row">
                     <button mat-raised-button color="primary" [ngClass]="'filter-panel-custom-buttons'"
-                        (click)="filter()">Save</button>
+                        (click)="saveLayout()">Save</button>
                     <mat-form-field class="example-full-width-custom2">
                         <mat-label>Save</mat-label>
-                        <input matInput placeholder="Save">
-                    </mat-form-field>
-                    <mat-form-field appearance="fill" class="example-full-width-custom2">
-                        <mat-label>Save Startegy</mat-label>
-                        <mat-select [formControl]="saveStrategyControl" multiple>
-                            <mat-option *ngFor="let listDate of strategyList" [value]="listDate">{{listDate}}
-                            </mat-option>
-                        </mat-select>
+                        <input [formControl]="saveStrategyControl" matInput placeholder="Save">
                     </mat-form-field>
                 </div>
                 <div fxLayout="row">
                     <button mat-raised-button color="primary" [ngClass]="'filter-panel-custom-buttons'"
-                        (click)="filter()">Load</button>
+                        (click)="loadStrategy()">Load</button>
                     <mat-form-field appearance="fill" [ngClass]="'option-dropdown-styling'">
                         <mat-label>Load trategy</mat-label>
-                        <mat-select [formControl]="saveStrategyControl" multiple>
-                            <mat-option *ngFor="let listDate of strategyList" [value]="listDate">{{listDate}}
+                        <mat-select [formControl]="saveStrategyControlLoad" multiple>
+                            <mat-option *ngFor="let listDate of strategyList()" [value]="listDate">{{listDate}}
                             </mat-option>
                         </mat-select>
                     </mat-form-field>
@@ -335,9 +328,8 @@
                         </ng-container>
                     </tr>
                 </thead>
-                <tbody cdkDropList [cdkDropListData]="paginateData" (cdkDropListDropped)="dropRow($event)">
-                    <tr #tr cdkDrag cdkDragLockAxis="y" (mousedown)="mouseDown($event,tr)"
-                        (cdkDragReleased)="onDragRelease($event)" *ngFor="let element of paginateData">
+                <tbody cdkDropList [cdkDropListData]="paginateData">
+                    <tr #tr *ngFor="let element of paginateData">
                         <ng-container *ngFor="let cell of columns">
                             <ng-container>
                                 <td class="drag-drop-data-td" [innerHTML]="element[cell.field] | sanitizeHtml"
