@@ -340,7 +340,8 @@
                         (cdkDragReleased)="onDragRelease($event)" *ngFor="let element of paginateData">
                         <ng-container *ngFor="let cell of columns">
                             <ng-container>
-                                <td class="drag-drop-data-td" [innerHTML]="element[cell.field] | sanitizeHtml">
+                                <td class="drag-drop-data-td" [innerHTML]="element[cell.field] | sanitizeHtml"
+                                    (click)="rowClicked(element)">
                                 </td>
                             </ng-container>
                         </ng-container>
@@ -349,7 +350,7 @@
                             <table>
                                 <tr>
                                     <td *ngFor="let cell of columns" class="drag-drop-data-td"
-                                        [innerHTML]="element[cell.field] | sanitizeHtml">
+                                        [innerHTML]="element[cell.field] | sanitizeHtml" (click)="rowClicked(element)">
                                     </td>
                                 </tr>
                             </table>
