@@ -17,6 +17,12 @@
         th.mat-header-cell {
             min-width: 50px !important;
         }
+
+        background: white !important;
+
+        .mat-elevation-z8 {
+            box-shadow: none !important;
+        }
     }
 
     .table-min-width-styling-bid-ask {
@@ -33,7 +39,7 @@
     }
 
     .no-data-class-main-data-table {
-        width: 1248px;
+        width: 1248px !important;
     }
 
 

@@ -69,7 +69,7 @@ export class StockDetailsComponent implements OnInit {
     // Pagination Related
     // MatPaginator Inputs
     pageLength = 0;
-    pageSize = 10;
+    pageSize = 20;
 
     // MatPaginator Output
     pageEvent: PageEvent | undefined;
