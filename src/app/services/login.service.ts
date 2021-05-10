@@ -10,7 +10,7 @@ import { of } from 'rxjs';
 export class LoginService {
 
     // private variables
-    private BASE_URL = 'http://18.162.51.206:222/';
+    private BASE_URL = 'http://211.24.62.27:222/';
 
     modalIsOpen$: BehaviorSubject<string> = new BehaviorSubject('false');
 
