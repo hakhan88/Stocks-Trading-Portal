@@ -1,6 +1,6 @@
 // tslint:disable: deprecation
 import { Component, OnInit, Renderer2 } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 
 import { CdkDragDrop, moveItemInArray, CdkDragStart, CdkDragRelease } from '@angular/cdk/drag-drop';
 import { MainUiListService } from '../../services/main-ui-list.service';
@@ -143,39 +143,40 @@ export class StockDetailsComponent implements OnInit {
     ];
 
     // All Form controls
-    stockFilterControl = new FormControl();
-    stockIssuerControl = new FormControl();
-    callPriceFrom = new FormControl();
-    callPriceTo = new FormControl();
-    conversionRatioFrom = new FormControl();
-    conversionRatioTo = new FormControl();
-    expiryDateControl = new FormControl();
-    issuerControl = new FormControl();
-    ivFrom = new FormControl();
-    ivTo = new FormControl();
-    lastPriceFrom = new FormControl();
-    lastPriceTo = new FormControl();
-    listingDateControl = new FormControl();
-    outStandingFrom = new FormControl();
-    outStandingTo = new FormControl();
-    premiumFrom = new FormControl();
-    premiumTo = new FormControl();
-    saveStrategyControl = new FormControl();
-    saveStrategyControlLoad = new FormControl();
-    sensitivityFrom = new FormControl();
-    sensitivityTo = new FormControl();
-    sourceFilter = new FormControl();
-    spreadFrom = new FormControl();
-    spreadTo = new FormControl();
-    squareMultipleFrom = new FormControl();
-    squareMultipleTo = new FormControl();
-    statusFilterControl = new FormControl();
-    stockControl = new FormControl();
-    toppingsControl = new FormControl();
-    volumeFrom = new FormControl();
-    volumeTo = new FormControl();
-    sortedFilterControl = new FormControl();
-
+    filterFormGroup = new FormGroup({
+        stockFilterControl: new FormControl(),
+        stockIssuerControl: new FormControl(),
+        callPriceFrom: new FormControl(),
+        callPriceTo: new FormControl(),
+        conversionRatioFrom: new FormControl(),
+        conversionRatioTo: new FormControl(),
+        expiryDateControl: new FormControl(),
+        issuerControl: new FormControl(),
+        ivFrom: new FormControl(),
+        ivTo: new FormControl(),
+        lastPriceFrom: new FormControl(),
+        lastPriceTo: new FormControl(),
+        listingDateControl: new FormControl(),
+        outStandingFrom: new FormControl(),
+        outStandingTo: new FormControl(),
+        premiumFrom: new FormControl(),
+        premiumTo: new FormControl(),
+        saveStrategyControl: new FormControl(),
+        saveStrategyControlLoad: new FormControl(),
+        sensitivityFrom: new FormControl(),
+        sensitivityTo: new FormControl(),
+        sourceFilter: new FormControl(),
+        spreadFrom: new FormControl(),
+        spreadTo: new FormControl(),
+        squareMultipleFrom: new FormControl(),
+        squareMultipleTo: new FormControl(),
+        statusFilterControl: new FormControl(),
+        stockControl: new FormControl(),
+        toppingsControl: new FormControl(),
+        volumeFrom: new FormControl(),
+        volumeTo: new FormControl(),
+        sortedFilterControl: new FormControl(),
+    });
 
     checked = false;
     indeterminate = false;
@@ -311,40 +312,8 @@ export class StockDetailsComponent implements OnInit {
 
     filter(): void {
         this.formSubmitted = true;
-        // tslint:disable: object-literal-shorthand
-        const bodyObject = {
-            to_call_price_from: this.callPriceFrom.value,
-            to_call_price_to: this.callPriceTo.value,
-            conversion_ratio_from: this.conversionRatioFrom.value,
-            conversion_ratio_to: this.conversionRatioTo.value,
-            expiry_date: this.expiryDateControl.value,
-            issuer: this.issuerControl.value,
-            iV_from: this.ivFrom.value,
-            iV_to: this.ivTo.value,
-            last_price_from: this.lastPriceFrom.value,
-            last_price_to: this.lastPriceTo.value,
-            listing_date: this.listingDateControl.value,
-            outstanding_from: this.outStandingFrom.value,
-            outstanding_to: this.outStandingTo.value,
-            premium_from: this.premiumFrom.value,
-            premium_to: this.premiumTo.value,
-            sensitivity_from: this.sensitivityFrom.value,
-            sensitivity_to: this.sensitivityTo.value,
-            sourceFilter: this.sourceFilter.value,
-            spread_from: this.spreadFrom.value,
-            spread_to: this.spreadTo.value,
-            square_multiple_from: this.squareMultipleFrom.value,
-            square_multiple_to: this.squareMultipleTo.value,
-            statusFilterControl: this.statusFilterControl.value,
-            stockControl: this.stockControl.value,
-            toppingsControl: this.toppingsControl.value,
-            volume_from: this.volumeFrom.value,
-            volume_to: this.volumeTo.value,
-            sorted_by: this.sortedFilterControl.value,
-        };
-
         this.mainUiListService
-            .getMainUiListData(bodyObject)
+            .getMainUiListData(this.filterFormGroup.value)
             .subscribe(val => {
                 this.data = this.concertBe2FE(val.data);
                 this.paginateData = this.concertBe2FE(val.data);
@@ -432,42 +401,44 @@ export class StockDetailsComponent implements OnInit {
     }
 
     getStockListOptions(options: any[]): any[] {
-        return options.filter(ele => ele.name.includes(this.stockFilterControl.value) || !this.stockFilterControl.value).slice(0, 10) || [];
+        return [];
+        // return options.filter(ele => ele.name.includes(this.stockFilterControl.value) || !this.stockFilterControl.value).slice(0, 10) || [];
     }
 
     getIssuerListOptions(options: any[]): any[] {
-        return options.filter(ele => ele.includes(this.stockIssuerControl.value) || !this.stockIssuerControl.value).slice(0, 10) || [];
+        return [];
+        // return options.filter(ele => ele.includes(this.stockIssuerControl.value) || !this.stockIssuerControl.value).slice(0, 10) || [];
     }
 
     getServerData(event: any): void {
         const bodyObject = {
-            to_call_price_from: this.callPriceFrom.value,
-            to_call_price_to: this.callPriceTo.value,
-            conversion_ratio_from: this.conversionRatioFrom.value,
-            conversion_ratio_to: this.conversionRatioTo.value,
-            expiryDateControl: this.expiryDateControl.value,
-            issuerControl: this.issuerControl.value,
-            iV_from: this.ivFrom.value,
-            iV_to: this.ivTo.value,
-            last_price_from: this.lastPriceFrom.value,
-            last_price_to: this.lastPriceTo.value,
-            listingDateControl: this.listingDateControl.value,
-            outstanding_from: this.outStandingFrom.value,
-            outstanding_to: this.outStandingTo.value,
-            premium_from: this.premiumFrom.value,
-            premium_to: this.premiumTo.value,
-            sensitivity_from: this.sensitivityFrom.value,
-            sensitivity_to: this.sensitivityTo.value,
-            sourceFilter: this.sourceFilter.value,
-            spread_from: this.spreadFrom.value,
-            spread_to: this.spreadTo.value,
-            square_multiple_from: this.squareMultipleFrom.value,
-            square_multiple_to: this.squareMultipleTo.value,
-            statusFilterControl: this.statusFilterControl.value,
-            stockControl: this.stockControl.value,
-            toppingsControl: this.toppingsControl.value,
-            volume_from: this.volumeFrom.value,
-            volume_to: this.volumeTo.value,
+            // to_call_price_from: this.callPriceFrom.value,
+            // to_call_price_to: this.callPriceTo.value,
+            // conversion_ratio_from: this.conversionRatioFrom.value,
+            // conversion_ratio_to: this.conversionRatioTo.value,
+            // expiryDateControl: this.expiryDateControl.value,
+            // issuerControl: this.issuerControl.value,
+            // iV_from: this.ivFrom.value,
+            // iV_to: this.ivTo.value,
+            // last_price_from: this.lastPriceFrom.value,
+            // last_price_to: this.lastPriceTo.value,
+            // listingDateControl: this.listingDateControl.value,
+            // outstanding_from: this.outStandingFrom.value,
+            // outstanding_to: this.outStandingTo.value,
+            // premium_from: this.premiumFrom.value,
+            // premium_to: this.premiumTo.value,
+            // sensitivity_from: this.sensitivityFrom.value,
+            // sensitivity_to: this.sensitivityTo.value,
+            // sourceFilter: this.sourceFilter.value,
+            // spread_from: this.spreadFrom.value,
+            // spread_to: this.spreadTo.value,
+            // square_multiple_from: this.squareMultipleFrom.value,
+            // square_multiple_to: this.squareMultipleTo.value,
+            // statusFilterControl: this.statusFilterControl.value,
+            // stockControl: this.stockControl.value,
+            // toppingsControl: this.toppingsControl.value,
+            // volume_from: this.volumeFrom.value,
+            // volume_to: this.volumeTo.value,
         };
 
         this.mainUiListService
@@ -496,14 +467,14 @@ export class StockDetailsComponent implements OnInit {
     }
 
     saveLayout(): void {
-        document.cookie = `${this.saveStrategyControl.value}=${JSON.stringify(this.columns)}`;
+        // document.cookie = `${this.saveStrategyControl.value}=${JSON.stringify(this.columns)}`;
     }
 
     loadStrategy(): void {
-        const loadedColumn = this.getCookie(this.saveStrategyControlLoad.value);
-        if (loadedColumn) {
-            this.columns = JSON.parse(loadedColumn);
-        }
+        // const loadedColumn = this.getCookie(this.saveStrategyControlLoad.value);
+        // if (loadedColumn) {
+        //     this.columns = JSON.parse(loadedColumn);
+        // }
     }
 
     strategyList(): string[] {
