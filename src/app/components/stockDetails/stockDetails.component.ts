@@ -60,9 +60,42 @@ const ELEMENT_DATA3: PeriodicElement2[] = [];
 })
 export class StockDetailsComponent implements OnInit {
 
+    /*
+     * Private Variables
+    */
+
+    private defaultValuesToBe = {
+        last_price_from: 0,
+        last_price_to: 0,
+        outstanding_from: 0,
+        outstanding_to: 0,
+        conversion_ratio_from: 0,
+        conversion_ration_to: 0,
+        iV_from: 0,
+        iV_to: 0,
+        volume_from: 0,
+        volume_to: 0,
+        premium_from: 0,
+        premium_to: 0,
+        to_call_price_from: 0,
+        to_call_price_to: 0,
+        sensitivity_from: 0,
+        sensitivity_to: 0,
+        spread_from: 0,
+        spread_to: 0,
+        square_multiple_from: 0,
+        square_multiple_to: 0
+    };
+
+    /*
+     * Public Variables
+    */
+
+    // icons for the accordion
     faAngleDown = faAngleDown;
     faAngleUp = faAngleUp;
 
+    // set up for the two accordions
     biddingExpanded = false;
     buySellExpanded = false;
 
@@ -72,17 +105,14 @@ export class StockDetailsComponent implements OnInit {
     pageSize = 20;
 
     // MatPaginator Output
-    pageEvent: PageEvent | undefined;
+    // pageEvent: PageEvent | undefined; // TODO
 
+    // left filter set up for selection
     SymbolSelected: string | undefined;
     NameSelected: string | undefined;
 
+    // need the following for the calling of data every constant interval to show current updated data
     formSubmitted = false;
-
-    User: any = ['Super Admin', 'Admin', 'Guest'];
-    hide = true;
-    hide2 = true;
-    test = '<h3>Hello</h3>';
 
     displayedColumns: string[] = [
         'Add',
@@ -113,8 +143,7 @@ export class StockDetailsComponent implements OnInit {
     columnsToDisplay: string[] = this.displayedColumns.slice();
     data: PeriodicElement[] = ELEMENT_DATA;
 
-
-    availableContactStatuses = [
+    availableContactStatuses = [ // TODO get values from cham on this
         {
             value: 1,
             display: 'Normal'
@@ -127,19 +156,6 @@ export class StockDetailsComponent implements OnInit {
             value: 1,
             display: 'Waiting Listing'
         },
-    ];
-    availableSources = [
-        {
-            value: 1,
-            display: 'option'
-        }
-    ];
-
-    calPut = [
-        { name: 'Call', completed: false, },
-        { name: 'Put', completed: false, },
-        { name: 'Pull', completed: false, },
-        { name: 'Bear', completed: false, },
     ];
 
     // All Form controls
@@ -179,16 +195,11 @@ export class StockDetailsComponent implements OnInit {
     });
 
     checked = false;
-    indeterminate = false;
-    indeterminate2 = false;
-    indeterminate3 = false;
-
-    toppingList: string[] = ['Extra cheese', 'Mushroom', 'Onion', 'Pepperoni', 'Sausage', 'Tomato'];
-
     stockList: StockIssuerListInterface[] = [];
     issuerList: string[] = [];
+    // TODO get the values from cham
     expiryDateList: string[] = ['Less than 3 months', '3 months to 6 months', '6 months to 12 months', 'more than 12 months'];
-    ListingDateList: string[] = ['Today', 'Tomorrow', 'Within a week', 'Past week', 'Past month'];
+    ListingDateList: string[] = ['Today', 'Tomorrow', 'Within a week', 'Past week', 'Past month']; // TODO get the values from cham
 
     sortedByOptions = [
         {
@@ -205,29 +216,6 @@ export class StockDetailsComponent implements OnInit {
         },
     ];
 
-    sampleBody = {
-        last_price_from: 0,
-        last_price_to: 0,
-        outstanding_from: 0,
-        outstanding_to: 0,
-        conversion_ratio_from: 0,
-        conversion_ration_to: 0,
-        iV_from: 0,
-        iV_to: 0,
-        volume_from: 0,
-        volume_to: 0,
-        premium_from: 0,
-        premium_to: 0,
-        to_call_price_from: 0,
-        to_call_price_to: 0,
-        sensitivity_from: 0,
-        sensitivity_to: 0,
-        spread_from: 0,
-        spread_to: 0,
-        square_multiple_from: 0,
-        square_multiple_to: 0
-    };
-
     displayedColumns2: string[] = ['Bid', 'Ask'];
     columnsToDisplay2: string[] = this.displayedColumns2.slice();
     data2: any[] = ELEMENT_DATA2;
@@ -237,13 +225,18 @@ export class StockDetailsComponent implements OnInit {
     data3: any[] = ELEMENT_DATA3;
 
     /*
-        draggable related stuff
+      * Draggable related stuff
     */
 
     columns: any[] = [];
     paginateData: any[] = [];
     pos: any;
     release = true;
+
+    constructor(
+        public renderer2: Renderer2,
+        public mainUiListService: MainUiListService,
+    ) { }
 
     setDraggableData(): void {
         this.columns = [
@@ -277,7 +270,6 @@ export class StockDetailsComponent implements OnInit {
 
     dropCol(event: CdkDragDrop<string[]>): void {
         moveItemInArray(this.columns, event.previousIndex, event.currentIndex);
-        console.log('columns: ', this.columns);
     }
 
     mouseDown(event: any, el: any = null): void {
@@ -289,22 +281,18 @@ export class StockDetailsComponent implements OnInit {
         };
     }
 
-    constructor(
-        public renderer2: Renderer2,
-        public mainUiListService: MainUiListService,
-    ) { }
 
     ngOnInit(): void {
         this.setDraggableData();
 
         this.mainUiListService
-            .getStockListData(this.sampleBody)
+            .getStockListData(this.defaultValuesToBe)
             .subscribe(val => {
                 this.stockList = val;
             });
 
         this.mainUiListService
-            .getIssuerListData(this.sampleBody)
+            .getIssuerListData(this.defaultValuesToBe)
             .subscribe(val => {
                 this.issuerList = val;
             });
@@ -401,48 +389,18 @@ export class StockDetailsComponent implements OnInit {
     }
 
     getStockListOptions(options: any[]): any[] {
-        return [];
-        // return options.filter(ele => ele.name.includes(this.stockFilterControl.value) || !this.stockFilterControl.value).slice(0, 10) || [];
+        return options.filter(ele => ele.name.includes(this.filterFormGroup.value.stockFilterControl)
+            || !this.filterFormGroup.value.stockFilterControl).slice(0, 10) || [];
     }
 
     getIssuerListOptions(options: any[]): any[] {
-        return [];
-        // return options.filter(ele => ele.includes(this.stockIssuerControl.value) || !this.stockIssuerControl.value).slice(0, 10) || [];
+        return options.filter(ele => ele.includes(this.filterFormGroup.value.stockIssuerControl)
+            || !this.filterFormGroup.value.sstockIssuerControl).slice(0, 10) || [];
     }
 
     getServerData(event: any): void {
-        const bodyObject = {
-            // to_call_price_from: this.to_call_price_from.value,
-            // to_call_price_to: this.to_call_price_to.value,
-            // conversion_ratio_from: this.conversion_ratio_from.value,
-            // conversion_ratio_to: this.conversion_ration_to.value,
-            // expiryDateControl: this.expiryDateControl.value,
-            // issuerControl: this.issuerControl.value,
-            // iV_from: this.iV_from.value,
-            // iV_to: this.iV_to.value,
-            // last_price_from: this.last_price_from.value,
-            // last_price_to: this.last_price_to.value,
-            // listingDateControl: this.listingDateControl.value,
-            // outstanding_from: this.outstanding_from.value,
-            // outstanding_to: this.outstanding_to.value,
-            // premium_from: this.premium_from.value,
-            // premium_to: this.premium_to.value,
-            // sensitivity_from: this.sensitivity_from.value,
-            // sensitivity_to: this.sensitivity_to.value,
-            // sourceFilter: this.sourceFilter.value,
-            // spread_from: this.spread_from.value,
-            // spread_to: this.spread_to.value,
-            // square_multiple_from: this.square_multiple_from.value,
-            // square_multiple_to: this.square_multiple_to.value,
-            // statusFilterControl: this.statusFilterControl.value,
-            // stockControl: this.stockControl.value,
-            // toppingsControl: this.toppingsControl.value,
-            // volume_from: this.volume_from.value,
-            // volume_to: this.volume_to.value,
-        };
-
         this.mainUiListService
-            .getMainUiListData(bodyObject, event.pageIndex * this.pageSize)
+            .getMainUiListData(this.filterFormGroup.value, event.pageIndex * this.pageSize)
             .subscribe(val => {
                 this.data = this.concertBe2FE(val.data);
                 this.paginateData = this.concertBe2FE(val.data);
@@ -467,14 +425,14 @@ export class StockDetailsComponent implements OnInit {
     }
 
     saveLayout(): void {
-        // document.cookie = `${this.saveStrategyControl.value}=${JSON.stringify(this.columns)}`;
+        document.cookie = `${this.filterFormGroup.value.saveStrategyControl.value}=${JSON.stringify(this.columns)}`;
     }
 
     loadStrategy(): void {
-        // const loadedColumn = this.getCookie(this.saveStrategyControlLoad.value);
-        // if (loadedColumn) {
-        //     this.columns = JSON.parse(loadedColumn);
-        // }
+        const loadedColumn = this.getCookie(this.filterFormGroup.value.saveStrategyControlLoad.value);
+        if (loadedColumn) {
+            this.columns = JSON.parse(loadedColumn);
+        }
     }
 
     strategyList(): string[] {
