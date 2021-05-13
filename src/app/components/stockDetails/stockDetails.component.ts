@@ -44,14 +44,13 @@ export interface PeriodicElement {
 }
 
 const ELEMENT_DATA: PeriodicElement[] = [];
-interface PeriodicElement2 {
+interface BidAskInterface {
     Bid: string;
     Ask: string;
 }
 
-const ELEMENT_DATA2: PeriodicElement2[] = [];
-
-const ELEMENT_DATA3: PeriodicElement2[] = [];
+const BIDDING_ELEMENT_DATA: BidAskInterface[] = [];
+const TRANSACTION_LOG_DATA: BidAskInterface[] = [];
 
 @Component({
     selector: 'app-stock-details',
@@ -218,11 +217,11 @@ export class StockDetailsComponent implements OnInit {
 
     displayedColumns2: string[] = ['Bid', 'Ask'];
     columnsToDisplay2: string[] = this.displayedColumns2.slice();
-    data2: any[] = ELEMENT_DATA2;
+    biddingListData: any[] = BIDDING_ELEMENT_DATA;
 
     displayedColumns3: string[] = ['Ask', 'Bid'];
     columnsToDisplay3: string[] = this.displayedColumns3.slice();
-    data3: any[] = ELEMENT_DATA3;
+    transactionLogs: any[] = TRANSACTION_LOG_DATA;
 
     /*
       * Draggable related stuff
@@ -281,23 +280,6 @@ export class StockDetailsComponent implements OnInit {
         };
     }
 
-
-    ngOnInit(): void {
-        this.setDraggableData();
-
-        this.mainUiListService
-            .getStockListData(this.defaultValuesToBe)
-            .subscribe(val => {
-                this.stockList = val;
-            });
-
-        this.mainUiListService
-            .getIssuerListData(this.defaultValuesToBe)
-            .subscribe(val => {
-                this.issuerList = val;
-            });
-    }
-
     filter(): void {
         this.formSubmitted = true;
         this.mainUiListService
@@ -345,7 +327,7 @@ export class StockDetailsComponent implements OnInit {
         return mappedToFe;
     }
 
-    concertTransaction2FE(array: any): any[] {
+    convertTransaction2FE(array: any): any[] {
         const arrowUp = '<div style=\"width: 0px !important;border-left: 7px dotted transparent !important;border-right: 7px solid transparent !important;border-bottom: 15px solid green !important;float: right;"></div>';
         const arrowDown = '<div style=\"width: 0px !important;border-left: 7px dotted transparent !important;border-right: 7px solid transparent !important;border-top: 15px solid #ff0000 !important;float: right;"></div>';
         const mappedToFe: any[] = [];
@@ -361,7 +343,7 @@ export class StockDetailsComponent implements OnInit {
         return mappedToFe;
     }
 
-    concertBidList2FE(array: any): any[] {
+    convertBidList2FE(array: any): any[] {
         const mappedToFe: any[] = [];
         array.forEach((ele: { [x: string]: any; }) => {
             const mapObject = {
@@ -379,12 +361,12 @@ export class StockDetailsComponent implements OnInit {
         this.mainUiListService
             .getAskBidListData(element.CODE)
             .subscribe(getAskBidListDataVal => {
-                this.data2 = this.concertBidList2FE(getAskBidListDataVal);
+                this.biddingListData = this.convertBidList2FE(getAskBidListDataVal);
             });
         this.mainUiListService
             .getTransactionLogListData(element.CODE)
             .subscribe(getTransactionLogListDataVal => {
-                this.data3 = this.concertTransaction2FE(getTransactionLogListDataVal);
+                this.transactionLogs = this.convertTransaction2FE(getTransactionLogListDataVal);
             });
     }
 
@@ -408,11 +390,11 @@ export class StockDetailsComponent implements OnInit {
             });
     }
 
-    fetchData2(array: any): any[] {
+    fetchBiddingData(array: any): any[] {
         return this.biddingExpanded ? array.slice(0, 10) : array.slice(0, 5) || [];
     }
 
-    fetchData3(array: any): any[] {
+    fetchBuySellData(array: any): any[] {
         return this.buySellExpanded ? array.slice(0, 10) : array.slice(0, 5) || [];
     }
 
@@ -454,5 +436,25 @@ export class StockDetailsComponent implements OnInit {
             const [name, value] = cookie.split('=').map(c => c.trim());
             return { ...cookies, [name]: value };
         }, {});
+    }
+
+    /*
+    * Life Cycles
+    */
+
+    ngOnInit(): void {
+        this.setDraggableData();
+
+        this.mainUiListService
+            .getStockListData(this.defaultValuesToBe)
+            .subscribe(val => {
+                this.stockList = val;
+            });
+
+        this.mainUiListService
+            .getIssuerListData(this.defaultValuesToBe)
+            .subscribe(val => {
+                this.issuerList = val;
+            });
     }
 }

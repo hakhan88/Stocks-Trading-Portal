@@ -241,7 +241,7 @@
                 <fa-icon (click)="biddingExpandedUpdate()" [icon]="biddingExpanded ? faAngleUp : faAngleDown"></fa-icon>
             </div>
         </div>
-        <table mat-table [dataSource]="fetchData2(data2)" style="width: 100%;"
+        <table mat-table [dataSource]="fetchBiddingData(biddingListData)" style="width: 100%;"
             class="mat-elevation-z8 table-min-width-styling-bid-ask">
             <ng-container [matColumnDef]="column" *ngFor="let column of displayedColumns2">
                 <th mat-header-cell *matHeaderCellDef> {{column}} </th>
@@ -251,7 +251,7 @@
             <tr mat-header-row *matHeaderRowDef="columnsToDisplay2"></tr>
             <tr mat-row *matRowDef="let row; columns: columnsToDisplay2;"></tr>
         </table>
-        <div [hidden]="data2 && data2.length > 0" class="no-data-class">
+        <div [hidden]="biddingListData && biddingListData.length > 0" class="no-data-class">
             No records found.
         </div>
 
@@ -264,7 +264,7 @@
                     </fa-icon>
                 </div>
             </div>
-            <table mat-table [dataSource]="fetchData3(data3)" style="width: 100%;"
+            <table mat-table [dataSource]="fetchBuySellData(transactionLogs)" style="width: 100%;"
                 class="mat-elevation-z8 table-min-width-styling">
                 <ng-container [matColumnDef]="column" *ngFor="let column of displayedColumns3">
                     <th style="display: none;" mat-header-cell *matHeaderCellDef> {{column}} </th>
@@ -272,7 +272,7 @@
                 </ng-container>
                 <tr mat-row *matRowDef="let row; columns: columnsToDisplay3;"></tr>
             </table>
-            <div [hidden]="data3 && data3.length > 0" class="no-data-class">
+            <div [hidden]="transactionLogs && transactionLogs.length > 0" class="no-data-class">
                 No records found.
             </div>
         </div>
