@@ -4,7 +4,6 @@ import { FormControl, FormGroup } from '@angular/forms';
 
 import { CdkDragDrop, moveItemInArray, CdkDragStart, CdkDragRelease } from '@angular/cdk/drag-drop';
 import { MainUiListService } from '../../services/main-ui-list.service';
-import { PageEvent } from '@angular/material/paginator';
 
 import { faAngleDown, faAngleUp } from '@fortawesome/free-solid-svg-icons';
 
