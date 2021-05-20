@@ -1,11 +1,13 @@
 // tslint:disable: deprecation
-import { Component, OnInit, Renderer2 } from '@angular/core';
+import { Component, OnDestroy, OnInit, Renderer2 } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { MainUiListService } from '../../services/main-ui-list.service';
 
 import { faAngleDown, faAngleUp } from '@fortawesome/free-solid-svg-icons';
+import { takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 
 interface StockIssuerListInterface {
     symbol: number;
@@ -62,11 +64,13 @@ const TRANSACTION_LOG_DATA: BidAskInterface[] = [];
     templateUrl: './stockDetails.component.html',
     styleUrls: ['./stockDetails.component.scss']
 })
-export class StockDetailsComponent implements OnInit {
+export class StockDetailsComponent implements OnInit, OnDestroy {
 
     /*
      * Private Variables
     */
+
+    private unsubscribe$: Subject<any> = new Subject();
 
     private defaultValuesToBe = {
         last_price_from: 0,
@@ -330,6 +334,7 @@ export class StockDetailsComponent implements OnInit {
         this.formSubmitted = true;
         this.mainUiListService
             .getMainUiListData(this.filterFormGroup.value)
+            .pipe(takeUntil(this.unsubscribe$))
             .subscribe(val => {
                 this.data = this.concertBe2FE(val.data);
                 this.paginateData = this.concertBe2FE(val.data);
@@ -407,11 +412,13 @@ export class StockDetailsComponent implements OnInit {
         this.NameSelected = element.Name;
         this.mainUiListService
             .getAskBidListData(element.CODE)
+            .pipe(takeUntil(this.unsubscribe$))
             .subscribe(getAskBidListDataVal => {
                 this.biddingListData = this.convertBidList2FE(getAskBidListDataVal);
             });
         this.mainUiListService
             .getTransactionLogListData(element.CODE)
+            .pipe(takeUntil(this.unsubscribe$))
             .subscribe(getTransactionLogListDataVal => {
                 this.transactionLogs = this.convertTransaction2FE(getTransactionLogListDataVal);
             });
@@ -430,6 +437,7 @@ export class StockDetailsComponent implements OnInit {
     getServerData(event: any): void {
         this.mainUiListService
             .getMainUiListData(this.filterFormGroup.value, event.pageIndex * this.pageSize)
+            .pipe(takeUntil(this.unsubscribe$))
             .subscribe(val => {
                 this.data = this.concertBe2FE(val.data);
                 this.paginateData = this.concertBe2FE(val.data);
@@ -494,14 +502,21 @@ export class StockDetailsComponent implements OnInit {
 
         this.mainUiListService
             .getStockListData(this.defaultValuesToBe)
+            .pipe(takeUntil(this.unsubscribe$))
             .subscribe(val => {
                 this.stockList = val;
             });
 
         this.mainUiListService
             .getIssuerListData(this.defaultValuesToBe)
+            .pipe(takeUntil(this.unsubscribe$))
             .subscribe(val => {
                 this.issuerList = val;
             });
+    }
+
+    ngOnDestroy(): void {
+        this.unsubscribe$.next();
+        this.unsubscribe$.complete();
     }
 }
