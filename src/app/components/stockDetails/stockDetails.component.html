@@ -214,7 +214,7 @@
                 <button mat-raised-button color="primary" (click)="filter()">Search</button>
                 <div fxLayout="row">
                     <button mat-raised-button color="primary" [ngClass]="'filter-panel-custom-buttons'"
-                        (click)="saveLayout()">Save</button>
+                        [disabled]="!filterFormGroup?.value?.saveStrategyControl" (click)="saveLayout()">Save</button>
                     <mat-form-field class="example-full-width-custom2">
                         <mat-label>Save</mat-label>
                         <input formControlName="saveStrategyControl" matInput placeholder="Save">
