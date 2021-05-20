@@ -20,6 +20,7 @@ interface ValueDescriptionInterface {
 
 export interface PeriodicElement {
     Add?: string;
+    stock?: string;
     STK: string;
     CODE: string;
     Name: string;
@@ -119,6 +120,7 @@ export class StockDetailsComponent implements OnInit {
 
     displayedColumns: string[] = [
         'Add',
+        'Stock',
         'CODE',
         'TY',
         'Name',
@@ -284,6 +286,7 @@ export class StockDetailsComponent implements OnInit {
         this.columns = [
             { field: 'Add', header: 'Add' },
             { field: 'CODE', header: 'CODE' },
+            { field: 'stock', header: 'Stock' },
             { field: 'TY', header: 'TY' },
             { field: 'Name', header: 'Name' },
             { field: 'ISR', header: 'ISR' },
@@ -341,6 +344,7 @@ export class StockDetailsComponent implements OnInit {
                 ASK: ele.ask,
                 Add: `<a href="hkex://ec2-18-162-51-206.ap-east-1.compute.amazonaws.com/warren/stockDetails?triggeradd=${ele.symbol}">Add</a>`,
                 BID: ele.bid,
+                stock: ele.stock,
                 CHG: ele.change,
                 CODE: ele.symbol,
                 CP: ele.call_Price,
