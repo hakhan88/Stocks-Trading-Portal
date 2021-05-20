@@ -81,12 +81,14 @@ export class UserListComponent implements OnInit, OnDestroy {
     */
 
     ngOnInit(): void {
-        this.customerListService.getUsersListData()
-            .pipe(takeUntil(this.unsubscribe$))
-            .subscribe(val => {
-                this.pageLength = val.length;
-                this.data = this.convertBeToFeData(val);
-            });
+        setTimeout(() => {
+            this.customerListService.getUsersListData()
+                .pipe(takeUntil(this.unsubscribe$))
+                .subscribe(val => {
+                    this.pageLength = val.length;
+                    this.data = this.convertBeToFeData(val);
+                });
+        }, 0);
     }
 
     ngOnDestroy(): void {

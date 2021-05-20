@@ -89,16 +89,18 @@ export class EditUserComponent implements OnInit, OnDestroy {
     ngOnInit(): void {
         this.userExists = !!this.customerListService.getUserIdSession();
         if (this.userExists) {
-            this.customerListService.getUserData()
-                .pipe(takeUntil(this.unsubscribe$))
-                .subscribe(val => {
-                    this.id.setValue(val.id);
-                    this.firstName.setValue(val.firstName);
-                    this.lastName.setValue(val.lastName);
-                    this.username.setValue(val.username);
-                    this.password.setValue(val.password);
-                    this.role.setValue(val.role);
-                });
+            setTimeout(() => {
+                this.customerListService.getUserData()
+                    .pipe(takeUntil(this.unsubscribe$))
+                    .subscribe(val => {
+                        this.id.setValue(val.id);
+                        this.firstName.setValue(val.firstName);
+                        this.lastName.setValue(val.lastName);
+                        this.username.setValue(val.username);
+                        this.password.setValue(val.password);
+                        this.role.setValue(val.role);
+                    });
+            }, 0);
         }
     }
 

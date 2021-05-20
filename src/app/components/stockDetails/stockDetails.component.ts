@@ -1,5 +1,5 @@
 // tslint:disable: deprecation
-import { Component, OnDestroy, OnInit, Renderer2 } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit, Renderer2 } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
@@ -64,7 +64,7 @@ const TRANSACTION_LOG_DATA: BidAskInterface[] = [];
     templateUrl: './stockDetails.component.html',
     styleUrls: ['./stockDetails.component.scss']
 })
-export class StockDetailsComponent implements OnInit, OnDestroy {
+export class StockDetailsComponent implements OnInit, OnDestroy, AfterViewInit {
 
     /*
      * Private Variables
@@ -280,11 +280,7 @@ export class StockDetailsComponent implements OnInit, OnDestroy {
         public renderer2: Renderer2,
         public mainUiListService: MainUiListService,
         public fb: FormBuilder,
-    ) {
-        setTimeout(() => {
-            console.log('controls: ', this.filterFormGroup.controls);
-        }, 4000);
-    }
+    ) { }
 
     setDraggableData(): void {
         this.columns = [
@@ -499,20 +495,24 @@ export class StockDetailsComponent implements OnInit, OnDestroy {
 
     ngOnInit(): void {
         this.setDraggableData();
+    }
 
-        this.mainUiListService
-            .getStockListData(this.defaultValuesToBe)
-            .pipe(takeUntil(this.unsubscribe$))
-            .subscribe(val => {
-                this.stockList = val;
-            });
+    ngAfterViewInit(): void {
+        setTimeout(() => {
+            this.mainUiListService
+                .getStockListData(this.defaultValuesToBe)
+                .pipe(takeUntil(this.unsubscribe$))
+                .subscribe(val => {
+                    this.stockList = val;
+                });
 
-        this.mainUiListService
-            .getIssuerListData(this.defaultValuesToBe)
-            .pipe(takeUntil(this.unsubscribe$))
-            .subscribe(val => {
-                this.issuerList = val;
-            });
+            this.mainUiListService
+                .getIssuerListData(this.defaultValuesToBe)
+                .pipe(takeUntil(this.unsubscribe$))
+                .subscribe(val => {
+                    this.issuerList = val;
+                });
+        }, 0);
     }
 
     ngOnDestroy(): void {

@@ -1,4 +1,4 @@
-<div *ngIf="loadingService.isLoading$ | async" class="overlay">
+<div *ngIf="loadingService.isLoadingObservable$ | async" class="overlay">
     <div class="spinner"></div>
 </div>
 <mat-toolbar color="primary" class="app-header">
