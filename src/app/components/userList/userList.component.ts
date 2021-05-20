@@ -1,9 +1,11 @@
 
 // tslint:disable: deprecation
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CustomerListService } from '../../services/customer.service';
 import { AuthService } from '../../services/Auth.service';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 export interface UserData {
     Name: string;
@@ -19,7 +21,18 @@ const ELEMENT_DATA: UserData[] = [];
     templateUrl: './userList.component.html',
     styleUrls: ['./userList.component.scss']
 })
-export class UserListComponent implements OnInit {
+export class UserListComponent implements OnInit, OnDestroy {
+
+    /*
+     * Private Variables
+    */
+
+    private unsubscribe$: Subject<any> = new Subject();
+
+    /*
+     * Public Variables
+    */
+
     displayedColumns: string[] = ['Name', 'Role', 'Edit', 'User Name'];
     columnsToDisplay: string[] = this.displayedColumns.slice();
     data: UserData[] = ELEMENT_DATA;
@@ -32,14 +45,6 @@ export class UserListComponent implements OnInit {
         private route: Router,
         public customerListService: CustomerListService,
     ) { }
-
-    ngOnInit(): void {
-        this.customerListService.getUsersListData()
-            .subscribe(val => {
-                this.pageLength = val.length;
-                this.data = this.convertBeToFeData(val);
-            });
-    }
 
     convertBeToFeData(array: any[]): any[] {
         return array.map(ele => {
@@ -65,11 +70,27 @@ export class UserListComponent implements OnInit {
 
     paginate(event: any): void {
         this.currentPageIndex = event.pageIndex;
-        console.log('event', event);
-        console.log('currentPageIndex', this.currentPageIndex);
     }
 
     returnPaginated(data: any[]): any[] {
         return data.slice(this.currentPageIndex * this.pageSize, this.currentPageIndex * this.pageSize + 10);
+    }
+
+    /*
+    * Life Cycles
+    */
+
+    ngOnInit(): void {
+        this.customerListService.getUsersListData()
+            .pipe(takeUntil(this.unsubscribe$))
+            .subscribe(val => {
+                this.pageLength = val.length;
+                this.data = this.convertBeToFeData(val);
+            });
+    }
+
+    ngOnDestroy(): void {
+        this.unsubscribe$.next();
+        this.unsubscribe$.complete();
     }
 }

@@ -1,6 +1,8 @@
 // tslint:disable: deprecation
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import { AuthService } from './services/Auth.service';
 import { LoadingService } from './services/loading.service';
 import { LoginService } from './services/login.service';
@@ -10,7 +12,18 @@ import { LoginService } from './services/login.service';
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnDestroy {
+
+    /*
+     * Private Variables
+    */
+
+    private unsubscribe$: Subject<any> = new Subject();
+
+    /*
+     * Public Variables
+    */
+
     showLogin = true;
     token: string | null;
 
@@ -21,6 +34,7 @@ export class AppComponent {
         public loadingService: LoadingService,
     ) {
         this.loginService.modalIsOpen$
+            .pipe(takeUntil(this.unsubscribe$))
             .subscribe(val => {
                 if (val === 'true') {
                     this.showLogin = false;
@@ -50,5 +64,14 @@ export class AppComponent {
         } else {
             this.route.navigate(['/signin']);
         }
+    }
+
+    /*
+    * Life Cycles
+    */
+
+    ngOnDestroy(): void {
+        this.unsubscribe$.next();
+        this.unsubscribe$.complete();
     }
 }

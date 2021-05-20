@@ -1,7 +1,9 @@
 // tslint:disable: deprecation
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import { CustomerListService } from '../../services/customer.service';
 
 @Component({
@@ -10,7 +12,18 @@ import { CustomerListService } from '../../services/customer.service';
     styleUrls: ['./editUser.component.scss']
 })
 
-export class EditUserComponent implements OnInit {
+export class EditUserComponent implements OnInit, OnDestroy {
+
+    /*
+     * Private Variables
+    */
+
+    private unsubscribe$: Subject<any> = new Subject();
+
+    /*
+     * Public Variables
+    */
+
     UserRoles: string[] = ['Super Admin', 'Admin', 'Guest', 'manager'];
     hide = true;
     hide2 = true;
@@ -29,22 +42,6 @@ export class EditUserComponent implements OnInit {
         private customerListService: CustomerListService,
     ) { }
 
-    ngOnInit(): void {
-
-        this.userExists = !!this.customerListService.getUserIdSession();
-        if (this.userExists) {
-            this.customerListService.getUserData()
-                .subscribe(val => {
-                    this.id.setValue(val.id);
-                    this.firstName.setValue(val.firstName);
-                    this.lastName.setValue(val.lastName);
-                    this.username.setValue(val.username);
-                    this.password.setValue(val.password);
-                    this.role.setValue(val.role);
-                });
-        }
-    }
-
     updateUserData(): void {
         const body = {
             id: this.id.value,
@@ -55,6 +52,7 @@ export class EditUserComponent implements OnInit {
             role: this.role.value,
         };
         this.customerListService.updateUserData(body)
+            .pipe(takeUntil(this.unsubscribe$))
             .subscribe(val => {
                 console.log('val: ', val);
             });
@@ -70,6 +68,7 @@ export class EditUserComponent implements OnInit {
             role: this.role.value,
         };
         this.customerListService.addUser(body)
+            .pipe(takeUntil(this.unsubscribe$))
             .subscribe(val => {
                 this.route.navigate(['/userList']);
             });
@@ -77,8 +76,34 @@ export class EditUserComponent implements OnInit {
 
     deleteUser(): void {
         this.customerListService.deleteUser()
+            .pipe(takeUntil(this.unsubscribe$))
             .subscribe(val => {
                 this.route.navigate(['/userList']);
             });
+    }
+
+    /*
+    * Life Cycles
+    */
+
+    ngOnInit(): void {
+        this.userExists = !!this.customerListService.getUserIdSession();
+        if (this.userExists) {
+            this.customerListService.getUserData()
+                .pipe(takeUntil(this.unsubscribe$))
+                .subscribe(val => {
+                    this.id.setValue(val.id);
+                    this.firstName.setValue(val.firstName);
+                    this.lastName.setValue(val.lastName);
+                    this.username.setValue(val.username);
+                    this.password.setValue(val.password);
+                    this.role.setValue(val.role);
+                });
+        }
+    }
+
+    ngOnDestroy(): void {
+        this.unsubscribe$.next();
+        this.unsubscribe$.complete();
     }
 }
