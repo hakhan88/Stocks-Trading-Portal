@@ -336,6 +336,8 @@ export class StockDetailsComponent implements OnInit, OnDestroy, AfterViewInit {
                 this.paginateData = this.concertBe2FE(val.data);
                 this.pageLength = val.totalCount;
             });
+
+
     }
 
     concertBe2FE(array: any): any[] {
@@ -458,19 +460,39 @@ export class StockDetailsComponent implements OnInit, OnDestroy, AfterViewInit {
     }
 
     saveLayout(): void {
-        document.cookie = `${this.filterFormGroup.value.saveStrategyControl.value}=${JSON.stringify(this.columns)}`;
+        document.cookie = `${this.filterFormGroup.value.saveStrategyControl}=${JSON.stringify(this.columns)}`;
+        document.cookie = `${this.filterFormGroup.value.saveStrategyControl}_issuer=${JSON.stringify(this.filterFormGroup.value.issuer)}`;
+        document.cookie = `${this.filterFormGroup.value.saveStrategyControl}_expiry_date=${JSON.stringify(this.filterFormGroup.value.expiry_date)}`;
+        document.cookie = `${this.filterFormGroup.value.saveStrategyControl}_listing_date=${JSON.stringify(this.filterFormGroup.value.listing_date)}`;
+        document.cookie = `${this.filterFormGroup.value.saveStrategyControl}_status=${JSON.stringify(this.filterFormGroup.value.status)}`;
     }
 
     loadStrategy(): void {
-        const loadedColumn = this.getCookie(this.filterFormGroup.value.saveStrategyControlLoad.value);
+        const loadedColumn = this.getCookie(this.filterFormGroup.value.saveStrategyControlLoad);
         if (loadedColumn) {
             this.columns = JSON.parse(loadedColumn);
+        }
+        const loadedIssuer = this.getCookie(this.filterFormGroup.value.saveStrategyControlLoad + '_issuer');
+        if (loadedIssuer) {
+            this.filterFormGroup.controls.issuer.setValue(JSON.parse(loadedIssuer));
+        }
+        const loadedExpiryDate = this.getCookie(this.filterFormGroup.value.saveStrategyControlLoad + '_expiry_date');
+        if (loadedExpiryDate) {
+            this.filterFormGroup.controls.expiry_date.setValue(JSON.parse(loadedExpiryDate));
+        }
+        const loadedListingDate = this.getCookie(this.filterFormGroup.value.saveStrategyControlLoad + '_listing_date');
+        if (loadedListingDate) {
+            this.filterFormGroup.controls.listing_date.setValue(JSON.parse(loadedListingDate));
+        }
+        const loadedStatus = this.getCookie(this.filterFormGroup.value.saveStrategyControlLoad + '_status');
+        if (loadedStatus) {
+            this.filterFormGroup.controls.status.patchValue(JSON.parse(loadedStatus));
         }
     }
 
     strategyList(): string[] {
         const allCookies = this.listCookies();
-        return Object.keys(allCookies);
+        return Object.keys(allCookies).filter(ele => !ele.includes('_issuer') && !ele.includes('_expiry_date') && !ele.includes('_listing_date') && !ele.includes('_status'));
     }
 
     getCookie(name: string): string | undefined {
