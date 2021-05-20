@@ -1,8 +1,8 @@
 // tslint:disable: deprecation
 import { Component, OnInit, Renderer2 } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 
-import { CdkDragDrop, moveItemInArray, CdkDragStart, CdkDragRelease } from '@angular/cdk/drag-drop';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { MainUiListService } from '../../services/main-ui-list.service';
 
 import { faAngleDown, faAngleUp } from '@fortawesome/free-solid-svg-icons';
@@ -11,6 +11,11 @@ interface StockIssuerListInterface {
     symbol: number;
     name: string;
     symbolName: string;
+}
+
+interface ValueDescriptionInterface {
+    value: number | string;
+    description: string;
 }
 
 export interface PeriodicElement {
@@ -147,30 +152,47 @@ export class StockDetailsComponent implements OnInit {
             display: 'Normal'
         },
         {
-            value: 1,
+            value: 2,
             display: 'Stopped Trading'
         },
         {
-            value: 1,
+            value: 3,
             display: 'Waiting Listing'
         },
     ];
 
+    typesOfFiltering: ValueDescriptionInterface[] = [
+        { value: 'call', description: 'call' },
+        { value: 'put', description: 'put' },
+        { value: 'bull', description: 'bull' },
+        { value: 'bear', description: 'bear' },
+    ];
+
+    // tslint:disable-next-line: typedef
+    updateChkbxArray(chk: { value: string | number; description: string; }, isChecked: any, key: any) {
+        const chkArray = this.filterFormGroup.get(key) as FormArray;
+        if (isChecked) {
+            if (chkArray.controls.findIndex(x => x.value === chk.value) === -1) {
+                chkArray.push(new FormControl(chk.value));
+            }
+        } else {
+            const idx = chkArray.controls.findIndex(x => x.value === chk.value);
+            chkArray.removeAt(idx);
+        }
+    }
+
     // All Form controls
+    // tslint:disable: member-ordering
     filterFormGroup = new FormGroup({
-        stockFilterControl: new FormControl(),
-        stockIssuerControl: new FormControl(),
-        to_call_price_from: new FormControl(),
-        to_call_price_to: new FormControl(),
         conversion_ratio_from: new FormControl(),
         conversion_ration_to: new FormControl(),
-        expiryDateControl: new FormControl(),
-        issuerControl: new FormControl(),
+        expiry_date: new FormControl(),
+        issuer: new FormControl(),
         iV_from: new FormControl(),
         iV_to: new FormControl(),
         last_price_from: new FormControl(),
         last_price_to: new FormControl(),
-        listingDateControl: new FormControl(),
+        listing_date: new FormControl(),
         outstanding_from: new FormControl(),
         outstanding_to: new FormControl(),
         premium_from: new FormControl(),
@@ -179,25 +201,42 @@ export class StockDetailsComponent implements OnInit {
         saveStrategyControlLoad: new FormControl(),
         sensitivity_from: new FormControl(),
         sensitivity_to: new FormControl(),
+        sorted_by: new FormControl(),
         sourceFilter: new FormControl(),
         spread_from: new FormControl(),
         spread_to: new FormControl(),
         square_multiple_from: new FormControl(),
         square_multiple_to: new FormControl(),
-        statusFilterControl: new FormControl(),
-        stockControl: new FormControl(),
+        status: new FormControl(),
+        symbol: new FormControl(),
+        stockFilterControl: new FormControl(),
+        stockIssuerControl: new FormControl(),
+        to_call_price_from: new FormControl(),
+        to_call_price_to: new FormControl(),
         toppingsControl: new FormControl(),
+        type: this.fb.array([]),
         volume_from: new FormControl(),
         volume_to: new FormControl(),
-        sorted_by: new FormControl(),
     });
 
     checked = false;
     stockList: StockIssuerListInterface[] = [];
     issuerList: string[] = [];
-    // TODO get the values from cham
-    expiryDateList: string[] = ['Less than 3 months', '3 months to 6 months', '6 months to 12 months', 'more than 12 months'];
-    ListingDateList: string[] = ['Today', 'Tomorrow', 'Within a week', 'Past week', 'Past month']; // TODO get the values from cham
+
+    expiryDateList: ValueDescriptionInterface[] = [
+        { value: 1, description: 'Less than 3 months' },
+        { value: 2, description: '3 months to 6 months' },
+        { value: 3, description: '6 months to 12 months' },
+        { value: 4, description: 'more than 12 months' },
+    ];
+
+    ListingDateList: ValueDescriptionInterface[] = [
+        { value: 1, description: 'Today' },
+        { value: 2, description: 'Tomorrow' },
+        { value: 3, description: 'Within a week' },
+        { value: 4, description: 'Past week' },
+        { value: 5, description: 'Past month' },
+    ];
 
     sortedByOptions = [
         {
@@ -234,7 +273,12 @@ export class StockDetailsComponent implements OnInit {
     constructor(
         public renderer2: Renderer2,
         public mainUiListService: MainUiListService,
-    ) { }
+        public fb: FormBuilder,
+    ) {
+        setTimeout(() => {
+            console.log('controls: ', this.filterFormGroup.controls);
+        }, 4000);
+    }
 
     setDraggableData(): void {
         this.columns = [
