@@ -21,6 +21,12 @@ interface ValueDescriptionInterface {
     description: string;
 }
 
+interface FieldHeaderInterface {
+    field: string;
+    header: string;
+    type?: string;
+}
+
 export interface PeriodicElement {
     Add?: string;
     stock?: string;
@@ -267,7 +273,7 @@ export class StockDetailsComponent implements OnInit, OnDestroy, AfterViewInit {
       * Draggable related stuff
     */
 
-    columns: any[] = [];
+    columns: FieldHeaderInterface[] = [];
     paginateData: any[] = [];
     pos: any;
     release = true;
@@ -280,31 +286,31 @@ export class StockDetailsComponent implements OnInit, OnDestroy, AfterViewInit {
 
     setDraggableData(): void {
         this.columns = [
-            { field: 'Add', header: 'Add' },
-            { field: 'CODE', header: 'CODE' },
-            { field: 'stock', header: 'Stock' },
-            { field: 'TY', header: 'TY' },
-            { field: 'Name', header: 'Name' },
-            { field: 'ISR', header: 'ISR' },
-            { field: 'SEN', header: 'SEN' },
-            { field: 'SQX', header: 'SQX' },
-            { field: 'BID', header: 'BID' },
-            { field: 'ASK', header: 'ASK' },
-            { field: 'LAST', header: 'LAST' },
-            { field: 'VOL', header: 'VOL' },
-            { field: 'TO', header: 'TO' },
-            { field: 'PREM', header: 'PREM' },
-            { field: 'IV', header: 'IV' },
-            { field: 'D', header: 'D' },
-            { field: 'CR', header: 'CR' },
-            { field: 'CHG', header: 'CHG' },
-            { field: 'K', header: 'K' },
-            { field: 'EXP', header: 'EXP' },
-            { field: 'CP', header: 'CP' },
-            { field: 'OUT', header: 'OUT' },
-            { field: 'P', header: 'P' },
-            { field: 'L', header: 'L' },
-            { field: 'NET', header: 'NET' },
+            { field: 'Add', header: 'Add', type: '' },
+            { field: 'CODE', header: 'CODE', type: 'symbol' },
+            { field: 'stock', header: 'Stock', type: 'stock' },
+            { field: 'TY', header: 'TY', type: 'type' },
+            { field: 'Name', header: 'Name', type: 'name' },
+            { field: 'ISR', header: 'ISR', type: 'issuer' },
+            { field: 'SEN', header: 'SEN', type: 'sensitivity' },
+            { field: 'SQX', header: 'SQX', type: 'square_Multiple' },
+            { field: 'BID', header: 'BID', type: 'bid' },
+            { field: 'ASK', header: 'ASK', type: 'ask' },
+            { field: 'LAST', header: 'LAST', type: 'last' },
+            { field: 'VOL', header: 'VOL', type: 'volume' },
+            { field: 'TO', header: 'TO', type: 'turnover' },
+            { field: 'PREM', header: 'PREM', type: 'premium' },
+            { field: 'IV', header: 'IV', type: 'iv' },
+            { field: 'D', header: 'D', type: 'delta' },
+            { field: 'CR', header: 'CR', type: 'conversion_Ratio' },
+            { field: 'CHG', header: 'CHG', type: 'change' },
+            { field: 'K', header: 'K', type: 'exercise_Price' },
+            { field: 'EXP', header: 'EXP', type: 'expiry_Date' },
+            { field: 'CP', header: 'CP', type: 'call_Price' },
+            { field: 'OUT', header: 'OUT', type: 'outstanding_Qty' },
+            { field: 'P', header: 'P', type: 'profit' },
+            { field: 'L', header: 'L', type: 'loss' },
+            { field: 'NET', header: 'NET', type: 'net' },
         ];
         this.paginateData = [];
     }
@@ -332,8 +338,6 @@ export class StockDetailsComponent implements OnInit, OnDestroy, AfterViewInit {
                 this.paginateData = this.concertBe2FE(val.data);
                 this.pageLength = val.totalCount;
             });
-
-
     }
 
     updateChkbxArray(chk: { value: string | number; description: string; }, isChecked: any, key: any): void {
@@ -345,6 +349,14 @@ export class StockDetailsComponent implements OnInit, OnDestroy, AfterViewInit {
         } else {
             const idx = chkArray.controls.findIndex(x => x.value === chk.value);
             chkArray.removeAt(idx);
+        }
+    }
+
+    headerFilter(column: FieldHeaderInterface): void {
+        if (this.formSubmitted) {
+            this.filterFormGroup.controls.sorted_by
+                .patchValue(column.type);
+            this.filter();
         }
     }
 
@@ -363,10 +375,9 @@ export class StockDetailsComponent implements OnInit, OnDestroy, AfterViewInit {
         const mappedToFe: any[] = [];
         array.forEach((ele: { [x: string]: any; }) => {
             const mapObject = {
-                ASK: ele.ask,
                 Add: `<a href="hkex://ec2-18-162-51-206.ap-east-1.compute.amazonaws.com/warren/stockDetails?triggeradd=${ele.symbol}">Add</a>`,
+                ASK: ele.ask,
                 BID: ele.bid,
-                stock: ele.stock,
                 CHG: ele.change,
                 CODE: ele.symbol,
                 CP: ele.call_Price,
@@ -378,8 +389,8 @@ export class StockDetailsComponent implements OnInit, OnDestroy, AfterViewInit {
                 K: ele.exercise_Price,
                 L: ele.loss,
                 LAST: ele.last,
-                NET: ele.net,
                 Name: ele.name,
+                NET: ele.net,
                 OUT: ele.outstanding_Qty,
                 P: ele.profit,
                 PREM: ele.premium,
@@ -387,6 +398,7 @@ export class StockDetailsComponent implements OnInit, OnDestroy, AfterViewInit {
                 SPRD: ele.spread,
                 SQX: ele.square_Multiple,
                 STK: ele.stock,
+                stock: ele.stock,
                 TO: ele.turnover,
                 TY: ele.type,
                 VOL: ele.volume,
