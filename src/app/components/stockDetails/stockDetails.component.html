@@ -62,16 +62,28 @@
                 <mat-form-field [ngClass]="'option-dropdown-styling'" appearance="fill" class="no-label-field">
                     <mat-label>Status</mat-label>
                     <mat-select formControlName="status" multiple>
+                        <mat-option #allSelected (click)="toggleAllSelection()" [value]="1">Select All</mat-option>
                         <mat-option *ngFor="let status of availableContactStatuses" [value]="status.value">
                             {{status.display}}
                         </mat-option>
                     </mat-select>
                 </mat-form-field>
                 <mat-form-field [ngClass]="'option-dropdown-styling'" appearance="fill" class="no-label-field">
-                    <mat-label>Sorted</mat-label>
-                    <mat-select formControlName="sorted_by">
+                    <mat-label>Sorting (ascending/descending)</mat-label>
+                    <mat-select formControlName="order_in">
                         <mat-option *ngFor="let status of sortedByOptions" [value]="status.value">
                             {{status.display}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+
+            <div class="vertical-form-field" fxLayout="row">
+                <mat-form-field [ngClass]="'option-dropdown-styling'" appearance="fill" class="no-label-field">
+                    <mat-label>Sorted By Column</mat-label>
+                    <mat-select formControlName="sorted_by">
+                        <mat-option *ngFor="let sortedByListItem of sortedByList" [value]="sortedByListItem">
+                            {{sortedByListItem}}
                         </mat-option>
                     </mat-select>
                 </mat-form-field>

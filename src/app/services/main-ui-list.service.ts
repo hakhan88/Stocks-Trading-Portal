@@ -38,6 +38,12 @@ export class MainUiListService {
             );
     }
 
+    getStockCategoryListData(): Observable<any> {
+        return this.httpClient.post(`${this.BASE_URL}v_main_ui_list/ColumnName`, {})
+            .pipe(
+                catchError(this.handleError)
+            );
+    }
 
     getAskBidListData(symbol: string): Observable<any> {
         return this.httpClient.post(`${this.BASE_URL}v_ask_bid_list?Symbol=` + symbol, {})

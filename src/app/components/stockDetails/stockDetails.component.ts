@@ -1,5 +1,5 @@
 // tslint:disable: deprecation
-import { AfterViewInit, Component, OnDestroy, OnInit, Renderer2 } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
@@ -8,6 +8,7 @@ import { MainUiListService } from '../../services/main-ui-list.service';
 import { faAngleDown, faAngleUp } from '@fortawesome/free-solid-svg-icons';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
+import { MatOption } from '@angular/material/core';
 
 interface StockIssuerListInterface {
     symbol: number;
@@ -96,6 +97,12 @@ export class StockDetailsComponent implements OnInit, OnDestroy, AfterViewInit {
     };
 
     /*
+     * View Child
+    */
+
+    @ViewChild('allSelected') private allSelected: MatOption | undefined;
+
+    /*
      * Public Variables
     */
 
@@ -122,6 +129,7 @@ export class StockDetailsComponent implements OnInit, OnDestroy, AfterViewInit {
     // need the following for the calling of data every constant interval to show current updated data
     formSubmitted = false;
 
+    sortedByList: string[] = [];
     displayedColumns: string[] = [
         'Add',
         'Stock',
@@ -154,15 +162,15 @@ export class StockDetailsComponent implements OnInit, OnDestroy, AfterViewInit {
 
     availableContactStatuses = [ // TODO get values from cham on this
         {
-            value: 1,
+            value: 2,
             display: 'Normal'
         },
         {
-            value: 2,
+            value: 3,
             display: 'Stopped Trading'
         },
         {
-            value: 3,
+            value: 4,
             display: 'Waiting Listing'
         },
     ];
@@ -173,19 +181,6 @@ export class StockDetailsComponent implements OnInit, OnDestroy, AfterViewInit {
         { value: 'bull', description: 'bull' },
         { value: 'bear', description: 'bear' },
     ];
-
-    // tslint:disable-next-line: typedef
-    updateChkbxArray(chk: { value: string | number; description: string; }, isChecked: any, key: any) {
-        const chkArray = this.filterFormGroup.get(key) as FormArray;
-        if (isChecked) {
-            if (chkArray.controls.findIndex(x => x.value === chk.value) === -1) {
-                chkArray.push(new FormControl(chk.value));
-            }
-        } else {
-            const idx = chkArray.controls.findIndex(x => x.value === chk.value);
-            chkArray.removeAt(idx);
-        }
-    }
 
     // All Form controls
     // tslint:disable: member-ordering
@@ -199,6 +194,7 @@ export class StockDetailsComponent implements OnInit, OnDestroy, AfterViewInit {
         last_price_from: new FormControl(),
         last_price_to: new FormControl(),
         listing_date: new FormControl(),
+        order_in: new FormControl(),
         outstanding_from: new FormControl(),
         outstanding_to: new FormControl(),
         premium_from: new FormControl(),
@@ -338,6 +334,29 @@ export class StockDetailsComponent implements OnInit, OnDestroy, AfterViewInit {
             });
 
 
+    }
+
+    updateChkbxArray(chk: { value: string | number; description: string; }, isChecked: any, key: any): void {
+        const chkArray = this.filterFormGroup.get(key) as FormArray;
+        if (isChecked) {
+            if (chkArray.controls.findIndex(x => x.value === chk.value) === -1) {
+                chkArray.push(new FormControl(chk.value));
+            }
+        } else {
+            const idx = chkArray.controls.findIndex(x => x.value === chk.value);
+            chkArray.removeAt(idx);
+        }
+    }
+
+    toggleAllSelection(): void {
+        if (this.allSelected?.selected) {
+            const availableContactStatusesCopy = [...this.availableContactStatuses];
+            availableContactStatusesCopy.push({ value: 1, display: '' });
+            this.filterFormGroup.controls.status
+                .patchValue(availableContactStatusesCopy.map(item => item.value));
+        } else {
+            this.filterFormGroup.controls.status.patchValue([]);
+        }
     }
 
     concertBe2FE(array: any): any[] {
@@ -533,6 +552,13 @@ export class StockDetailsComponent implements OnInit, OnDestroy, AfterViewInit {
                 .pipe(takeUntil(this.unsubscribe$))
                 .subscribe(val => {
                     this.issuerList = val;
+                });
+
+            this.mainUiListService
+                .getStockCategoryListData()
+                .pipe(takeUntil(this.unsubscribe$))
+                .subscribe(val => {
+                    this.sortedByList = val;
                 });
         }, 0);
     }
