@@ -134,6 +134,8 @@ export class StockDetailsComponent implements OnInit, OnDestroy, AfterViewInit {
 
     // need the following for the calling of data every constant interval to show current updated data
     formSubmitted = false;
+    headerSelected: FieldHeaderInterface | undefined;
+    headerSelectedDirection: string | undefined;
 
     sortedByList: string[] = [];
     displayedColumns: string[] = [
@@ -353,11 +355,23 @@ export class StockDetailsComponent implements OnInit, OnDestroy, AfterViewInit {
     }
 
     headerFilter(column: FieldHeaderInterface): void {
+        this.headerSelected = column;
+        const nextFilteringState = this.filterFormGroup.value.order_in === 'ASC' ? 'DESC' : 'ASC';
+        this.filterFormGroup.controls.order_in.setValue(nextFilteringState);
+
         if (this.formSubmitted) {
             this.filterFormGroup.controls.sorted_by
                 .patchValue(column.type);
             this.filter();
         }
+    }
+
+    headerSelectedDirectionValue(): boolean {
+        return this.filterFormGroup.value.order_in === 'ASC';
+    }
+
+    isHeaderSelected(column: FieldHeaderInterface): boolean {
+        return this.headerSelected?.header === column.header;
     }
 
     toggleAllSelection(): void {
@@ -548,6 +562,11 @@ export class StockDetailsComponent implements OnInit, OnDestroy, AfterViewInit {
 
     ngOnInit(): void {
         this.setDraggableData();
+        setInterval(() => {
+            if (this.formSubmitted) {
+                this.filter();
+            }
+        }, 50000);
     }
 
     ngAfterViewInit(): void {
