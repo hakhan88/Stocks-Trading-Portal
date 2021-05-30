@@ -219,7 +219,7 @@
             <div>
                 <button mat-raised-button color="primary" (click)="filter()">Search</button>
                 <div fxLayout="row">
-                    <button mat-raised-button color="primary" [ngClass]="'filter-panel-custom-buttons'"
+                    <button mat-raised-button color="primary" ngClass="filter-panel-custom-buttons"
                         [disabled]="!filterFormGroup?.value?.saveStrategyControl" (click)="saveLayout()">Save</button>
                     <mat-form-field class="example-full-width-custom2">
                         <mat-label>Save</mat-label>
@@ -227,7 +227,7 @@
                     </mat-form-field>
                 </div>
                 <div fxLayout="row">
-                    <button mat-raised-button color="primary" [ngClass]="'filter-panel-custom-buttons'"
+                    <button mat-raised-button color="primary" ngClass="filter-panel-custom-buttons"
                         (click)="loadStrategy()">Load</button>
                     <mat-form-field appearance="fill" [ngClass]="'option-dropdown-styling'">
                         <mat-label>Load trategy</mat-label>
@@ -287,7 +287,7 @@
         </div>
     </div>
 
-    <div style="max-width: 80%;">
+    <div style="max-width: 78%;">
         <div [ngClass]="'table-wrapper-scrollbar'">
             <table
                 class="table mat-table  table-responsive table-bordered table-hover mat-elevation-z8 table-min-width-styling"

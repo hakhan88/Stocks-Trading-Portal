@@ -4,7 +4,7 @@
     }
 
     button {
-        margin: 16px 8px;
+        margin: 2px 8px;
     }
 
     ::ng-deep input::-webkit-outer-spin-button,
@@ -47,8 +47,8 @@
         margin-bottom: 30px;
         min-width: 20%;
         background: white;
-        padding: 0px 20px;
-        margin: 0px 20px;
+        padding: 0px 10px;
+        margin: 0px 10px;
         border-radius: 10px;
     }
 
@@ -59,7 +59,11 @@
 
     .example-margin {
         position: relative;
-        margin: 0px 10px;
+        // margin: 0px 10px;
+    }
+
+    ::ng-deep .mat-checkbox-inner-container {
+        margin-right: 2px !important;
     }
 
     .option-dropdown-styling {
@@ -67,9 +71,15 @@
     }
 
     .table-wrapper-scrollbar {
+        tr:hover {
+            background-color: #d4d3d3;
+        }
+    }
+
+    .table-wrapper-scrollbar {
         overflow-x: scroll;
         max-height: 100%;
-        max-width: 90%;
+        // max-width: 90%;
         overflow-y: scroll;
         border-radius: 10px;
     }
@@ -87,7 +97,7 @@
     }
 
     .filter-panel-custom-buttons {
-        min-width: 77px;
+        // min-width: 77px;
     }
 
     .table-min-width-styling {

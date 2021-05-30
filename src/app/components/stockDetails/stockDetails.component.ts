@@ -184,10 +184,11 @@ export class StockDetailsComponent implements OnInit, OnDestroy, AfterViewInit {
     ];
 
     typesOfFiltering: ValueDescriptionInterface[] = [
-        { value: 'call', description: 'call' },
-        { value: 'put', description: 'put' },
-        { value: 'bull', description: 'bull' },
-        { value: 'bear', description: 'bear' },
+        { value: 'call', description: 'Call' },
+        { value: 'put', description: 'Put' },
+        { value: 'bull', description: 'Bull' },
+        { value: 'bear', description: 'Bear' },
+        { value: 'other', description: 'Other' },
     ];
 
     // All Form controls
