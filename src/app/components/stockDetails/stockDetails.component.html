@@ -217,19 +217,17 @@
             </div>
 
             <div>
-                <button mat-raised-button color="primary" (click)="filter()">Search</button>
                 <div fxLayout="row">
-                    <button mat-raised-button color="primary" ngClass="filter-panel-custom-buttons"
+                    <button fxFlex="0 1 15%" mat-raised-button color="primary" (click)="filter()">Search</button>
+                    <button fxFlex="0 1 15%" mat-raised-button color="primary" ngClass="filter-panel-custom-buttons"
                         [disabled]="!filterFormGroup?.value?.saveStrategyControl" (click)="saveLayout()">Save</button>
-                    <mat-form-field class="example-full-width-custom2">
+                    <mat-form-field fxFlex="0 1 15%" class="example-full-width-custom2">
                         <mat-label>Save</mat-label>
                         <input formControlName="saveStrategyControl" matInput placeholder="Save">
                     </mat-form-field>
-                </div>
-                <div fxLayout="row">
-                    <button mat-raised-button color="primary" ngClass="filter-panel-custom-buttons"
+                    <button fxFlex="0 1 15%" mat-raised-button color="primary" ngClass="filter-panel-custom-buttons"
                         (click)="loadStrategy()">Load</button>
-                    <mat-form-field appearance="fill" [ngClass]="'option-dropdown-styling'">
+                    <mat-form-field fxFlex="0 1 15%" appearance="fill" [ngClass]="'option-dropdown-styling'">
                         <mat-label>Load trategy</mat-label>
                         <mat-select formControlName="saveStrategyControlLoad">
                             <mat-option *ngFor="let listDate of strategyList()" [value]="listDate">{{listDate}}
