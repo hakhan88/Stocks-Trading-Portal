@@ -14,7 +14,7 @@
             <div class="vertical-form-field" fxLayout="row">
                 <div fxLayout="column" [ngClass]="'option-dropdown-styling'">
                     <mat-form-field>
-                        <input matInput formControlName="stockFilterControl" placeholder="Filter Stock" />
+                        <input matInput formControlName="filter_stock" placeholder="Filter Stock" />
                     </mat-form-field>
                     <mat-form-field appearance="fill">
                         <mat-label>Stock</mat-label>
@@ -26,14 +26,19 @@
                     </mat-form-field>
                 </div>
                 <div fxLayout="column" [ngClass]="'option-dropdown-styling'">
-                    <mat-form-field>
-                        <input matInput formControlName="stockIssuerControl" placeholder="Filter Issuer" />
-                    </mat-form-field>
                     <mat-form-field appearance="fill">
                         <mat-label>Issuer</mat-label>
                         <mat-select formControlName="issuer" multiple>
                             <mat-option *ngFor="let issuer of getIssuerListOptions(issuerList)" [value]="issuer">
                                 {{issuer}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-form-field [ngClass]="'option-dropdown-styling'" appearance="fill" class="no-label-field">
+                        <mat-label>Sorted By Column</mat-label>
+                        <mat-select formControlName="sorted_by">
+                            <mat-option *ngFor="let sortedByListItem of sortedByList" [value]="sortedByListItem">
+                                {{sortedByListItem}}
+                            </mat-option>
                         </mat-select>
                     </mat-form-field>
                 </div>
@@ -73,17 +78,6 @@
                     <mat-select formControlName="order_in">
                         <mat-option *ngFor="let status of sortedByOptions" [value]="status.value">
                             {{status.display}}
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field>
-            </div>
-
-            <div class="vertical-form-field" fxLayout="row">
-                <mat-form-field [ngClass]="'option-dropdown-styling'" appearance="fill" class="no-label-field">
-                    <mat-label>Sorted By Column</mat-label>
-                    <mat-select formControlName="sorted_by">
-                        <mat-option *ngFor="let sortedByListItem of sortedByList" [value]="sortedByListItem">
-                            {{sortedByListItem}}
                         </mat-option>
                     </mat-select>
                 </mat-form-field>
@@ -271,7 +265,7 @@
         </div>
 
         <div style="margin-top: 10px;">
-            <h2>Tranaction Log</h2>
+            <h2>Transaction Log</h2>
             <div fxLayout="row">
                 <div fxFlex="1 1 90%"></div>
                 <div fxFlex="1 1 10%">

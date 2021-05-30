@@ -218,7 +218,7 @@ export class StockDetailsComponent implements OnInit, OnDestroy, AfterViewInit {
         square_multiple_from: new FormControl(),
         square_multiple_to: new FormControl(),
         status: new FormControl(),
-        stockFilterControl: new FormControl(),
+        filter_stock: new FormControl(),
         stockIssuerControl: new FormControl(),
         symbol: new FormControl([]),
         to_call_price_from: new FormControl(),
@@ -442,8 +442,8 @@ export class StockDetailsComponent implements OnInit, OnDestroy, AfterViewInit {
         const mappedToFe: any[] = [];
         array.forEach((ele: { [x: string]: any; }) => {
             const mapObject = {
-                Ask: ele.ask_Price,
-                Bid: ele.bid_Price,
+                Ask: `${ele.ask_Price} ${ele.ask_Quantity}`,
+                Bid: `${ele.bid_Price} ${ele.bid_Quantity}`,
             };
             mappedToFe.push(mapObject);
         });
@@ -468,13 +468,11 @@ export class StockDetailsComponent implements OnInit, OnDestroy, AfterViewInit {
     }
 
     getStockListOptions(options: any[]): any[] {
-        return options.filter(ele => ele.name.includes(this.filterFormGroup.value.stockFilterControl)
-            || !this.filterFormGroup.value.stockFilterControl).slice(0, 10) || [];
+        return options || [];
     }
 
     getIssuerListOptions(options: any[]): any[] {
-        return options.filter(ele => ele.includes(this.filterFormGroup.value.stockIssuerControl)
-            || !this.filterFormGroup.value.sstockIssuerControl).slice(0, 10) || [];
+        return options || [];
     }
 
     getServerData(event: any): void {
@@ -583,6 +581,7 @@ export class StockDetailsComponent implements OnInit, OnDestroy, AfterViewInit {
                 .pipe(takeUntil(this.unsubscribe$))
                 .subscribe(val => {
                     this.issuerList = val;
+                    this.filterFormGroup.controls.issuer.patchValue([this.issuerList[0]]);
                 });
 
             this.mainUiListService
