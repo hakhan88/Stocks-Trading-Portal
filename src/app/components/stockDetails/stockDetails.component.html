@@ -300,7 +300,7 @@
                 id="table">
                 <thead>
                     <tr cdkDropList cdkDropListOrientation="horizontal" [cdkDropListData]="columns"
-                        (cdkDragReleased)="release=true">
+                        (cdkDragReleased)="release=true" (cdkDropListDropped)="dropCol($event)">
                         <ng-container *ngFor="let column of columns, let i = index">
                             <th (click)="headerFilter(column)" class="drag-drop-header-th" cdkDrag
                                 (mousedown)="mouseDown($event)" cdkDragLockAxis="x" (cdkDragReleased)="release=true">

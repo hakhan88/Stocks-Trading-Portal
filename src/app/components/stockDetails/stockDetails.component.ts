@@ -275,7 +275,7 @@ export class StockDetailsComponent implements OnInit, OnDestroy, AfterViewInit {
       * Draggable related stuff
     */
 
-    columns: FieldHeaderInterface[] = [];
+    columns: any[] = [];
     paginateData: any[] = [];
     pos: any;
     release = true;
