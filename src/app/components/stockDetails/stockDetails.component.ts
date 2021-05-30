@@ -573,7 +573,7 @@ export class StockDetailsComponent implements OnInit, OnDestroy, AfterViewInit {
             if (this.formSubmitted && this.elementClicked) {
                 this.rowClicked(this.elementClicked, { disableLoading: true });
             }
-        }, 10000);
+        }, 5000);
     }
 
     ngAfterViewInit(): void {

@@ -225,7 +225,7 @@
             </div>
         </div>
         <table mat-table [dataSource]="fetchBiddingData(biddingListData)" style="width: 100%;"
-            class="mat-elevation-z8 table-min-width-styling-bid-ask">
+            class="mat-elevation-z8 table-min-width-styling-bid-ask table-min-width-styling-bid-ask-transaction-log">
             <ng-container [matColumnDef]="column" *ngFor="let column of displayedColumns2">
                 <th mat-header-cell *matHeaderCellDef> {{column}} </th>
                 <td mat-cell *matCellDef="let element" [innerHTML]="element[column] | sanitizeHtml"></td>
@@ -248,7 +248,7 @@
                 </div>
             </div>
             <table mat-table [dataSource]="fetchBuySellData(transactionLogs)" style="width: 100%;"
-                class="mat-elevation-z8 table-min-width-styling">
+                class="mat-elevation-z8 table-min-width-styling table-min-width-styling-bid-ask-transaction-log">
                 <ng-container [matColumnDef]="column" *ngFor="let column of displayedColumns3">
                     <th style="display: none;" mat-header-cell *matHeaderCellDef> {{column}} </th>
                     <td mat-cell *matCellDef="let element" [innerHTML]="element[column] | sanitizeHtml"></td>
