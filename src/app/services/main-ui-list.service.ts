@@ -45,16 +45,16 @@ export class MainUiListService {
             );
     }
 
-    getAskBidListData(symbol: string): Observable<any> {
-        return this.httpClient.post(`${this.BASE_URL}v_ask_bid_list?Symbol=` + symbol, {})
+    getAskBidListData(symbol: string, body = {}): Observable<any> {
+        return this.httpClient.post(`${this.BASE_URL}v_ask_bid_list?Symbol=` + symbol, body)
             .pipe(
                 catchError(this.handleError)
             );
     }
 
 
-    getTransactionLogListData(symbol: string): Observable<any> {
-        return this.httpClient.post(`${this.BASE_URL}v_transaction_log/buy?Symbol=` + symbol, {})
+    getTransactionLogListData(symbol: string, body = {}): Observable<any> {
+        return this.httpClient.post(`${this.BASE_URL}v_transaction_log/buy?Symbol=` + symbol, body)
             .pipe(
                 catchError(this.handleError)
             );

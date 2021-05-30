@@ -12,40 +12,39 @@
             </div>
 
             <div class="vertical-form-field" fxLayout="row">
-                <div fxLayout="column" [ngClass]="'option-dropdown-styling'">
-                    <mat-form-field>
-                        <input matInput formControlName="filter_stock" placeholder="Filter Stock" />
-                    </mat-form-field>
-                    <mat-form-field appearance="fill">
-                        <mat-label>Stock</mat-label>
-                        <mat-select formControlName="symbol" multiple>
-                            <mat-option *ngFor="let stock of getStockListOptions(stockList)" [value]="stock.symbol">
-                                {{stock.symbolName}}
-                            </mat-option>
-                        </mat-select>
-                    </mat-form-field>
-                </div>
-                <div fxLayout="column" [ngClass]="'option-dropdown-styling'">
-                    <mat-form-field appearance="fill">
-                        <mat-label>Issuer</mat-label>
-                        <mat-select formControlName="issuer" multiple>
-                            <mat-option *ngFor="let issuer of getIssuerListOptions(issuerList)" [value]="issuer">
-                                {{issuer}}</mat-option>
-                        </mat-select>
-                    </mat-form-field>
-                    <mat-form-field [ngClass]="'option-dropdown-styling'" appearance="fill" class="no-label-field">
-                        <mat-label>Sorted By Column</mat-label>
-                        <mat-select formControlName="sorted_by">
-                            <mat-option *ngFor="let sortedByListItem of sortedByList" [value]="sortedByListItem">
-                                {{sortedByListItem}}
-                            </mat-option>
-                        </mat-select>
-                    </mat-form-field>
-                </div>
+                <mat-form-field [ngClass]="'option-dropdown-styling example-half-width-custom'">
+                    <input matInput formControlName="filter_stock" placeholder="Filter Stock" />
+                </mat-form-field>
+                <mat-form-field appearance="fill" [ngClass]="'option-dropdown-styling example-half-width-custom'">
+                    <mat-label>Issuer</mat-label>
+                    <mat-select formControlName="issuer" multiple>
+                        <mat-option *ngFor="let issuer of getIssuerListOptions(issuerList)" [value]="issuer">
+                            {{issuer}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div class="vertical-form-field" fxLayout="row">
+                <mat-form-field appearance="fill" [ngClass]="'option-dropdown-styling example-half-width-custom'">
+                    <mat-label>Stock</mat-label>
+                    <mat-select formControlName="symbol" multiple>
+                        <mat-option *ngFor="let stock of getStockListOptions(stockList)" [value]="stock.symbol">
+                            {{stock.symbolName}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field [ngClass]="'option-dropdown-styling example-half-width-custom'" appearance="fill"
+                    class="no-label-field">
+                    <mat-label>Sorted By Column</mat-label>
+                    <mat-select formControlName="sorted_by">
+                        <mat-option *ngFor="let sortedByListItem of sortedByList" [value]="sortedByListItem">
+                            {{sortedByListItem}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
             </div>
 
             <div class="vertical-form-field" fxLayout="row">
-                <mat-form-field appearance="fill" [ngClass]="'option-dropdown-styling'">
+                <mat-form-field appearance="fill" [ngClass]="'option-dropdown-styling example-half-width-custom'">
                     <mat-label>Expiry Date</mat-label>
                     <mat-select formControlName="expiry_date" multiple>
                         <mat-option *ngFor="let expiryDate of expiryDateList" [value]="expiryDate.value">{{
@@ -53,7 +52,7 @@
                         </mat-option>
                     </mat-select>
                 </mat-form-field>
-                <mat-form-field appearance="fill" [ngClass]="'option-dropdown-styling'">
+                <mat-form-field appearance="fill" [ngClass]="'option-dropdown-styling example-half-width-custom'">
                     <mat-label>Listing Date</mat-label>
                     <mat-select formControlName="listing_date" multiple>
                         <mat-option *ngFor="let listDate of ListingDateList" [value]="listDate.value">{{
@@ -64,7 +63,8 @@
             </div>
 
             <div class="vertical-form-field" fxLayout="row">
-                <mat-form-field [ngClass]="'option-dropdown-styling'" appearance="fill" class="no-label-field">
+                <mat-form-field [ngClass]="'option-dropdown-styling example-half-width-custom'" appearance="fill"
+                    class="no-label-field">
                     <mat-label>Status</mat-label>
                     <mat-select formControlName="status" multiple>
                         <mat-option #allSelected (click)="toggleAllSelection()" [value]="1">Select All</mat-option>
@@ -73,7 +73,8 @@
                         </mat-option>
                     </mat-select>
                 </mat-form-field>
-                <mat-form-field [ngClass]="'option-dropdown-styling'" appearance="fill" class="no-label-field">
+                <mat-form-field [ngClass]="'option-dropdown-styling example-half-width-custom'" appearance="fill"
+                    class="no-label-field">
                     <mat-label>Sorting (ascending/descending)</mat-label>
                     <mat-select formControlName="order_in">
                         <mat-option *ngFor="let status of sortedByOptions" [value]="status.value">
@@ -93,11 +94,6 @@
                         <mat-label>To</mat-label>
                         <input matInput type="number" placeholder="To" formControlName="last_price_to">
                     </mat-form-field>
-                </div>
-            </div>
-
-            <div class="vertical-form-field">
-                <div fxLayout="row">
                     <mat-form-field class="example-full-width-custom">
                         <mat-label>Outstandig %</mat-label>
                         <input matInput placeholder="Outstandig %" type="number" formControlName="outstanding_from">
@@ -120,11 +116,6 @@
                         <mat-label>To</mat-label>
                         <input matInput placeholder="To" type="number" formControlName="conversion_ration_to">
                     </mat-form-field>
-                </div>
-            </div>
-
-            <div class="vertical-form-field">
-                <div fxLayout="row">
                     <mat-form-field class="example-full-width-custom">
                         <mat-label>I.V.</mat-label>
                         <input matInput placeholder="I.V." type="number" formControlName="iV_from">
@@ -146,11 +137,6 @@
                         <mat-label>To</mat-label>
                         <input matInput placeholder="To" type="number" formControlName="volume_to">
                     </mat-form-field>
-                </div>
-            </div>
-
-            <div class="vertical-form-field">
-                <div fxLayout="row">
                     <mat-form-field class="example-full-width-custom">
                         <mat-label>Premium %</mat-label>
                         <input matInput placeholder="Premium %" type="number" formControlName="premium_from">
@@ -173,11 +159,6 @@
                         <mat-label>To</mat-label>
                         <input matInput placeholder="To" type="number" formControlName="to_call_price_to">
                     </mat-form-field>
-                </div>
-            </div>
-
-            <div class="vertical-form-field">
-                <div fxLayout="row">
                     <mat-form-field class="example-full-width-custom">
                         <mat-label>Sensitivity</mat-label>
                         <input matInput placeholder="Sensitivity" type="number" formControlName="sensitivity_from">
@@ -199,11 +180,6 @@
                         <mat-label>To</mat-label>
                         <input matInput placeholder="To" type="number" formControlName="spread_to">
                     </mat-form-field>
-                </div>
-            </div>
-
-            <div class="vertical-form-field">
-                <div fxLayout="row">
                     <mat-form-field class="example-full-width-custom">
                         <mat-label>Square Multiple</mat-label>
                         <input matInput placeholder="Square Multiple" type="number"

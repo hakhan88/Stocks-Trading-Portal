@@ -5,6 +5,7 @@
 
     button {
         margin: 2px 8px;
+        font-size: 10px !important;
     }
 
     ::ng-deep input::-webkit-outer-spin-button,
@@ -88,8 +89,12 @@
         min-width: 130px;
     }
 
-    .example-full-width-custom {
+    .example-half-width-custom {
         width: 50%;
+    }
+
+    .example-full-width-custom {
+        width: 25%;
     }
 
     .example-full-width-custom2 {
@@ -123,6 +128,8 @@
     ::ng-deep .mat-raised-button {
         line-height: 24px !important;
         font-size: 12px !important;
+        padding: 0 2px !important;
+        min-width: 30px !important;
     }
 
     ::ng-deep .mat-paginator {

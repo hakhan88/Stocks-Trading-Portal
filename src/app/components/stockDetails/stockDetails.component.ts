@@ -77,6 +77,7 @@ export class StockDetailsComponent implements OnInit, OnDestroy, AfterViewInit {
      * Private Variables
     */
 
+    private elementClicked: PeriodicElement | undefined;
     private unsubscribe$: Subject<any> = new Subject();
 
     private defaultValuesToBe = {
@@ -451,17 +452,18 @@ export class StockDetailsComponent implements OnInit, OnDestroy, AfterViewInit {
         return mappedToFe;
     }
 
-    rowClicked(element: PeriodicElement): void {
+    rowClicked(element: PeriodicElement, body = {}): void {
+        this.elementClicked = element;
         this.SymbolSelected = element.CODE;
         this.NameSelected = element.Name;
         this.mainUiListService
-            .getAskBidListData(element.CODE)
+            .getAskBidListData(element.CODE, body)
             .pipe(takeUntil(this.unsubscribe$))
             .subscribe(getAskBidListDataVal => {
                 this.biddingListData = this.convertBidList2FE(getAskBidListDataVal);
             });
         this.mainUiListService
-            .getTransactionLogListData(element.CODE)
+            .getTransactionLogListData(element.CODE, body)
             .pipe(takeUntil(this.unsubscribe$))
             .subscribe(getTransactionLogListDataVal => {
                 this.transactionLogs = this.convertTransaction2FE(getTransactionLogListDataVal);
@@ -566,6 +568,12 @@ export class StockDetailsComponent implements OnInit, OnDestroy, AfterViewInit {
                 this.filter();
             }
         }, 50000);
+
+        setInterval(() => {
+            if (this.formSubmitted && this.elementClicked) {
+                this.rowClicked(this.elementClicked, { disableLoading: true });
+            }
+        }, 10000);
     }
 
     ngAfterViewInit(): void {

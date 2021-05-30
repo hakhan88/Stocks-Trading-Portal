@@ -19,7 +19,9 @@ export class LoadingInterceptor implements HttpInterceptor {
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<any> {
         this.totalRequests++;
-        this.loadingService.setLoading(true);
+        if (!request.body.disableLoading) {
+            this.loadingService.setLoading(true);
+        }
 
         return next.handle(request).pipe(
             finalize(() => {
