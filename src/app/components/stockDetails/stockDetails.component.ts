@@ -29,38 +29,39 @@ interface FieldHeaderInterface {
 
 export interface PeriodicElement {
     Add?: string;
-    stock?: string;
-    STK: string;
+    ASK: string;
+    BID: string;
+    CHG: string;
     CODE: string;
-    Name: string;
+    CP: string;
+    CR: string;
+    D: string;
+    EXP: string;
     ISR: string;
+    IV: string;
+    K: string;
+    L: string;
+    LAST: string;
+    Name: string;
+    NET: string;
+    OUT: string;
+    OUTS: string;
+    P: string;
+    PREM: string;
     SEN: string;
     SPRD: string;
     SQX: string;
-    TY: string;
-    BID: string;
-    ASK: string;
-    LAST: string;
-    VOL: string;
+    STK: string;
+    stock?: string;
     TO: string;
-    PREM: string;
-    IV: string;
-    D: string;
-    CR: string;
-    CHG: string;
-    K: string;
-    EXP: string;
-    CP: string;
-    OUT: string;
-    P: string;
-    L: string;
-    NET: string;
+    TY: string;
+    VOL: string;
 }
 
 const ELEMENT_DATA: PeriodicElement[] = [];
 interface BidAskInterface {
-    Bid: string;
     Ask: string;
+    Bid: string;
 }
 
 const BIDDING_ELEMENT_DATA: BidAskInterface[] = [];
@@ -81,26 +82,26 @@ export class StockDetailsComponent implements OnInit, OnDestroy, AfterViewInit {
     private unsubscribe$: Subject<any> = new Subject();
 
     private defaultValuesToBe = {
-        last_price_from: 0,
-        last_price_to: 0,
-        outstanding_from: 0,
-        outstanding_to: 0,
         conversion_ratio_from: 0,
         conversion_ration_to: 0,
         iV_from: 0,
         iV_to: 0,
-        volume_from: 0,
-        volume_to: 0,
+        last_price_from: 0,
+        last_price_to: 0,
+        outstanding_from: 0,
+        outstanding_to: 0,
         premium_from: 0,
         premium_to: 0,
-        to_call_price_from: 0,
-        to_call_price_to: 0,
         sensitivity_from: 0,
         sensitivity_to: 0,
         spread_from: 0,
         spread_to: 0,
         square_multiple_from: 0,
-        square_multiple_to: 0
+        square_multiple_to: 0,
+        to_call_price_from: 0,
+        to_call_price_to: 0,
+        volume_from: 0,
+        volume_to: 0,
     };
 
     /*
@@ -141,30 +142,31 @@ export class StockDetailsComponent implements OnInit, OnDestroy, AfterViewInit {
     sortedByList: string[] = [];
     displayedColumns: string[] = [
         'Add',
-        'Stock',
+        'ASK',
+        'BID',
+        'CHG',
         'CODE',
-        'TY',
-        'Name',
+        'CP',
+        'CR',
+        'D',
+        'EXP',
         'ISR',
+        'IV',
+        'K',
+        'L',
+        'LAST',
+        'Name',
+        'NET',
+        'OUT',
+        'OUTS',
+        'P',
+        'PREM',
         'SEN',
         'SQX',
-        'BID',
-        'ASK',
-        'LAST',
-        'VOL',
+        'Stock',
         'TO',
-        'PREM',
-        'IV',
-        'D',
-        'CR',
-        'CHG',
-        'K',
-        'EXP',
-        'CP',
-        'OUT',
-        'P',
-        'L',
-        'NET',
+        'TY',
+        'VOL',
     ];
     columnsToDisplay: string[] = this.displayedColumns.slice();
     data: PeriodicElement[] = ELEMENT_DATA;
@@ -197,7 +199,10 @@ export class StockDetailsComponent implements OnInit, OnDestroy, AfterViewInit {
     filterFormGroup = new FormGroup({
         conversion_ratio_from: new FormControl(),
         conversion_ration_to: new FormControl(),
+        delta_from: new FormControl(),
+        delta_to: new FormControl(),
         expiry_date: new FormControl(),
+        filter_stock: new FormControl(),
         issuer: new FormControl([]),
         iV_from: new FormControl(),
         iV_to: new FormControl(),
@@ -220,7 +225,6 @@ export class StockDetailsComponent implements OnInit, OnDestroy, AfterViewInit {
         square_multiple_from: new FormControl(),
         square_multiple_to: new FormControl(),
         status: new FormControl(),
-        filter_stock: new FormControl(),
         stockIssuerControl: new FormControl(),
         symbol: new FormControl([]),
         to_call_price_from: new FormControl(),
@@ -291,30 +295,31 @@ export class StockDetailsComponent implements OnInit, OnDestroy, AfterViewInit {
     setDraggableData(): void {
         this.columns = [
             { field: 'Add', header: 'Add', type: '' },
+            { field: 'ASK', header: 'ASK', type: 'ask' },
+            { field: 'BID', header: 'BID', type: 'bid' },
+            { field: 'CHG', header: 'CHG', type: 'change' },
             { field: 'CODE', header: 'CODE', type: 'symbol' },
-            { field: 'stock', header: 'Stock', type: 'stock' },
-            { field: 'TY', header: 'TY', type: 'type' },
-            { field: 'Name', header: 'Name', type: 'name' },
+            { field: 'CP', header: 'CP', type: 'call_Price' },
+            { field: 'CR', header: 'CR', type: 'conversion_Ratio' },
+            { field: 'D', header: 'D', type: 'delta' },
+            { field: 'EXP', header: 'EXP', type: 'expiry_Date' },
             { field: 'ISR', header: 'ISR', type: 'issuer' },
+            { field: 'IV', header: 'IV', type: 'iv' },
+            { field: 'K', header: 'K', type: 'exercise_Price' },
+            { field: 'L', header: 'L', type: 'loss' },
+            { field: 'LAST', header: 'LAST', type: 'last' },
+            { field: 'Name', header: 'Name', type: 'name' },
+            { field: 'NET', header: 'NET', type: 'net' },
+            { field: 'OUT', header: 'OUT', type: 'outstanding_Qty' },
+            { field: 'OUTS', header: 'OUTS', type: 'OUTS' },
+            { field: 'P', header: 'P', type: 'profit' },
+            { field: 'PREM', header: 'PREM', type: 'premium' },
             { field: 'SEN', header: 'SEN', type: 'sensitivity' },
             { field: 'SQX', header: 'SQX', type: 'square_Multiple' },
-            { field: 'BID', header: 'BID', type: 'bid' },
-            { field: 'ASK', header: 'ASK', type: 'ask' },
-            { field: 'LAST', header: 'LAST', type: 'last' },
-            { field: 'VOL', header: 'VOL', type: 'volume' },
+            { field: 'stock', header: 'Stock', type: 'stock' },
             { field: 'TO', header: 'TO', type: 'turnover' },
-            { field: 'PREM', header: 'PREM', type: 'premium' },
-            { field: 'IV', header: 'IV', type: 'iv' },
-            { field: 'D', header: 'D', type: 'delta' },
-            { field: 'CR', header: 'CR', type: 'conversion_Ratio' },
-            { field: 'CHG', header: 'CHG', type: 'change' },
-            { field: 'K', header: 'K', type: 'exercise_Price' },
-            { field: 'EXP', header: 'EXP', type: 'expiry_Date' },
-            { field: 'CP', header: 'CP', type: 'call_Price' },
-            { field: 'OUT', header: 'OUT', type: 'outstanding_Qty' },
-            { field: 'P', header: 'P', type: 'profit' },
-            { field: 'L', header: 'L', type: 'loss' },
-            { field: 'NET', header: 'NET', type: 'net' },
+            { field: 'TY', header: 'TY', type: 'type' },
+            { field: 'VOL', header: 'VOL', type: 'volume' },
         ];
         this.paginateData = [];
     }
@@ -408,6 +413,7 @@ export class StockDetailsComponent implements OnInit, OnDestroy, AfterViewInit {
                 Name: ele.name,
                 NET: ele.net,
                 OUT: ele.outstanding_Qty,
+                OUTS: ele.OUTS,
                 P: ele.profit,
                 PREM: ele.premium,
                 SEN: ele.sensitivity,
