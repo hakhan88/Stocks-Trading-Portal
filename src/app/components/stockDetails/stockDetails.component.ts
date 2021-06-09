@@ -78,9 +78,10 @@ export class StockDetailsComponent implements OnInit, OnDestroy, AfterViewInit {
      * Private Variables
     */
 
+    private filterInterval: any;
+    private rowClickedInterval: any;
     private elementClicked: PeriodicElement | undefined;
     private unsubscribe$: Subject<any> = new Subject();
-
     private defaultValuesToBe = {
         conversion_ratio_from: 0,
         conversion_ration_to: 0,
@@ -569,13 +570,13 @@ export class StockDetailsComponent implements OnInit, OnDestroy, AfterViewInit {
 
     ngOnInit(): void {
         this.setDraggableData();
-        setInterval(() => {
+        this.filterInterval = setInterval(() => {
             if (this.formSubmitted) {
                 this.filter();
             }
         }, 50000);
 
-        setInterval(() => {
+        this.rowClickedInterval = setInterval(() => {
             if (this.formSubmitted && this.elementClicked) {
                 this.rowClicked(this.elementClicked, { disableLoading: true });
             }
@@ -609,6 +610,8 @@ export class StockDetailsComponent implements OnInit, OnDestroy, AfterViewInit {
     }
 
     ngOnDestroy(): void {
+        clearInterval(this.filterInterval);
+        clearInterval(this.rowClickedInterval);
         this.unsubscribe$.next();
         this.unsubscribe$.complete();
     }
