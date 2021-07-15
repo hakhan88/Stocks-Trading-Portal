@@ -519,48 +519,46 @@ export class StockDetailsComponent implements OnInit, OnDestroy, AfterViewInit {
     }
 
     saveLayout(): void {
-        document.cookie = `${this.filterFormGroup.value.saveStrategyControl}=${JSON.stringify(this.columns)}`;
-        document.cookie = `${this.filterFormGroup.value.saveStrategyControl}_issuer=${JSON.stringify(this.filterFormGroup.value.issuer)}`;
-        document.cookie = `${this.filterFormGroup.value.saveStrategyControl}_expiry_date=${JSON.stringify(this.filterFormGroup.value.expiry_date)}`;
-        document.cookie = `${this.filterFormGroup.value.saveStrategyControl}_listing_date=${JSON.stringify(this.filterFormGroup.value.listing_date)}`;
-        document.cookie = `${this.filterFormGroup.value.saveStrategyControl}_status=${JSON.stringify(this.filterFormGroup.value.status)}`;
+        // document.cookie = `${this.filterFormGroup.value.saveStrategyControl}=${JSON.stringify(this.columns)}`;
+        // document.cookie = `${this.filterFormGroup.value.saveStrategyControl}_issuer=${JSON.stringify(this.filterFormGroup.value.issuer)}`;
+        // document.cookie = `${this.filterFormGroup.value.saveStrategyControl}_expiry_date=${JSON.stringify(this.filterFormGroup.value.expiry_date)}`;
+        // document.cookie = `${this.filterFormGroup.value.saveStrategyControl}_listing_date=${JSON.stringify(this.filterFormGroup.value.listing_date)}`;
+        // document.cookie = `${this.filterFormGroup.value.saveStrategyControl}_status=${JSON.stringify(this.filterFormGroup.value.status)}`;
+
+        // tslint:disable: max-line-length
+        window.localStorage.setItem(this.filterFormGroup.value.saveStrategyControl, JSON.stringify(this.columns));
+        window.localStorage.setItem(`${this.filterFormGroup.value.saveStrategyControl}_issuer`, JSON.stringify(this.filterFormGroup.value.issuer));
+        window.localStorage.setItem(`${this.filterFormGroup.value.saveStrategyControl}_expiry_date`, JSON.stringify(this.filterFormGroup.value.expiry_date));
+        window.localStorage.setItem(`${this.filterFormGroup.value.saveStrategyControl}_listing_date`, JSON.stringify(this.filterFormGroup.value.listing_date));
+        window.localStorage.setItem(`${this.filterFormGroup.value.saveStrategyControl}_status`, JSON.stringify(this.filterFormGroup.value.status));
     }
 
     loadStrategy(): void {
-        const loadedColumn = this.getCookie(this.filterFormGroup.value.saveStrategyControlLoad);
+        const loadedColumn = this.getLocalStorage(this.filterFormGroup.value.saveStrategyControlLoad);
         if (loadedColumn) {
             this.columns = JSON.parse(loadedColumn);
         }
-        const loadedIssuer = this.getCookie(this.filterFormGroup.value.saveStrategyControlLoad + '_issuer');
+        const loadedIssuer = this.getLocalStorage(this.filterFormGroup.value.saveStrategyControlLoad + '_issuer');
         if (loadedIssuer) {
             this.filterFormGroup.controls.issuer.setValue(JSON.parse(loadedIssuer));
         }
-        const loadedExpiryDate = this.getCookie(this.filterFormGroup.value.saveStrategyControlLoad + '_expiry_date');
+        const loadedExpiryDate = this.getLocalStorage(this.filterFormGroup.value.saveStrategyControlLoad + '_expiry_date');
         if (loadedExpiryDate) {
             this.filterFormGroup.controls.expiry_date.setValue(JSON.parse(loadedExpiryDate));
         }
-        const loadedListingDate = this.getCookie(this.filterFormGroup.value.saveStrategyControlLoad + '_listing_date');
+        const loadedListingDate = this.getLocalStorage(this.filterFormGroup.value.saveStrategyControlLoad + '_listing_date');
         if (loadedListingDate) {
             this.filterFormGroup.controls.listing_date.setValue(JSON.parse(loadedListingDate));
         }
-        const loadedStatus = this.getCookie(this.filterFormGroup.value.saveStrategyControlLoad + '_status');
+        const loadedStatus = this.getLocalStorage(this.filterFormGroup.value.saveStrategyControlLoad + '_status');
         if (loadedStatus) {
             this.filterFormGroup.controls.status.patchValue(JSON.parse(loadedStatus));
         }
     }
 
     strategyList(): string[] {
-        const allCookies = this.listCookies();
-        return Object.keys(allCookies).filter(ele => !ele.includes('_issuer') && !ele.includes('_expiry_date') && !ele.includes('_listing_date') && !ele.includes('_status'));
-    }
-
-    getCookie(name: string): string | undefined {
-        const value = `; ${document.cookie}`;
-        const parts = value.split(`; ${name}=`);
-        if (parts && parts.length === 2) {
-            return parts.pop()?.split(';').shift();
-        }
-        return;
+        const allLocalStorage = this.getAllStrategies();
+        return allLocalStorage.filter(ele => !ele.includes('_issuer') && !ele.includes('_expiry_date') && !ele.includes('_listing_date') && !ele.includes('_status'));
     }
 
     listCookies(): object {
@@ -568,6 +566,24 @@ export class StockDetailsComponent implements OnInit, OnDestroy, AfterViewInit {
             const [name, value] = cookie.split('=').map(c => c.trim());
             return { ...cookies, [name]: value };
         }, {});
+    }
+
+    getLocalStorage(localstorageTarget: string): string | null {
+        return localStorage.getItem(localstorageTarget);
+    }
+
+    getAllStrategies(): string[] {
+        return this.allStorage();
+    }
+
+    allStorage(): string[] {
+        const values = [];
+        const keys = Object.keys(localStorage);
+        let i = keys.length;
+        while (i--) {
+            values.push(keys[i]);
+        }
+        return values;
     }
 
     /*
