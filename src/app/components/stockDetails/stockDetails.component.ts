@@ -329,10 +329,10 @@ export class StockDetailsComponent implements OnInit, OnDestroy, AfterViewInit {
             { field: 'Name', header: 'Name', type: 'name' },
             { field: 'NET', header: 'NET', type: 'net' },
             { field: 'OUT', header: 'OUT', type: 'outstanding_Qty' },
-            { field: 'OUTS', header: 'OUTS', type: 'OUTS' },
             { field: 'P', header: 'P', type: 'profit' },
             { field: 'PREM', header: 'PREM', type: 'premium' },
             { field: 'SEN', header: 'SEN', type: 'sensitivity' },
+            { field: 'Spread', header: 'Spread', type: 'Spread' },
             { field: 'SQX', header: 'SQX', type: 'square_Multiple' },
             { field: 'stock', header: 'Stock', type: 'stock' },
             { field: 'TO', header: 'TO', type: 'turnover' },
@@ -457,6 +457,7 @@ export class StockDetailsComponent implements OnInit, OnDestroy, AfterViewInit {
             const mapObject = {
                 Ask: ele.time,
                 Bid: `${ele.price}
+                    ${ele.quantity}
                     ${showArrow}`,
             };
             mappedToFe.push(mapObject);
