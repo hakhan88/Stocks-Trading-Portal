@@ -297,7 +297,12 @@ export class StockDetailsComponent implements OnInit, OnDestroy, AfterViewInit {
         public renderer2: Renderer2,
         public mainUiListService: MainUiListService,
         public fb: FormBuilder,
-    ) { }
+    ) {
+        if (this.strategyList().length > 0) {
+            this.filterFormGroup.get('saveStrategyControlLoad')?.patchValue(this.strategyList()[0]);
+            this.loadStrategy();
+        }
+    }
 
     allSelectedFn(): void {
         const issuerValue = this.filterFormGroup.get('issuer')?.value;
@@ -795,7 +800,8 @@ export class StockDetailsComponent implements OnInit, OnDestroy, AfterViewInit {
                     && !ele.includes('_type')
                     && !ele.includes('_volume_from')
                     && !ele.includes('_volume_to')
-                    && !ele.includes('_symbol');
+                    && !ele.includes('_symbol')
+                    && !ele.includes('randid');
             });
     }
 
