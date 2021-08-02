@@ -6,7 +6,7 @@ import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { MainUiListService } from '../../services/main-ui-list.service';
 
 import { faAngleDown, faAngleUp } from '@fortawesome/free-solid-svg-icons';
-import { takeUntil } from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { MatOption } from '@angular/material/core';
 
@@ -299,6 +299,17 @@ export class StockDetailsComponent implements OnInit, OnDestroy, AfterViewInit {
         public fb: FormBuilder,
     ) { }
 
+    allSelectedFn(): void {
+        const issuerValue = this.filterFormGroup.get('issuer')?.value;
+        setTimeout(() => {
+            if (issuerValue.find((issVal: string) => issVal === 'ALL')) {
+                this.filterFormGroup.get('issuer')?.patchValue(this.issuerList);
+            } else {
+                this.filterFormGroup.get('issuer')?.patchValue([]);
+            }
+        }, 500);
+    }
+
     setDraggableData(): void {
         this.columns = [
             { field: 'Add', header: 'Add', type: '' },
@@ -488,7 +499,7 @@ export class StockDetailsComponent implements OnInit, OnDestroy, AfterViewInit {
     }
 
     getIssuerListOptions(options: any[]): any[] {
-        return options || [];
+        return options.filter(option => option !== 'ALL') || [];
     }
 
     getServerData(event: any): void {

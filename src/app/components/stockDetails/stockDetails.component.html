@@ -18,6 +18,8 @@
                 <mat-form-field appearance="fill" [ngClass]="'option-dropdown-styling example-half-width-custom'">
                     <mat-label>Issuer</mat-label>
                     <mat-select formControlName="issuer" multiple>
+                        <mat-option value="ALL" (click)="allSelectedFn()">
+                            ALL</mat-option>
                         <mat-option *ngFor="let issuer of getIssuerListOptions(issuerList)" [value]="issuer">
                             {{issuer}}</mat-option>
                     </mat-select>
