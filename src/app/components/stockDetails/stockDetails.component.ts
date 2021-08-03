@@ -56,6 +56,7 @@ export interface PeriodicElement {
     TO: string;
     TY: string;
     VOL: string;
+    CallPrice: string;
 }
 
 const ELEMENT_DATA: PeriodicElement[] = [];
@@ -148,6 +149,7 @@ export class StockDetailsComponent implements OnInit, OnDestroy, AfterViewInit {
         'CHG',
         'CODE',
         'CP',
+        'CallPrice',
         'CR',
         'D',
         'EXP',
@@ -323,6 +325,7 @@ export class StockDetailsComponent implements OnInit, OnDestroy, AfterViewInit {
             { field: 'CHG', header: 'CHG', type: 'change' },
             { field: 'CODE', header: 'CODE', type: 'symbol' },
             { field: 'CP', header: 'CP', type: 'call_Price' },
+            { field: 'CallPrice', header: 'Call Price', type: 'CallPrice' },
             { field: 'CR', header: 'CR', type: 'conversion_Ratio' },
             { field: 'D', header: 'D', type: 'delta' },
             { field: 'EXP', header: 'EXP', type: 'expiry_Date' },
@@ -424,7 +427,8 @@ export class StockDetailsComponent implements OnInit, OnDestroy, AfterViewInit {
                 BID: ele.bid,
                 CHG: ele.change,
                 CODE: ele.symbol,
-                CP: ele.call_Price,
+                CP: ele.change_Percentage,
+                CallPrice: ele.call_Price,
                 CR: ele.conversion_Ratio,
                 D: ele.delta,
                 EXP: ele.expiry_Date,
@@ -441,6 +445,7 @@ export class StockDetailsComponent implements OnInit, OnDestroy, AfterViewInit {
                 PREM: ele.premium,
                 SEN: ele.sensitivity,
                 SPRD: ele.spread,
+                Spread: ele.spread,
                 SQX: ele.square_Multiple,
                 STK: ele.stock,
                 stock: ele.stock,
