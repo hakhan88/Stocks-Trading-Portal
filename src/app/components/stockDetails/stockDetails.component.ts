@@ -21,6 +21,11 @@ interface ValueDescriptionInterface {
     description: string;
 }
 
+interface StringValueDescriptionInterface {
+    value: string;
+    description: string;
+}
+
 interface FieldHeaderInterface {
     field: string;
     header: string;
@@ -189,7 +194,7 @@ export class StockDetailsComponent implements OnInit, OnDestroy, AfterViewInit {
         },
     ];
 
-    typesOfFiltering: ValueDescriptionInterface[] = [
+    typesOfFilteringBackup: StringValueDescriptionInterface[] = [
         { value: 'call', description: 'Call' },
         { value: 'put', description: 'Put' },
         { value: 'bull', description: 'Bull' },
@@ -239,6 +244,11 @@ export class StockDetailsComponent implements OnInit, OnDestroy, AfterViewInit {
         to_call_price_from: new FormControl(),
         to_call_price_to: new FormControl(),
         toppingsControl: new FormControl(),
+        call: new FormControl(),
+        put: new FormControl(),
+        bull: new FormControl(),
+        bear: new FormControl(),
+        other: new FormControl(),
         type: this.fb.array([]),
         volume_from: new FormControl(),
         volume_to: new FormControl(),
@@ -301,8 +311,11 @@ export class StockDetailsComponent implements OnInit, OnDestroy, AfterViewInit {
         public fb: FormBuilder,
     ) {
         if (this.strategyList().length > 0) {
-            this.filterFormGroup.get('saveStrategyControlLoad')?.patchValue(this.strategyList()[0]);
-            this.loadStrategy();
+            this.filterFormGroup.get('saveStrategyControl')?.setValue(this.strategyList()[0]);
+            this.filterFormGroup.get('saveStrategyControlLoad')?.setValue(this.strategyList()[0]);
+            setTimeout(() => {
+                this.loadStrategy();
+            }, 0);
         }
     }
 
@@ -375,16 +388,19 @@ export class StockDetailsComponent implements OnInit, OnDestroy, AfterViewInit {
             });
     }
 
-    updateChkbxArray(chk: { value: string | number; description: string; }, isChecked: any, key: any): void {
-        const chkArray = this.filterFormGroup.get(key) as FormArray;
-        if (isChecked) {
-            if (chkArray.controls.findIndex(x => x.value === chk.value) === -1) {
-                chkArray.push(new FormControl(chk.value));
+    updateChkbxArray(): void {
+        this.typesOfFilteringBackup.forEach(obj => {
+            if (this.filterFormGroup.get(obj.value)?.value) {
+                if (!this.filterFormGroup.get('type')?.value.includes(obj.description)) {
+                    this.filterFormGroup.get('type')?.value?.push(obj.description);
+                }
+            } else {
+                if (this.filterFormGroup.get('type')?.value.includes(obj.description)) {
+                    // tslint:disable-next-line: max-line-length
+                    this.filterFormGroup.get('type')?.patchValue(this.filterFormGroup.get('type')?.value.filter((item: string) => item !== obj.description));
+                }
             }
-        } else {
-            const idx = chkArray.controls.findIndex(x => x.value === chk.value);
-            chkArray.removeAt(idx);
-        }
+        });
     }
 
     headerFilter(column: FieldHeaderInterface): void {
@@ -752,7 +768,7 @@ export class StockDetailsComponent implements OnInit, OnDestroy, AfterViewInit {
 
         const loadedtype = this.getLocalStorage(this.filterFormGroup.value.saveStrategyControlLoad + '_type');
         if (loadedtype) {
-            this.filterFormGroup.controls.type.patchValue(JSON.parse(loadedtype));
+            // this.filterFormGroup.controls.type.patchValue(JSON.parse(loadedtype));
         }
 
         const loadedvolume_from = this.getLocalStorage(this.filterFormGroup.value.saveStrategyControlLoad + '_volume_from');

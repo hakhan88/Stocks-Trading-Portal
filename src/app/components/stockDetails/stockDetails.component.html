@@ -3,9 +3,9 @@
         <form [formGroup]="filterFormGroup">
             <div class="vertical-form-field">
                 <section class="example-section">
-                    <ng-container *ngFor="let n of typesOfFiltering">
-                        <mat-checkbox class="example-margin" (change)="updateChkbxArray(n, $event.checked, 'type')"
-                            value="n.id">
+                    <ng-container *ngFor="let n of typesOfFilteringBackup">
+                        <mat-checkbox class="example-margin" [formControlName]='n.value' value="n.id"
+                            (change)='updateChkbxArray()'>
                             {{n.description}}</mat-checkbox>
                     </ng-container>
                 </section>
