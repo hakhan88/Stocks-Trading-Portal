@@ -438,7 +438,7 @@ export class StockDetailsComponent implements OnInit, OnDestroy, AfterViewInit {
         const mappedToFe: any[] = [];
         array.forEach((ele: { [x: string]: any; }) => {
             const mapObject = {
-                Add: `<a href="hkex://ec2-18-162-51-206.ap-east-1.compute.amazonaws.com/warren/stockDetails?triggeradd=${ele.symbol}">Add</a>`,
+                Add: `<a href="hkex://${ele.symbol}">Add</a>`,
                 ASK: ele.ask,
                 BID: ele.bid,
                 CHG: ele.change,

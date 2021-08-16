@@ -66,6 +66,14 @@ export class AppComponent implements OnDestroy {
         }
     }
 
+    getServerStatus(): void {
+        this.loginService.getStatus()
+            .pipe(takeUntil(this.unsubscribe$))
+            .subscribe(val => {
+                console.log(val);
+            });
+    }
+
     /*
     * Life Cycles
     */

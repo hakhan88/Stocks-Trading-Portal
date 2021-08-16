@@ -25,6 +25,13 @@ export class LoginService {
             );
     }
 
+    getStatus(): Observable<any> {
+        return this.httpClient.post(`${this.BASE_URL}v_main_ui_list/adv?limit=20&offset=1`, {})
+            .pipe(
+                catchError(this.handleError)
+            );
+    }
+
     private handleError(error: HttpErrorResponse): Observable<any> {
         if (error.error instanceof ErrorEvent) {
             // A client-side or network error occurred. Handle it accordingly.
