@@ -595,6 +595,10 @@ export class StockDetailsComponent implements OnInit, OnDestroy, AfterViewInit {
         window.localStorage.setItem(`${this.filterFormGroup.value.saveStrategyControl}_type`, JSON.stringify(this.filterFormGroup.value.type));
         window.localStorage.setItem(`${this.filterFormGroup.value.saveStrategyControl}_volume_from`, JSON.stringify(this.filterFormGroup.value.volume_from));
         window.localStorage.setItem(`${this.filterFormGroup.value.saveStrategyControl}_volume_to`, JSON.stringify(this.filterFormGroup.value.volume_to));
+        window.localStorage.setItem(`${this.filterFormGroup.value.saveStrategyControl}_put`, JSON.stringify(this.filterFormGroup.value.put));
+        window.localStorage.setItem(`${this.filterFormGroup.value.saveStrategyControl}_bull`, JSON.stringify(this.filterFormGroup.value.bull));
+        window.localStorage.setItem(`${this.filterFormGroup.value.saveStrategyControl}_bear`, JSON.stringify(this.filterFormGroup.value.bear));
+        window.localStorage.setItem(`${this.filterFormGroup.value.saveStrategyControl}_other`, JSON.stringify(this.filterFormGroup.value.other));
     }
 
     loadStrategy(): void {
@@ -649,6 +653,26 @@ export class StockDetailsComponent implements OnInit, OnDestroy, AfterViewInit {
         const loadediV_from = this.getLocalStorage(this.filterFormGroup.value.saveStrategyControlLoad + '_iV_from');
         if (loadediV_from) {
             this.filterFormGroup.controls.iV_from.patchValue(JSON.parse(loadediV_from));
+        }
+
+        const put = this.getLocalStorage(this.filterFormGroup.value.saveStrategyControlLoad + '_put');
+        if (put) {
+            this.filterFormGroup.controls.put.patchValue(JSON.parse(put));
+        }
+
+        const bull = this.getLocalStorage(this.filterFormGroup.value.saveStrategyControlLoad + '_bull');
+        if (bull) {
+            this.filterFormGroup.controls.bull.patchValue(JSON.parse(bull));
+        }
+
+        const bear = this.getLocalStorage(this.filterFormGroup.value.saveStrategyControlLoad + '_bear');
+        if (bear) {
+            this.filterFormGroup.controls.bear.patchValue(JSON.parse(bear));
+        }
+
+        const other = this.getLocalStorage(this.filterFormGroup.value.saveStrategyControlLoad + '_other');
+        if (other) {
+            this.filterFormGroup.controls.other.patchValue(JSON.parse(other));
         }
 
         const loadediV_to = this.getLocalStorage(this.filterFormGroup.value.saveStrategyControlLoad + '_iV_to');
@@ -805,6 +829,11 @@ export class StockDetailsComponent implements OnInit, OnDestroy, AfterViewInit {
                     && !ele.includes('_premium_from')
                     && !ele.includes('_premium_to')
                     && !ele.includes('_p_from')
+                    && !ele.includes('_bull')
+                    && !ele.includes('_bear')
+                    && !ele.includes('_put')
+                    && !ele.includes('_other')
+                    && !ele.includes('_call')
                     && !ele.includes('_p_to')
                     && !ele.includes('_l_from')
                     && !ele.includes('_l_to')
