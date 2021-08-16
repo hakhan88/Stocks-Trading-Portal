@@ -111,6 +111,8 @@ export class StockDetailsComponent implements OnInit, OnDestroy, AfterViewInit {
         volume_to: 0,
     };
 
+    private currentPageIndex = 0;
+
     /*
      * View Child
     */
@@ -379,7 +381,7 @@ export class StockDetailsComponent implements OnInit, OnDestroy, AfterViewInit {
     filter(): void {
         this.formSubmitted = true;
         this.mainUiListService
-            .getMainUiListData(this.filterFormGroup.value)
+            .getMainUiListData(this.filterFormGroup.value, this.currentPageIndex * this.pageSize)
             .pipe(takeUntil(this.unsubscribe$))
             .subscribe(val => {
                 this.data = this.concertBe2FE(val.data);
@@ -530,8 +532,9 @@ export class StockDetailsComponent implements OnInit, OnDestroy, AfterViewInit {
     }
 
     getServerData(event: any): void {
+        this.currentPageIndex = event.pageIndex;
         this.mainUiListService
-            .getMainUiListData(this.filterFormGroup.value, event.pageIndex * this.pageSize)
+            .getMainUiListData(this.filterFormGroup.value, this.currentPageIndex * this.pageSize)
             .pipe(takeUntil(this.unsubscribe$))
             .subscribe(val => {
                 this.data = this.concertBe2FE(val.data);
