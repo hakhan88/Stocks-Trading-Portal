@@ -1,5 +1,6 @@
 // tslint:disable: deprecation
 import { Component, OnDestroy } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -28,6 +29,7 @@ export class AppComponent implements OnDestroy {
     token: string | null;
 
     constructor(
+        private snackBar: MatSnackBar,
         private route: Router,
         private loginService: LoginService,
         private authService: AuthService,
@@ -70,7 +72,11 @@ export class AppComponent implements OnDestroy {
         this.loginService.getStatus()
             .pipe(takeUntil(this.unsubscribe$))
             .subscribe(val => {
-                console.log(val);
+                if (val?.totalCount < 0) {
+                    this.snackBar.open('Please restart the server', 'Close', { duration: 5000 });
+                } else {
+                    this.snackBar.open('Server status is "OK"', 'Close', { duration: 5000 });
+                }
             });
     }
 
