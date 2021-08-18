@@ -6,7 +6,6 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSliderModule } from '@angular/material/slider';
 import { SigninComponent } from './components/signin/signin.component';
-import { RegisterComponent } from './components/register/register.component';
 import { AngularMaterialModule } from './angular-material.module';
 import { FlexLayoutModule, FlexModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -29,7 +28,6 @@ import { AuthInterceptor } from './services/auth-Interceptor.service';
     declarations: [
         AppComponent,
         SigninComponent,
-        RegisterComponent,
         EditUserComponent,
         UserListComponent,
         SanitizeHtmlPipe,

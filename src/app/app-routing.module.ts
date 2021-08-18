@@ -4,7 +4,6 @@ import { RouterModule, Routes } from '@angular/router';
 
 // App
 import { SigninComponent } from './components/signin/signin.component';
-import { RegisterComponent } from './components/register/register.component';
 import { EditUserComponent } from './components/editUser/editUser.component';
 import { UserListComponent } from './components/userList/userList.component';
 import { StockDetailsComponent } from './components/stockDetails/stockDetails.component';
@@ -12,7 +11,6 @@ import { StockDetailsComponent } from './components/stockDetails/stockDetails.co
 const routes: Routes = [
     { path: '', pathMatch: 'full', redirectTo: 'signin' },
     { path: 'signin', component: SigninComponent },
-    { path: 'register', component: RegisterComponent },
     { path: 'editUser', component: EditUserComponent },
     { path: 'userList', component: UserListComponent },
     { path: 'stockDetails', component: StockDetailsComponent },
