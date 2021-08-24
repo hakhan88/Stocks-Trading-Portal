@@ -391,17 +391,15 @@ export class StockDetailsComponent implements OnInit, OnDestroy, AfterViewInit {
     }
 
     updateChkbxArray(): void {
+        const tempArray: string[] = [];
         this.typesOfFilteringBackup.forEach(obj => {
             if (this.filterFormGroup.get(obj.value)?.value) {
-                if (!this.filterFormGroup.get('type')?.value.includes(obj.description)) {
-                    this.filterFormGroup.get('type')?.value?.push(obj.description);
-                }
-            } else {
-                if (this.filterFormGroup.get('type')?.value.includes(obj.description)) {
-                    // tslint:disable-next-line: max-line-length
-                    this.filterFormGroup.get('type')?.patchValue(this.filterFormGroup.get('type')?.value.filter((item: string) => item !== obj.description));
-                }
+                tempArray.push(obj.description);
             }
+        });
+        this.filterFormGroup.get('type')?.patchValue([]);
+        tempArray.forEach(item => {
+            this.filterFormGroup.get('type')?.value.push(item);
         });
     }
 
