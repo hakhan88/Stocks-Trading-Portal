@@ -557,6 +557,49 @@ export class StockDetailsComponent implements OnInit, OnDestroy, AfterViewInit {
         this.buySellExpanded = !this.buySellExpanded;
     }
 
+    deleteLayout(): void {
+        window.localStorage.removeItem(this.filterFormGroup.value.saveStrategyControl);
+        window.localStorage.removeItem(`${this.filterFormGroup.value.saveStrategyControl}_issuer`);
+        window.localStorage.removeItem(`${this.filterFormGroup.value.saveStrategyControl}_expiry_date`);
+        window.localStorage.removeItem(`${this.filterFormGroup.value.saveStrategyControl}_listing_date`);
+        window.localStorage.removeItem(`${this.filterFormGroup.value.saveStrategyControl}_status`);
+        window.localStorage.removeItem(`${this.filterFormGroup.value.saveStrategyControl}_conversion_ratio_from`);
+        window.localStorage.removeItem(`${this.filterFormGroup.value.saveStrategyControl}_conversion_ration_to`);
+        window.localStorage.removeItem(`${this.filterFormGroup.value.saveStrategyControl}_delta_from`);
+        window.localStorage.removeItem(`${this.filterFormGroup.value.saveStrategyControl}_delta_to`);
+        window.localStorage.removeItem(`${this.filterFormGroup.value.saveStrategyControl}_filter_stock`);
+        window.localStorage.removeItem(`${this.filterFormGroup.value.saveStrategyControl}_iV_from`);
+        window.localStorage.removeItem(`${this.filterFormGroup.value.saveStrategyControl}_iV_to`);
+        window.localStorage.removeItem(`${this.filterFormGroup.value.saveStrategyControl}_last_price_from`);
+        window.localStorage.removeItem(`${this.filterFormGroup.value.saveStrategyControl}_last_price_to`);
+        window.localStorage.removeItem(`${this.filterFormGroup.value.saveStrategyControl}_order_in`);
+        window.localStorage.removeItem(`${this.filterFormGroup.value.saveStrategyControl}_outstanding_from`);
+        window.localStorage.removeItem(`${this.filterFormGroup.value.saveStrategyControl}_outstanding_to`);
+        window.localStorage.removeItem(`${this.filterFormGroup.value.saveStrategyControl}_premium_from`);
+        window.localStorage.removeItem(`${this.filterFormGroup.value.saveStrategyControl}_premium_to`);
+        window.localStorage.removeItem(`${this.filterFormGroup.value.saveStrategyControl}_p_from`);
+        window.localStorage.removeItem(`${this.filterFormGroup.value.saveStrategyControl}_p_to`);
+        window.localStorage.removeItem(`${this.filterFormGroup.value.saveStrategyControl}_l_from`);
+        window.localStorage.removeItem(`${this.filterFormGroup.value.saveStrategyControl}_l_to`);
+        window.localStorage.removeItem(`${this.filterFormGroup.value.saveStrategyControl}_sensitivity_from`);
+        window.localStorage.removeItem(`${this.filterFormGroup.value.saveStrategyControl}_sensitivity_to`);
+        window.localStorage.removeItem(`${this.filterFormGroup.value.saveStrategyControl}_sorted_by`);
+        window.localStorage.removeItem(`${this.filterFormGroup.value.saveStrategyControl}_spread_from`);
+        window.localStorage.removeItem(`${this.filterFormGroup.value.saveStrategyControl}_spread_to`);
+        window.localStorage.removeItem(`${this.filterFormGroup.value.saveStrategyControl}_square_multiple_from`);
+        window.localStorage.removeItem(`${this.filterFormGroup.value.saveStrategyControl}_square_multiple_to`);
+        window.localStorage.removeItem(`${this.filterFormGroup.value.saveStrategyControl}_stockIssuerControl`);
+        window.localStorage.removeItem(`${this.filterFormGroup.value.saveStrategyControl}_to_call_price_from`);
+        window.localStorage.removeItem(`${this.filterFormGroup.value.saveStrategyControl}_to_call_price_to`);
+        window.localStorage.removeItem(`${this.filterFormGroup.value.saveStrategyControl}_type`);
+        window.localStorage.removeItem(`${this.filterFormGroup.value.saveStrategyControl}_volume_from`);
+        window.localStorage.removeItem(`${this.filterFormGroup.value.saveStrategyControl}_volume_to`);
+        window.localStorage.removeItem(`${this.filterFormGroup.value.saveStrategyControl}_put`);
+        window.localStorage.removeItem(`${this.filterFormGroup.value.saveStrategyControl}_bull`);
+        window.localStorage.removeItem(`${this.filterFormGroup.value.saveStrategyControl}_bear`);
+        window.localStorage.removeItem(`${this.filterFormGroup.value.saveStrategyControl}_other`);
+    }
+
     saveLayout(): void {
         // tslint:disable: max-line-length
         window.localStorage.setItem(this.filterFormGroup.value.saveStrategyControl, JSON.stringify(this.columns));
